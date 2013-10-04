@@ -1,0 +1,1 @@
+Token = Struct.new(:type, :value, :line, :column)
