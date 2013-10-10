@@ -1,11 +1,12 @@
 class DefnExpression
 
-  attr_reader :value, :src
+  attr_reader :value, :src, :params
 
-  def initialize(name, src, body)
+  def initialize(name, params, body, src)
     @value = name
-    @src = src
+    @params = params
     @body = body
+    @src = src
   end
 
   def type

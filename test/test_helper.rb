@@ -8,34 +8,34 @@ require File.expand_path('../matchers/matcher', __FILE__)
 require File.expand_path('../matchers/defn_matcher', __FILE__)
 require File.expand_path('../matchers/defs_matcher', __FILE__)
 require File.expand_path('../matchers/class_matcher', __FILE__)
+require File.expand_path('../matchers/root_matcher', __FILE__)
+require File.expand_path('../matchers/params_matcher', __FILE__)
 
 class ParseTestCase < Test::Unit::TestCase
 
-  def assert_valid_expression(matcher)
-    expression = find_expression(matcher.type)
-    matcher.assert(expression)
+  def assert_valid_root_expression(matcher)
+    matcher.assert(root)
   end
 
-  def assert_valid_child_expression(matcher)
-    assert_not_empty root.children, 'Expected children not to be empty'
-    expression = find_expression(matcher.type, root.children)
-    matcher.assert(expression)
-  end
-
-  def find_expression(type, expressions=parsed)
-    expressions.find {|expression| expression.type == type }.tap do |expression|
-      assert_not_nil expression, "Couldn't find parsed expression of type: #{type}"
+  def assert_valid_child_expression(matcher, depth=1)
+    nested_exp = depth.pred.times.reduce(root) do |exp, depth|
+      assert_not_empty(exp.children)
+      exp.children.first
     end
+    matched_exp = find_expression(matcher.type, nested_exp)
+    matcher.assert(matched_exp)
   end
 
-  def parsed
-    CodeMiner.parse(ruby).tap do |parsed|
-      assert_not_empty parsed, "Parse was empty...\n#{Ripper.sexp(ruby)}"
+  def find_expression(type, expression)
+    expression.children.find {|exp| exp.type == type }.tap do |exp|
+      assert_not_nil exp, "Couldn't find parsed expression of type: #{type}"
     end
   end
 
   def root
-    parsed.first
+    CodeMiner.parse(ruby).tap do |parsed|
+      assert_not_nil parsed, "Parse was nil...\n#{Ripper.sexp(ruby)}"
+    end
   end
 
   def ruby(code=nil)

@@ -8,7 +8,7 @@ def foo
   bar
 end
     RUBY
-    assert_valid_expression DefnMatcher.new('foo', ruby)
+    assert_valid_child_expression DefnMatcher.new('foo', ruby)
   end
 
   test 'method with local variables' do
@@ -17,7 +17,7 @@ def foo
   bar = baz
 end
     RUBY
-  assert_valid_child_expression Matcher.new(:lasgn, 'bar', <<-EXPECTED)
+  assert_valid_child_expression Matcher.new(:lasgn, 'bar', <<-EXPECTED), 2
   bar = baz
     EXPECTED
   end
@@ -28,11 +28,15 @@ def a.foo
   bar()
 end
     RUBY
-    assert_valid_expression DefsMatcher.new('a', 'foo', ruby)
+    assert_valid_child_expression DefsMatcher.new('a', 'foo', ruby)
   end
 
   test 'method params' do
-
+    ruby <<-RUBY
+def foo(a, b, c)
+end
+    RUBY
+    assert_valid_child_expression ParamsMatcher.new(:defn, 'a, b, c', 'a', 'b', 'c'), 1
   end
 
 end

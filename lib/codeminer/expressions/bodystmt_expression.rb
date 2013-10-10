@@ -9,7 +9,7 @@ class BodystmtExpression
   end
 
   def children
-    @a[2]
+    @a.to_a.first == VoidExpression ? [] : @a
   end
 
 end

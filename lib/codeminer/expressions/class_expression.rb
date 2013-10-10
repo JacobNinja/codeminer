@@ -13,7 +13,7 @@ class ClassExpression
   end
 
   def children
-    body.children
+    body.children.to_a
   end
 
 end

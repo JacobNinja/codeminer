@@ -1,16 +1,28 @@
 class DefsExpression
 
-  attr_reader :receiver, :value, :src, :body
+  attr_reader :src, :body
 
   def initialize(receiver, name, src, body)
-    @receiver = receiver
-    @value = name
+    @receiver_token = receiver
+    @name = name
     @src = src
     @body = body
   end
 
+  def receiver
+    @receiver_token.value
+  end
+
+  def value
+    @name
+  end
+
   def type
     :defs
+  end
+
+  def line
+    @receiver_token.line
   end
 
 end

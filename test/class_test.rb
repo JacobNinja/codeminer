@@ -7,7 +7,7 @@ class ClassTest < ParseTestCase
 class Test
 end
     RUBY
-    assert_valid_expression ClassMatcher.new('Test', ruby)
+    assert_valid_child_expression ClassMatcher.new('Test', ruby)
   end
 
   test 'class with instance method' do
@@ -18,7 +18,7 @@ class Test
   end
 end
     RUBY
-    assert_valid_child_expression DefnMatcher.new('foo', <<-EXPECTED)
+    assert_valid_child_expression DefnMatcher.new('foo', <<-EXPECTED), 2
   def foo
     bar * bar
   end
@@ -33,7 +33,7 @@ class Test
   end
 end
     RUBY
-    assert_valid_child_expression DefsMatcher.new('self', 'foo', <<-EXPECTED)
+    assert_valid_child_expression DefsMatcher.new('self', 'foo', <<-EXPECTED), 2
   def self.foo
     stuff
   end
