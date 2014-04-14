@@ -87,7 +87,7 @@ class ExpressionParserRipper < Ripper
   end
 
   def extract_params_source(params)
-    SourceExtract.new(@src).extract_by_range(params.first.line, params.first.column..params.last.column)
+    source_extract.extract_by_range(params.first.line, params.first.column..params.last.column)
   end
 
   def source_extract
