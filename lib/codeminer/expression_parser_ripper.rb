@@ -52,7 +52,7 @@ class ExpressionParserRipper < Ripper
   end
 
   def on_class(token, parent, body)
-    ClassExpression.new(token.value, body, extract_src(@keywords.pop))
+    ClassExpression.new(token.value, body, extract_src_by_token(@keywords.pop))
   end
 
   def on_void_stmt
@@ -60,7 +60,7 @@ class ExpressionParserRipper < Ripper
   end
 
   def on_def(token, params, body)
-    DefnExpression.new(token.value, params, body, extract_src(@keywords.pop))
+    DefnExpression.new(token.value, params, body, extract_src_by_token(@keywords.pop))
   end
 
   def on_params(positional, b, c, d, e, f, g)
@@ -73,19 +73,24 @@ class ExpressionParserRipper < Ripper
   end
 
   def on_defs(receiver, period_token, name_token, params, body)
-    DefsExpression.new(receiver, name_token.value, extract_src(@keywords.pop), body)
+    DefsExpression.new(receiver, name_token.value, extract_src_by_token(@keywords.pop), body)
   end
 
   def on_assign(token, body)
-    LocalAssignExpression.new(token, body, extract_src(token, body.line, body.end_column))
+    LocalAssignExpression.new(token, body, extract_src_by_token(token, body.line, body.end_column))
   end
 
   def on_vcall(token)
-    CallExpression.new(token, extract_src(token))
+    CallExpression.new(token, extract_src_by_token(token))
+  end
+
+  def on_call(receiver, delimiter, token)
+    receiver.delimiter = delimiter
+    CallExpression.new(token, extract_src_by_token(receiver), receiver: receiver)
   end
 
   def on_fcall(token)
-    CallExpression.new(token, extract_src(token))
+    CallExpression.new(token, extract_src_by_token(token))
   end
 
   def on_bodystmt(a, b, c, d)
@@ -97,7 +102,7 @@ class ExpressionParserRipper < Ripper
   end
 
   def on_brace_block(args, body)
-    BlockExpression.new(body, args, extract_src(@keywords.pop))
+    BlockExpression.new(body, args, extract_src_by_token(@keywords.pop))
   end
 
   alias_method :on_do_block, :on_brace_block
@@ -118,8 +123,12 @@ class ExpressionParserRipper < Ripper
 
   private
 
-  def extract_src(token, line=lineno(), col=column())
+  def extract_src_by_token(token, line=lineno(), col=column())
     source_extract.extract_by_token(token, line, col)
+  end
+
+  def extract_src(begin_line, begin_column, end_line=lineno(), end_column=column())
+    source_extract.extract(begin_line, begin_column, end_line, end_column)
   end
 
   def extract_params_source(params)

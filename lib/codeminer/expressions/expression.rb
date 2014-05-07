@@ -3,7 +3,7 @@ VoidExpression = Object.new
 class Expression
 
   attr_reader :type, :value, :src, :line, :column
-  attr_accessor :block, :args
+  attr_accessor :block, :args, :delimiter
 
   def initialize(type, value, src, children, line, column)
     @type, @value, @src, @children, @line, @column = type, value, src, children, line, column

@@ -9,6 +9,12 @@ foo()
     assert_valid_child_expression CallMatcher.new('foo', ruby)
   end
 
+  test 'call with receiver' do
+    ruby <<-RUBY
+foo.bar()
+    RUBY
+    assert_valid_child_expression CallMatcher.new('bar', ruby, receiver: CallMatcher.new('foo', 'foo'))
+  end
 
   test 'method block' do
     ruby <<-RUBY

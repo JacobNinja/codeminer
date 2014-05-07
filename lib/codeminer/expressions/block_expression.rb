@@ -13,7 +13,7 @@ class BlockExpression < Expression
   end
 
   def each
-    Array(@body)
+    Array(body)
   end
 
 end
