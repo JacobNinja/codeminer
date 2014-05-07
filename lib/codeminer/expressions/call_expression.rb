@@ -1,10 +1,12 @@
-class CallExpression
+class CallExpression < Expression
 
-  attr_reader :src
+  attr_reader :block, :args, :token
 
   def initialize(token, src)
     @token = token
     @src = src
+    @block = nil
+    @args = nil
   end
 
   def type
@@ -17,6 +19,14 @@ class CallExpression
 
   def line
     @token.line
+  end
+
+  def end_column
+    @token.column + value.length
+  end
+
+  def each
+    []
   end
 
 end

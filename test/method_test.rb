@@ -17,9 +17,7 @@ def foo
   bar = baz
 end
     RUBY
-  assert_valid_child_expression Matcher.new(:lasgn, 'bar', <<-EXPECTED), 2
-  bar = baz
-    EXPECTED
+  assert_valid_child_expression Matcher.new(:lasgn, 'bar', 'bar = baz'), 2
   end
 
   test 'method on singleton' do

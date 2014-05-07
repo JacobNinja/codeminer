@@ -1,6 +1,6 @@
-class ClassExpression
+class ClassExpression < Expression
 
-  attr_reader :value, :body, :src
+  attr_reader :value, :body
 
   def initialize(name, body, src)
     @value = name
@@ -12,8 +12,8 @@ class ClassExpression
     :class
   end
 
-  def children
-    body.children.to_a
+  def each
+    body.each.to_a
   end
 
 end

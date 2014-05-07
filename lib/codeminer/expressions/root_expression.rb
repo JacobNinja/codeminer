@@ -1,14 +1,12 @@
-class RootExpression
-
-  attr_reader :src
+class RootExpression < Expression
 
   def initialize(body, src)
     @body = body
     @src = src
   end
 
-  def children
-    @body
+  def each
+    Array(@body)
   end
 
   def type

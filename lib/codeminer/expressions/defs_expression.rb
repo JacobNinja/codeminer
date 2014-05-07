@@ -1,6 +1,6 @@
-class DefsExpression
+class DefsExpression < Expression
 
-  attr_reader :src, :body
+  attr_reader :body
 
   def initialize(receiver, name, src, body)
     @receiver_token = receiver
@@ -23,6 +23,10 @@ class DefsExpression
 
   def line
     @receiver_token.line
+  end
+
+  def each
+    @body.each
   end
 
 end

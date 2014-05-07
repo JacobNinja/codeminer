@@ -19,7 +19,7 @@ class Test
 end
     RUBY
     assert_valid_child_expression DefnMatcher.new('foo', <<-EXPECTED), 2
-  def foo
+def foo
     bar * bar
   end
     EXPECTED
@@ -34,7 +34,7 @@ class Test
 end
     RUBY
     assert_valid_child_expression DefsMatcher.new('self', 'foo', <<-EXPECTED), 2
-  def self.foo
+def self.foo
     stuff
   end
     EXPECTED

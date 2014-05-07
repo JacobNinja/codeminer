@@ -27,8 +27,19 @@ class ExpressionParserRipper < Ripper
       end
     else
       define_method :"on_#{event}" do |*args|
-        args
+        Expression.new(event.to_s, nil, nil, [], lineno(), column())
       end
+    end
+  end
+
+  def on_lbrace(token)
+    @keywords << Token.new('{', nil, lineno(), column())
+    token
+  end
+
+  def on_kw(kw)
+    Token.new(:kw, kw, lineno(), column()).tap do |token|
+      @keywords << token if %w(do class def).include?(kw)
     end
   end
 
@@ -36,11 +47,12 @@ class ExpressionParserRipper < Ripper
 
   def initialize(src, *args)
     @src = src
+    @keywords = []
     super
   end
 
-  def on_class(token, parents, body)
-    ClassExpression.new(token.value, body, extract_src(token))
+  def on_class(token, parent, body)
+    ClassExpression.new(token.value, body, extract_src(@keywords.pop))
   end
 
   def on_void_stmt
@@ -48,7 +60,7 @@ class ExpressionParserRipper < Ripper
   end
 
   def on_def(token, params, body)
-    DefnExpression.new(token.value, params, body, extract_src(token))
+    DefnExpression.new(token.value, params, body, extract_src(@keywords.pop))
   end
 
   def on_params(positional, b, c, d, e, f, g)
@@ -61,14 +73,18 @@ class ExpressionParserRipper < Ripper
   end
 
   def on_defs(receiver, period_token, name_token, params, body)
-    DefsExpression.new(receiver, name_token.value, extract_src(receiver), body)
+    DefsExpression.new(receiver, name_token.value, extract_src(@keywords.pop), body)
   end
 
   def on_assign(token, body)
-    Expression.new(:lasgn, token.value, extract_src(token))
+    LocalAssignExpression.new(token, body, extract_src(token, body.line, body.end_column))
   end
 
   def on_vcall(token)
+    CallExpression.new(token, extract_src(token))
+  end
+
+  def on_fcall(token)
     CallExpression.new(token, extract_src(token))
   end
 
@@ -80,10 +96,30 @@ class ExpressionParserRipper < Ripper
     RootExpression.new(body, @src)
   end
 
+  def on_brace_block(args, body)
+    BlockExpression.new(body, args, extract_src(@keywords.pop))
+  end
+
+  alias_method :on_do_block, :on_brace_block
+
+  def on_method_add_block(exp, args)
+    exp.block = args
+    exp
+  end
+
+  def on_method_add_arg(exp, args)
+    exp.args = args
+    exp
+  end
+
+  def on_arg_paren(*args)
+    args.compact
+  end
+
   private
 
-  def extract_src(token)
-    source_extract.extract_by_token(token, lineno())
+  def extract_src(token, line=lineno(), col=column())
+    source_extract.extract_by_token(token, line, col)
   end
 
   def extract_params_source(params)

@@ -1,6 +1,4 @@
-class ParamsExpression
-
-  attr_reader :src
+class ParamsExpression < Expression
 
   def initialize(src, positional)
     @src = src

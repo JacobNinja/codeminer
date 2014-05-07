@@ -1,4 +1,4 @@
-class DefnExpression
+class DefnExpression < Expression
 
   attr_reader :value, :src, :params
 
@@ -13,8 +13,8 @@ class DefnExpression
     :defn
   end
 
-  def children
-    @body.children
+  def each
+    @body.each
   end
 
 end

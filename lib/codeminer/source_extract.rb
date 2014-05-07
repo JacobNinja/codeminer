@@ -4,18 +4,17 @@ class SourceExtract
     @src = src
   end
 
-  def extract_by_token(token, endline)
-    slice_lines(token.line - 1..endline - 1).join
-  end
-
   def extract_by_range(line, range)
-    slice_lines(line - 1..line - 1).join.each_char.to_a.slice(range).join
+    extract(line - 1..line - 1).join.each_char.to_a.slice(range).join
   end
 
-  private
-
-  def slice_lines(range)
+  def extract(range)
     @src.lines.slice(range)
+  end
+
+  def extract_by_token(token, end_line, end_column)
+    lines = extract(token.line-1..end_line-1).join
+    lines.slice(token.column, lines.length - (lines.lines.last.length - end_column) - token.column).to_s.chomp
   end
 
 end

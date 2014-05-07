@@ -12,7 +12,7 @@ class DefnMatcher < Matcher
   def assert(exp)
     assert_equal type, exp.type
     assert_equal @name, exp.value
-    assert_equal @src, exp.src
+    assert_equal @src.chomp, exp.src
   end
 
 end

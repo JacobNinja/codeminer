@@ -1,4 +1,4 @@
-class BodystmtExpression
+class BodystmtExpression < Expression
 
   def initialize(a, b, c, d)
     @a, @b, @c, @d = a, b, c, d
@@ -8,7 +8,7 @@ class BodystmtExpression
     :bodystmt
   end
 
-  def children
+  def each
     @a.to_a.first == VoidExpression ? [] : @a
   end
 

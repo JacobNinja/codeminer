@@ -16,9 +16,9 @@ end
   end
 
   test 'extracts code given a token' do
-    token = Token.new(:class, 'Foo', 1, 6)
-    result = sut.extract_by_token(token, 6)
-    assert_equal <<-EXPECTED, result
+    token = Token.new(:class, 'Foo', 1, 0)
+    result = sut.extract_by_token(token, 6, 3)
+    assert_equal <<-EXPECTED.chomp, result
 class Foo
 
   def bar(a, b, c)

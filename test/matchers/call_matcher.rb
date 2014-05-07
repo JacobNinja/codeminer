@@ -1,4 +1,4 @@
-class ClassMatcher < Matcher
+class CallMatcher < Matcher
 
   def initialize(name, src)
     @name = name
@@ -6,7 +6,7 @@ class ClassMatcher < Matcher
   end
 
   def type
-    :class
+    :call
   end
 
   def assert(exp)
