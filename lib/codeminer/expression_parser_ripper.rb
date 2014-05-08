@@ -51,6 +51,10 @@ class ExpressionParserRipper < Ripper
     super
   end
 
+  def on_var_ref(token)
+    LocalVariableExpression.new(token)
+  end
+
   def on_class(token, parent, body)
     ClassExpression.new(token.value, body, extract_src_by_token(@keywords.pop))
   end
