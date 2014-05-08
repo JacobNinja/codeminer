@@ -2,19 +2,17 @@ VoidExpression = Object.new
 
 class Expression
 
-  attr_reader :type, :value, :src, :line, :column
+  def self.not_implemented(*attrs)
+    attrs.each do |attr|
+      define_method attr do |*|
+        raise NotImplementedError, "Need to define #{attr} on #{self.class}"
+      end
+    end
+  end
+
+  attr_reader :src
   attr_accessor :block, :args, :delimiter
 
-  def initialize(type, value, src, children, line, column)
-    @type, @value, @src, @children, @line, @column = type, value, src, children, line, column
-  end
-
-  def <<(obj)
-    @children << obj
-  end
-
-  def each
-    @children
-  end
+  not_implemented :line, :column, :end_column, :<<, :each, :type, :value
 
 end

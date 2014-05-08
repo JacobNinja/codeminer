@@ -9,6 +9,8 @@ require File.expand_path('../codeminer/expressions/call_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/params_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/local_assign_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/local_variable_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/unknown_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/regexp_expression', __FILE__)
 
 require File.expand_path('../codeminer/token', __FILE__)
 require File.expand_path('../codeminer/expression_parser_ripper', __FILE__)

@@ -16,4 +16,16 @@ class LocalAssignExpression < Expression
     @receiver.value
   end
 
+  def line
+    @receiver.line
+  end
+
+  def column
+    @receiver.column
+  end
+
+  def each
+    Array(body)
+  end
+
 end
