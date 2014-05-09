@@ -5,11 +5,13 @@ require File.expand_path('../processors/class_processor', __FILE__)
 require File.expand_path('../processors/default_processor', __FILE__)
 require File.expand_path('../processors/method_processor', __FILE__)
 require File.expand_path('../processors/regexp_processor', __FILE__)
+require File.expand_path('../processors/string_processor', __FILE__)
 require File.expand_path('../processors/token_processor', __FILE__)
 
 class ExpressionParserRipper < Ripper
 
   include AssignmentProcessor, CallProcessor, ClassProcessor, MethodProcessor, RegexpProcessor, TokenProcessor,
+          StringProcessor,
           DefaultProcessor
 
   def initialize(src, *args)

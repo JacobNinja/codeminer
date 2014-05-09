@@ -1,4 +1,4 @@
-class StringMatcher
+class StringMatcher < Matcher
   
   def initialize(value, src)
     @value = value
@@ -10,8 +10,9 @@ class StringMatcher
   end
   
   def assert(exp)
+    assert_equal type, exp.type
     assert_equal @value, exp.value
-    assert_equal @src, exp.src
+    assert_equal @src.chomp, exp.src
   end
   
 end

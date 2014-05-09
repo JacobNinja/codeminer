@@ -9,4 +9,22 @@ class MethodTest < ParseTestCase
     assert_valid_child_expression StringMatcher.new('foo', ruby)
   end
 
+  test 'double quoted string' do
+    ruby <<-RUBY
+"foo"
+    RUBY
+    assert_valid_child_expression StringMatcher.new('foo', ruby)
+  end
+
+  test 'dynamic string' do
+    ruby '"foo#{bar}"'
+    assert_valid_child_expression DynamicStringMatcher.new(StringMatcher.new('foo', 'foo'), StringEmbeddedMatcher.new(CallMatcher.new('bar', 'bar'), '#{bar}'), ruby)
+  end
+
+  test 'really dynamic string' do
+    ruby '"#{foo()}bar#{baz}"'
+    debug
+    assert_valid_child_expression DynamicStringMatcher.new(StringEmbeddedMatcher.new(CallMatcher.new('foo', 'foo()'), '#{foo()}'), StringMatcher.new('bar', 'bar'), StringEmbeddedMatcher.new(CallMatcher.new('baz', 'baz'), '#{baz}'), ruby)
+  end
+
 end

@@ -11,11 +11,13 @@ require File.expand_path('../matchers/call_with_block_matcher', __FILE__)
 require File.expand_path('../matchers/class_matcher', __FILE__)
 require File.expand_path('../matchers/defn_matcher', __FILE__)
 require File.expand_path('../matchers/defs_matcher', __FILE__)
+require File.expand_path('../matchers/dynamic_string_matcher', __FILE__)
 require File.expand_path('../matchers/local_variable_matcher', __FILE__)
 require File.expand_path('../matchers/params_matcher', __FILE__)
 require File.expand_path('../matchers/root_matcher', __FILE__)
 require File.expand_path('../matchers/regexp_matcher', __FILE__)
 require File.expand_path('../matchers/string_matcher', __FILE__)
+require File.expand_path('../matchers/string_embedded_matcher', __FILE__)
 
 class ParseTestCase < Test::Unit::TestCase
 
@@ -49,5 +51,8 @@ class ParseTestCase < Test::Unit::TestCase
     @ruby
   end
 
+  def debug
+    p Ripper.sexp_raw(@ruby) if @ruby
+  end
 
 end
