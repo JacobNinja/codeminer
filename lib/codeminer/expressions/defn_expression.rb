@@ -1,6 +1,6 @@
 class DefnExpression < Expression
 
-  attr_reader :value, :src, :params
+  attr_reader :value, :params
 
   def initialize(name, params, body, src)
     @value = name

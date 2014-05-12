@@ -47,19 +47,16 @@ class ExpressionParserRipper < Ripper
   private
 
   def extract_src_by_token(token, line=lineno(), col=column())
-    source_extract.extract_by_token(token, line, col)
+    SourceExtract.extract_by_token(@src, token, line, col)
   end
 
   def extract_src(begin_line, begin_column, end_line=lineno(), end_column=column())
-    source_extract.extract(begin_line, begin_column, end_line, end_column)
+    SourceExtract.new(@src, begin_line, begin_column, end_line, end_column)
   end
 
   def extract_params_source(params)
-    source_extract.extract_by_range(params.first.line, params.first.column..params.last.column)
+    extract_src(params.first.line, params.last.line, params.first.column, params.last.column)
   end
 
-  def source_extract
-    SourceExtract.new(@src)
-  end
 
 end

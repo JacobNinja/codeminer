@@ -2,6 +2,8 @@ require File.expand_path('./../dynamic_string_expression', __FILE__)
 
 class StringExpression < Expression
 
+  attr_reader :token
+
   def initialize(token, src)
     @token = token
     @src = src
@@ -15,20 +17,8 @@ class StringExpression < Expression
     @token.value
   end
 
-  def line
-    @token.line
-  end
-
-  def column
-    @token.column
-  end
-
-  def end_column
-    column + value.length
-  end
-
-  def add(string, src, line, column)
-    DynamicStringExpression.new(*[self, *string], src, line, column)
+  def add(string)
+    DynamicStringExpression.new(*[self, *string], @src)
   end
 
   def add_quotes(src)

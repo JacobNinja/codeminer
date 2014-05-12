@@ -21,10 +21,6 @@ class DefsExpression < Expression
     :defs
   end
 
-  def line
-    @receiver_token.line
-  end
-
   def each
     @body.each
   end

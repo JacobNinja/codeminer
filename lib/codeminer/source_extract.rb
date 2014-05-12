@@ -1,20 +1,23 @@
 class SourceExtract
 
-  def initialize(src)
+  attr_reader :line, :column
+  attr_reader :end_line, :end_column
+
+  def initialize(src, line, column, end_line, end_column)
     @src = src
+    @line = line
+    @column = column
+    @end_line = end_line
+    @end_column = end_column
   end
 
-  def extract_by_range(line, range)
-    extract_lines(line - 1..line - 1).join.each_char.to_a.slice(range).join
+  def self.extract_by_token(src, token, end_line, end_column)
+    new(src, token.line, token.column, end_line, end_column)
   end
 
-  def extract_by_token(token, end_line, end_column)
-    extract(token.line, token.column, end_line, end_column)
-  end
-
-  def extract(begin_line, begin_column, end_line, end_column)
-    lines = extract_lines(begin_line-1..end_line-1).join
-    lines.slice(begin_column, lines.length - (lines.lines.last.length - end_column) - begin_column).to_s.chomp
+  def extract
+    lines = extract_lines(line-1..end_line-1).join
+    lines.slice(column, lines.length - (lines.lines.last.length - end_column) - column).to_s.chomp
   end
 
   private

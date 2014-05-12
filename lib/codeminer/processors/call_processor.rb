@@ -1,11 +1,10 @@
 module CallProcessor
 
   def on_vcall(token)
-    CallExpression.new(token, extract_src_by_token(token))
+    CallExpression.new(token, extract_src_by_token(token, token.line, token.end_column))
   end
 
   def on_call(receiver, delimiter, token)
-    puts receiver, token, receiver.class
     receiver.delimiter = delimiter
     CallExpression.new(token, extract_src_by_token(receiver), receiver: receiver)
   end
@@ -15,7 +14,7 @@ module CallProcessor
   end
 
   def on_params(positional, b, c, d, e, f, g)
-    src = positional ? extract_params_source(positional) : nil
+    src = positional ? extract_src(positional.first.line, positional.first.column, positional.last.line, positional.last.end_column) : nil
     ParamsExpression.new(src, positional)
   end
 

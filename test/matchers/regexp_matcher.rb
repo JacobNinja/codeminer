@@ -1,7 +1,7 @@
 class RegexpMatcher < Matcher
 
-  def initialize(content, src)
-    @content = content
+  def initialize(content_matcher, src)
+    @content_matcher = content_matcher
     @src = src
   end
 
@@ -10,7 +10,7 @@ class RegexpMatcher < Matcher
   end
 
   def assert(exp)
-    assert_equal @content, exp.value
+    @content_matcher.assert(exp.each.first)
     assert_equal @src.chomp, exp.src
   end
 

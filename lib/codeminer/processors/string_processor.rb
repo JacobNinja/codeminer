@@ -13,22 +13,25 @@ module StringProcessor
   end
 
   def on_string_add(string_content, string)
-    string_content.add(string, extract_src_by_token(string_content), string.line, string.column)
+    string_content.add(string)
   end
 
   def on_string_content
-    StringContentExpression.new(lineno(), column())
+    StringContentExpression
   end
 
   def on_string_embexpr(body)
-    body.last.src.chomp!('}')
-    StringEmbeddedExpression.new(body, extract_src_by_token(@embexpr_begin), lineno(), column())
+    body.last.delimiter = '}'
+    embedded_expression_src = extract_src_by_token(@embexpr_begin)
+    @embexpr_begin = nil
+    StringEmbeddedExpression.new(body, embedded_expression_src)
   end
 
-  def on_string_literal(string)
-    src_with_quotes = extract_src_by_token(@string_begin)
-    @string_begin = nil
-    string.add_quotes(src_with_quotes)
+  def on_string_literal(string_content)
+    string_content.tap do |string|
+      string.src = extract_src_by_token(@string_begin)
+      @string_begin = nil
+    end
   end
 
 end

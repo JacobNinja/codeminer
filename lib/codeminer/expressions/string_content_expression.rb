@@ -1,17 +1,10 @@
 class StringContentExpression
 
-  attr_reader :line, :column
-
-  def initialize(line, column)
-    @line = line
-    @column = column
-  end
-
-  def add(string, src, line, column)
+  def self.add(string)
     if string.kind_of? StringEmbeddedExpression
-      DynamicStringExpression.new(string, src, @line, @column)
+      DynamicStringExpression.new(string)
     else
-      StringExpression.new(string, src)
+      string
     end
   end
 

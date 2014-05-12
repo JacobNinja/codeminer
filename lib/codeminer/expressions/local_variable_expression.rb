@@ -28,6 +28,8 @@ class LocalVariableExpression < Expression
     []
   end
 
-  alias_method :src, :value
+  def src
+    value
+  end
 
 end

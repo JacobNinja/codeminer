@@ -24,18 +24,6 @@ class CallExpression < Expression
     @token.column
   end
 
-  def end_column
-    @token.column + value.length
-  end
-
-  def src
-    if delimiter
-      @src.chomp(delimiter.to_s)
-    else
-      @src
-    end
-  end
-
   def each
     []
   end

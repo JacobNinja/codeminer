@@ -1,12 +1,7 @@
 class DynamicStringExpression < Expression
 
-  attr_reader :line, :column
-
-  def initialize(*body, src, line, column)
+  def initialize(*body)
     @body = body
-    @src = src
-    @line = line
-    @column = column
   end
 
   def type
@@ -17,12 +12,9 @@ class DynamicStringExpression < Expression
     @body
   end
 
-  def add_quotes(src)
-    DynamicStringExpression.new(*@body, src, @line, @column)
-  end
-
-  def add(string, src, line, column)
-    DynamicStringExpression.new(*[*@body, *string], src, line, column)
+  def add(string)
+    @body << string
+    self
   end
 
 end
