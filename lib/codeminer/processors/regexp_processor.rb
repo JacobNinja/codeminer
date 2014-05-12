@@ -1,8 +1,23 @@
 module RegexpProcessor
 
-  def on_regexp_literal(regex_strings, regex_end)
-    regex = regex_strings.first
-    RegexpExpression.new(regex, regex_end, extract_src(regex.line, regex.column - 1))
+  def on_regexp_literal(regexp, regex_end)
+    regexp.tap do |r|
+      r.src = extract_src_by_token(@begin_regex.pop, regex_end.line, regex_end.end_column)
+    end
+  end
+
+  def on_regexp_beg(value)
+    Token.new(:regexp_beg, value, lineno(), column()).tap do |token|
+      @begin_regex << token
+    end
+  end
+
+  def on_regexp_add(regexp_content, regex)
+    regexp_content.add(regex)
+  end
+
+  def on_regexp_new
+    RegexpExpression.new
   end
 
 end

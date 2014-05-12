@@ -1,9 +1,7 @@
 class RegexpExpression < Expression
 
-  def initialize(content, end_token, src)
-    @content = content
-    @end_token = end_token
-    @src = src
+  def initialize
+    @content = []
   end
 
   def type
@@ -11,7 +9,16 @@ class RegexpExpression < Expression
   end
 
   def value
-    @content.value
+    src
+  end
+
+  def each
+    @content
+  end
+
+  def add(regex)
+    @content << regex
+    self
   end
 
 end

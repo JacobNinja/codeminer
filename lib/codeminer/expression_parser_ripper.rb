@@ -17,6 +17,7 @@ class ExpressionParserRipper < Ripper
   def initialize(src, *args)
     @src = src
     @keywords = []
+    @begin_regex = []
     super
   end
 
