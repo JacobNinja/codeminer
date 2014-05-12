@@ -1,11 +1,19 @@
-class StringContentExpression
+class StringContentExpression < Expression
 
-  def self.add(string)
+  def add(string)
     if string.kind_of? StringEmbeddedExpression
       DynamicStringExpression.new(string)
     else
       string
     end
+  end
+
+  def type
+    :string
+  end
+
+  def value
+    ''
   end
 
 end

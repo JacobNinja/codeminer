@@ -17,7 +17,7 @@ module StringProcessor
   end
 
   def on_string_content
-    StringContentExpression
+    StringContentExpression.new
   end
 
   def on_string_embexpr(body)
