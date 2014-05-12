@@ -12,4 +12,9 @@ class RegularExpressionTest < ParseTestCase
     assert_valid_child_expression RegexpMatcher.new(StringMatcher.new('foo[', 'foo['), DynamicStringMatcher.new(CallMatcher.new('bar', 'bar'), '#{bar}'), StringMatcher.new(']', ']'), ruby)
   end
 
+  test 'empty regular expression' do
+    ruby '//'
+    assert_valid_child_expression RegexpMatcher.new(ruby)
+  end
+
 end
