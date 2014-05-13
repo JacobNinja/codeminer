@@ -13,4 +13,8 @@ class ElseExpression < Expression
     @consequence
   end
 
+  def each
+    [@consequence]
+  end
+
 end

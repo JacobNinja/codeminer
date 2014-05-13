@@ -13,4 +13,8 @@ class ConditionExpression < Expression
     :condition
   end
 
+  def each
+    [@test, @consequence, @else_statement]
+  end
+
 end

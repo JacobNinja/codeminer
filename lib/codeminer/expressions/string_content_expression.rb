@@ -16,4 +16,8 @@ class StringContentExpression < Expression
     ''
   end
 
+  def each
+    []
+  end
+
 end
