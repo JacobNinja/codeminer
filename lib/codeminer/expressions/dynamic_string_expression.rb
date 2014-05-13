@@ -9,7 +9,7 @@ class DynamicStringExpression < Expression
   end
 
   def each
-    @body
+    @body.each
   end
 
   def add(string)

@@ -1,0 +1,19 @@
+class BodyMatcher < Matcher
+
+  def initialize(*body_matchers)
+    @body_matchers = body_matchers
+  end
+
+  def type
+    :body
+  end
+
+  def assert(exp)
+    assert_equal type, exp.type
+    assert_equal @body_matchers.length, exp.each.length, "Expected body #{exp.each} to equal matchers length"
+    @body_matchers.zip(exp.each).each do |matcher, e|
+      matcher.assert(e)
+    end
+  end
+
+end

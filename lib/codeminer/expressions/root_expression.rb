@@ -6,7 +6,7 @@ class RootExpression < Expression
   end
 
   def each
-    Array(@body)
+    @body.each
   end
 
   def type

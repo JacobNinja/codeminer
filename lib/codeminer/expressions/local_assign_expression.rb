@@ -25,7 +25,7 @@ class LocalAssignExpression < Expression
   end
 
   def each
-    Array(body)
+    Array(body.each)
   end
 
 end

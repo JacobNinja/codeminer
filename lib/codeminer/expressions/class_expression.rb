@@ -13,7 +13,7 @@ class ClassExpression < Expression
   end
 
   def each
-    body.each.to_a
+    body.each
   end
 
 end

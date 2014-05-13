@@ -3,6 +3,7 @@ VoidExpression = Object.new
 class Expression
 
   attr_writer :src
+  attr_reader :token
 
   def self.not_implemented(*attrs)
     attrs.each do |attr|

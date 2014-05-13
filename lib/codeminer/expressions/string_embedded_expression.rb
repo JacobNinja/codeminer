@@ -6,7 +6,7 @@ class StringEmbeddedExpression < Expression
   end
 
   def each
-    @body
+    @body.each
   end
 
   def type

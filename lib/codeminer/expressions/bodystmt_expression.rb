@@ -9,7 +9,7 @@ class BodystmtExpression < Expression
   end
 
   def each
-    @a.to_a.first == VoidExpression ? [] : @a
+    @a.each.first == VoidExpression ? [] : @a.each
   end
 
 end

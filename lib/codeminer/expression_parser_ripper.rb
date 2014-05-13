@@ -2,6 +2,7 @@ require 'ripper'
 require File.expand_path('../processors/assignment_processor', __FILE__)
 require File.expand_path('../processors/call_processor', __FILE__)
 require File.expand_path('../processors/class_processor', __FILE__)
+require File.expand_path('../processors/condition_processor', __FILE__)
 require File.expand_path('../processors/default_processor', __FILE__)
 require File.expand_path('../processors/method_processor', __FILE__)
 require File.expand_path('../processors/regexp_processor', __FILE__)
@@ -11,7 +12,7 @@ require File.expand_path('../processors/token_processor', __FILE__)
 class ExpressionParserRipper < Ripper
 
   include AssignmentProcessor, CallProcessor, ClassProcessor, MethodProcessor, RegexpProcessor, TokenProcessor,
-          StringProcessor,
+          StringProcessor, ConditionProcessor,
           DefaultProcessor
 
   def initialize(src, *args)
@@ -35,6 +36,14 @@ class ExpressionParserRipper < Ripper
 
   def on_bodystmt(a, b, c, d)
     BodystmtExpression.new(a, b, c, d)
+  end
+
+  def on_stmts_new
+    BodyExpression.new
+  end
+
+  def on_stmts_add(body, statement)
+    body.add(statement)
   end
 
   def on_program(body)

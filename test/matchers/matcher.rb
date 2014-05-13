@@ -1,6 +1,7 @@
 class Matcher
 
   include Test::Unit::Assertions
+  extend Test::Unit::Assertions
 
   attr_reader :type
 

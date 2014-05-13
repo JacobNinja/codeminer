@@ -21,7 +21,7 @@ module StringProcessor
   end
 
   def on_string_embexpr(body)
-    body.last.delimiter = '}'
+    body.each.last.delimiter = '}'
     embedded_expression_src = extract_src_by_token(@embexpr_begin)
     @embexpr_begin = nil
     StringEmbeddedExpression.new(body, embedded_expression_src)

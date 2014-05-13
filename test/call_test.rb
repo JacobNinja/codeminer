@@ -6,6 +6,7 @@ class CallTest < ParseTestCase
     ruby <<-RUBY
 foo()
     RUBY
+    debug
     assert_valid_child_expression CallMatcher.new('foo', ruby)
   end
 
