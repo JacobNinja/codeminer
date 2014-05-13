@@ -5,6 +5,7 @@ require File.expand_path('./../../lib/codeminer', __FILE__)
 # Test Matchers
 
 require File.expand_path('../matchers/matcher', __FILE__)
+require File.expand_path('../matchers/binary_matcher', __FILE__)
 require File.expand_path('../matchers/block_matcher', __FILE__)
 require File.expand_path('../matchers/body_matcher', __FILE__)
 require File.expand_path('../matchers/call_matcher', __FILE__)

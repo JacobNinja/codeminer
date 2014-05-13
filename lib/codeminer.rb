@@ -17,6 +17,7 @@ require File.expand_path('../codeminer/expressions/string_embedded_expression', 
 require File.expand_path('../codeminer/expressions/condition_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/else_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/body_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/binary_expression', __FILE__)
 
 require File.expand_path('../codeminer/token', __FILE__)
 require File.expand_path('../codeminer/expression_parser_ripper', __FILE__)
