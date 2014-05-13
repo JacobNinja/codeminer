@@ -16,4 +16,9 @@ foo = bar
     assert_valid_child_expression Matcher.new(:lasgn, 'foo', ruby)
   end
 
+  test 'return' do
+    ruby 'return foo'
+    assert_valid_child_expression ReturnMatcher.new(CallMatcher.new('foo', 'foo'), ruby)
+  end
+
 end

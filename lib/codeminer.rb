@@ -13,6 +13,7 @@ require File.expand_path('../codeminer/expressions/local_assign_expression', __F
 require File.expand_path('../codeminer/expressions/local_variable_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/params_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/regexp_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/return_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/root_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/string_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/string_content_expression', __FILE__)
