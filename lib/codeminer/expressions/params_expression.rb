@@ -1,16 +1,18 @@
 class ParamsExpression < Expression
 
-  def initialize(src, positional)
-    @src = src
-    @positional = positional
-  end
+  attr_reader :positional, :optional
 
-  def positional
-    @positional.map(&:value)
+  def initialize(positional, optional)
+    @positional = positional
+    @optional = optional
   end
 
   def type
     :params
+  end
+
+  def each
+    [*positional.each, *optional.each]
   end
 
 end

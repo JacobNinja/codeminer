@@ -33,10 +33,6 @@ class ExpressionParserRipper < Ripper
     VoidExpression
   end
 
-  def on_paren(body)
-    body
-  end
-
   def on_bodystmt(a, b, c, d)
     BodystmtExpression.new(a, b, c, d)
   end

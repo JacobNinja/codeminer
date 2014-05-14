@@ -2,20 +2,19 @@ class ParamsMatcher < Matcher
 
   attr_reader :src
 
-  def initialize(parent_type, src, *positional)
-    @parent_type = parent_type
+  def initialize(positional_matcher, optional_matcher=EmptyParamsMatcher, src)
+    @positional_matcher = positional_matcher
+    @optional_matcher = optional_matcher
     @src = src
-    @positional = positional
   end
 
   def type
-    @parent_type
+    :params
   end
 
-  def assert(defn_exp)
-    exp = defn_exp.params
-    assert_equal :params, exp.type
-    assert_equal @positional, exp.positional
+  def assert(exp)
+    @positional_matcher.assert(exp.positional)
+    @optional_matcher.assert(exp.optional)
     assert_equal @src, exp.src
   end
 

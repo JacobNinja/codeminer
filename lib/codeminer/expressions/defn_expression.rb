@@ -14,7 +14,7 @@ class DefnExpression < Expression
   end
 
   def each
-    @body.each
+    [@params, *@body]
   end
 
 end

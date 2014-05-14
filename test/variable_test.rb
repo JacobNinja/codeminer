@@ -16,7 +16,7 @@ def test(foo)
   foo
 end
     RUBY
-    assert_valid_child_expression LocalVariableMatcher.new('foo'), 2
+    assert_valid_child_expression LocalVariableMatcher.new('foo'), 4
   end
 
 end

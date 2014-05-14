@@ -18,7 +18,7 @@ def foo
 end
     RUBY
     debug
-    assert_valid_child_expression Matcher.new(:lasgn, 'bar', 'bar = baz'), 2
+    assert_valid_child_expression Matcher.new(:lasgn, 'bar', 'bar = baz'), 4
   end
 
   test 'method on singleton' do
@@ -28,14 +28,6 @@ def a.foo
 end
     RUBY
     assert_valid_child_expression DefsMatcher.new('a', 'foo', ruby)
-  end
-
-  test 'method params' do
-    ruby <<-RUBY
-def foo(a, b, c)
-end
-    RUBY
-    assert_valid_child_expression ParamsMatcher.new(:defn, 'a, b, c', 'a', 'b', 'c'), 1
   end
 
 end
