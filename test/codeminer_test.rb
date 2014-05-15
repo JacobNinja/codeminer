@@ -26,4 +26,9 @@ foo = bar
     assert_valid_child_expression Matcher.new(:int, '1', '1')
   end
 
+  test 'unary' do
+    ruby '-1'
+    assert_valid_child_expression UnaryMatcher.new('-', Matcher.new(:int, '1', '1'), ruby)
+  end
+
 end

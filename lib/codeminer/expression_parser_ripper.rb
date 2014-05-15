@@ -31,6 +31,10 @@ class ExpressionParserRipper < Ripper
     IntExpression.new(token, extract_src_by_token(token, token.end_line, token.end_column))
   end
 
+  def on_unary(value, receiver)
+    UnaryExpression.new(value.to_s.chomp('@'), receiver, extract_src(receiver.token.line, receiver.token.column - 1))
+  end
+
   def on_var_ref(token)
     LocalVariableExpression.new(token)
   end

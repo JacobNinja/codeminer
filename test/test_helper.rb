@@ -28,6 +28,7 @@ require File.expand_path('../matchers/root_matcher', __FILE__)
 require File.expand_path('../matchers/regexp_matcher', __FILE__)
 require File.expand_path('../matchers/string_matcher', __FILE__)
 require File.expand_path('../matchers/string_embedded_matcher', __FILE__)
+require File.expand_path('../matchers/unary_matcher', __FILE__)
 
 class ParseTestCase < Test::Unit::TestCase
 
