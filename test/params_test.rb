@@ -1,6 +1,6 @@
 require File.expand_path('./../test_helper', __FILE__)
 
-class ArgumentsTest < ParseTestCase
+class ParamsTest < ParseTestCase
 
   test 'positional method params' do
     ruby <<-RUBY

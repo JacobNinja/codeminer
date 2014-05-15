@@ -1,4 +1,4 @@
-module ArgumentProcessor
+module ParamsProcessor
 
   def on_args_add_block(exp, block)
     exp.block = block
