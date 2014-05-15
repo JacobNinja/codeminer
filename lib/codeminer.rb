@@ -9,6 +9,7 @@ require File.expand_path('../codeminer/expressions/condition_expression', __FILE
 require File.expand_path('../codeminer/expressions/defn_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/defs_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/else_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/int_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/local_assign_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/local_variable_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/optional_param_expression', __FILE__)

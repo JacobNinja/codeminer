@@ -25,6 +25,11 @@ class ExpressionParserRipper < Ripper
     super
   end
 
+  def on_int(value)
+    token = Token.new(:int, value, lineno(), column())
+    IntExpression.new(token, extract_src_by_token(token, token.end_line, token.end_column))
+  end
+
   def on_var_ref(token)
     LocalVariableExpression.new(token)
   end

@@ -8,4 +8,8 @@ Token = Struct.new(:type, :value, :line, :column) do
     column + value.length
   end
 
+  def src
+    value
+  end
+
 end

@@ -21,4 +21,9 @@ foo = bar
     assert_valid_child_expression ReturnMatcher.new(CallMatcher.new('foo', 'foo'), ruby)
   end
 
+  test 'integer' do
+    ruby '1'
+    assert_valid_child_expression Matcher.new(:int, '1', '1')
+  end
+
 end
