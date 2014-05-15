@@ -12,4 +12,8 @@ class UnaryExpression < Expression
     :unary
   end
 
+  def each
+    [@value, @receiver]
+  end
+
 end

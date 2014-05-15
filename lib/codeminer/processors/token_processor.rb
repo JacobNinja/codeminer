@@ -17,7 +17,9 @@ module TokenProcessor
 
   def on_kw(kw)
     Token.new(:kw, kw, lineno(), column()).tap do |token|
-      @keywords << token if %w(do class def if else unless return).include?(kw)
+      if %w(do class def if else unless return).include?(kw.gsub(/[^a-z]/, ''))
+        @keywords << token
+      end
     end
   end
 

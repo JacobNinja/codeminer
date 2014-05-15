@@ -40,4 +40,15 @@ def self.foo
     EXPECTED
   end
 
+  test 'multiple classes' do
+    ruby <<-RUBY
+class Test
+end
+
+class Foo
+end
+    RUBY
+    assert_valid_root_expression RootMatcher.new(ClassMatcher.new('Test', "class Test\nend"), ClassMatcher.new('Foo', "class Foo\nend"), ruby)
+  end
+
 end

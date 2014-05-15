@@ -32,7 +32,7 @@ class ExpressionParserRipper < Ripper
   end
 
   def on_unary(value, receiver)
-    UnaryExpression.new(value.to_s.chomp('@'), receiver, extract_src(receiver.token.line, receiver.token.column - 1))
+    UnaryExpression.new(value.to_s.chomp('@'), receiver, extract_src(receiver.line, receiver.column - 1))
   end
 
   def on_var_ref(token)
@@ -40,7 +40,7 @@ class ExpressionParserRipper < Ripper
   end
 
   def on_void_stmt
-    VoidExpression
+    VoidExpression.new(lineno(), column())
   end
 
   def on_bodystmt(a, b, c, d)
@@ -77,5 +77,8 @@ class ExpressionParserRipper < Ripper
     extract_src(params.first.line, params.last.line, params.first.column, params.last.column)
   end
 
+  def pop_keyword
+    @keywords.pop
+  end
 
 end

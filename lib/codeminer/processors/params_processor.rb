@@ -8,7 +8,7 @@ module ParamsProcessor
   end
 
   def on_paren(params)
-    params.src = extract_src(params.line, params.column - 1, params.end_line, params.end_column + 1) if params
+    params.src = extract_src(params.line, params.column - 1, params.end_line, params.end_column + 1) if params && params.src
     params
   end
   

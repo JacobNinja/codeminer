@@ -13,4 +13,8 @@ class IntExpression < Expression
     @token.value
   end
 
+  def each
+    [@token]
+  end
+
 end

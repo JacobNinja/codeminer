@@ -14,8 +14,12 @@ class UnknownExpression < Expression
     @children
   end
 
+  def end_line
+    line
+  end
+
   def end_column
-    column
+    column + value.to_s.length
   end
 
 end

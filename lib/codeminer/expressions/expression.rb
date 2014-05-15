@@ -1,5 +1,3 @@
-VoidExpression = Object.new
-
 class Expression
 
   attr_writer :src

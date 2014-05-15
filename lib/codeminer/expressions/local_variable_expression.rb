@@ -20,6 +20,10 @@ class LocalVariableExpression < Expression
     @token.column
   end
 
+  def end_line
+    @token.end_line
+  end
+
   def end_column
     @token.column + value.length
   end
