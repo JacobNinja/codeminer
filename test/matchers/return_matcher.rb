@@ -1,7 +1,7 @@
 class ReturnMatcher < Matcher
 
-  def initialize(body_matcher, src)
-    @body_matcher = body_matcher
+  def initialize(argument_matcher, src)
+    @argument_matcher = argument_matcher
     @src = src
   end
 
@@ -11,7 +11,7 @@ class ReturnMatcher < Matcher
 
   def assert(exp)
     assert_equal type, exp.type
-    @body_matcher.assert(exp.body)
+    @argument_matcher.assert(exp.body)
     assert_equal @src, exp.src
   end
 

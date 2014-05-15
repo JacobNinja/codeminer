@@ -1,15 +1,5 @@
 module ParamsProcessor
 
-  def on_args_add_block(exp, block)
-    exp.block = block
-    exp
-  end
-
-  def on_args_add(args, exp)
-    exp.args = args
-    exp
-  end
-
   def on_params(positional, optional, *)
     ParamsExpression.new(positional_params(positional), optional_params(optional)).tap do |params|
       token = params.each.map(&:token).first

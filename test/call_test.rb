@@ -39,4 +39,9 @@ end
     RUBY
   end
 
+  test 'bracket invocation' do
+    ruby 'foo[bar]'
+    assert_valid_child_expression CallMatcher.new('[', ruby, receiver: CallMatcher.new('foo', 'foo'), arguments: ArgumentsMatcher.new(CallMatcher.new('bar', 'bar'), 'bar'))
+  end
+
 end
