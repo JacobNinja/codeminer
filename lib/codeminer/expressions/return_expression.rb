@@ -1,7 +1,7 @@
 class ReturnExpression < Expression
 
-  def initialize(body, src)
-    @body = body
+  def initialize(args, src)
+    @args = args
     @src = src
   end
 
@@ -9,8 +9,12 @@ class ReturnExpression < Expression
     :return
   end
 
+  def each
+    @args.each
+  end
+
   def body
-    @body
+    @args
   end
 
 end

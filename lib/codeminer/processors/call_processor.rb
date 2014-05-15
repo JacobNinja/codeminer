@@ -13,4 +13,13 @@ module CallProcessor
     CallExpression.new(token, extract_src_by_token(token))
   end
 
+  def on_aref(receiver, args)
+    args.src = extract_src(@lbracket.line, @lbracket.column + 1, lineno(), column() - 1)
+    CallExpression.new(@lbracket, extract_src_by_token(receiver), receiver: receiver, arguments: args)
+  end
+
+  def on_lbracket(value)
+    @lbracket = Token.new(:lbracket, value, lineno(), column())
+  end
+
 end

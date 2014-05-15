@@ -2,10 +2,11 @@ class CallExpression < Expression
 
   attr_reader :receiver
 
-  def initialize(token, src, receiver: nil)
+  def initialize(token, src, receiver: nil, arguments: nil)
     @token = token
     @src = src
     @receiver = receiver
+    @args = arguments
   end
 
   def type
@@ -25,7 +26,7 @@ class CallExpression < Expression
   end
 
   def each
-    []
+    [@receiver, @args]
   end
 
 end
