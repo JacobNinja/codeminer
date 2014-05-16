@@ -43,4 +43,9 @@ end
     assert_valid_child_expression CallMatcher.new('[', ruby, receiver: CallMatcher.new('foo', 'foo'), arguments: ArgumentsMatcher.new(CallMatcher.new('bar', 'bar'), 'bar'))
   end
 
+  test 'dot syntax' do
+    ruby 'foo.(bar)'
+    assert_valid_child_expression CallMatcher.new('call', ruby, receiver: CallMatcher.new('foo', 'foo'), arguments: ArgumentsMatcher.new(CallMatcher.new('bar', 'bar'), '(bar)'))
+  end
+
 end

@@ -19,8 +19,9 @@ module MethodProcessor
     exp
   end
 
-  def on_arg_paren(*args)
-    ArgumentsExpression.new(*args.compact, lineno(), column())
+  def on_arg_paren(args)
+    args.src = extract_src_by_token(@parens_begin.pop) if args
+    args || ArgumentsExpression.new(lineno(), column())
   end
 
   def on_brace_block(args, body)

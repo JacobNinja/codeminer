@@ -27,4 +27,14 @@ module TokenProcessor
     end
   end
 
+  def on_lbracket(value)
+    @lbracket = super
+  end
+
+  def on_lparen(*)
+    super.tap do |token|
+      @parens_begin << token
+    end
+  end
+
 end

@@ -31,6 +31,7 @@ class ExpressionParserRipper < Ripper
     @string_end = []
     @symbol_begin = []
     @string_content = []
+    @parens_begin = []
     super
   end
 
