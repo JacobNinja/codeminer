@@ -31,4 +31,19 @@ foo = bar
     assert_valid_child_expression UnaryMatcher.new('-', Matcher.new(:int, '1', '1'), ruby)
   end
 
+  test 'malformed statement' do
+    assert_raise(CodeMiner::ParseError) { CodeMiner.parse(<<-RUBY) }
+case
+when something.end_with? foo
+  "bar"
+end
+    RUBY
+  end
+
+  test 'compile error' do
+    assert_raise(CodeMiner::ParseError) { CodeMiner.parse(<<-RUBY) }
+%q
+    RUBY
+  end
+
 end

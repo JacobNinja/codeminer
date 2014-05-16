@@ -35,6 +35,8 @@ require File.expand_path('../codeminer/source_extract', __FILE__)
 
 class CodeMiner
 
+  ParseError = Class.new(RuntimeError)
+
   def self.parse(code)
     expression_parser = ExpressionParserRipper
     expression_parser.parse(code)

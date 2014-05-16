@@ -57,6 +57,7 @@ class ExpressionParserRipper < Ripper
   end
 
   def on_stmts_add(body, statement)
+    assert body.kind_of?(BodyExpression), "Expected body #{body} to be type of BodyExpression"
     body.add(statement)
   end
 
@@ -66,6 +67,10 @@ class ExpressionParserRipper < Ripper
 
   def on_arg_paren(*args)
     args.compact
+  end
+
+  def compile_error(msg)
+    raise CodeMiner::ParseError, msg
   end
 
   private
@@ -84,6 +89,10 @@ class ExpressionParserRipper < Ripper
 
   def extract_params_source(params)
     extract_src(params.first.line, params.last.line, params.first.column, params.last.column)
+  end
+
+  def assert(t, msg)
+    raise CodeMiner::ParseError, msg unless t
   end
 
   def pop_keyword
