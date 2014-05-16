@@ -58,4 +58,9 @@ else
     ELSE
   end
 
+  test 'ternary' do
+    ruby 'foo ? bar : baz'
+    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), CallMatcher.new('bar', 'bar'), CallMatcher.new('baz', 'baz'), ruby)
+  end
+
 end

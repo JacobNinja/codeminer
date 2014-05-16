@@ -22,4 +22,8 @@ module ConditionProcessor
     ConditionExpression.new(test, nil, else_expression, extract_src_by_token(else_expression))
   end
 
+  def on_ifop(test, consequence, else_statement)
+    ConditionExpression.new(test, consequence, else_statement, extract_src_by_tokens(test, else_statement))
+  end
+
 end
