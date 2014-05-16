@@ -31,4 +31,14 @@ class MethodTest < ParseTestCase
     assert_valid_child_expression StringMatcher.new('', ruby)
   end
 
+  test 'heredoc' do
+    ruby <<-RUBY
+<<-HEREDOC
+foo
+HEREDOC
+    RUBY
+    debug
+    assert_valid_child_expression StringMatcher.new("foo\n", ruby)
+  end
+
 end

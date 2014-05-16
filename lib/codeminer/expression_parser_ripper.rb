@@ -25,6 +25,9 @@ class ExpressionParserRipper < Ripper
     @src = src
     @keywords = []
     @begin_regex = []
+    @embexpr = []
+    @string_begin = []
+    @string_end = []
     super
   end
 
