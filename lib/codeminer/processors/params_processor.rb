@@ -2,8 +2,7 @@ module ParamsProcessor
 
   def on_params(positional, optional, *)
     ParamsExpression.new(positional_params(positional), optional_params(optional)).tap do |params|
-      token = params.each.map(&:token).first
-      params.src = extract_src_by_token(token) if token
+      params.src = extract_src_by_tokens(params, params) if params.line
     end
   end
 
@@ -16,7 +15,7 @@ module ParamsProcessor
 
   def positional_params(positional)
     positional_expressions = positional.to_a.map do |token|
-      PositionalParamExpression.new(token, extract_src_by_token(token))
+      PositionalParamExpression.new(token, extract_src_by_token(token, token.end_line, token.end_column))
     end
     src = extract_src_by_token(positional.first, positional.last.end_line, positional.last.end_column) if positional
     ParamsContainer.new(positional_expressions, src)

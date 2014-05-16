@@ -1,5 +1,7 @@
 class OptionalParamExpression < Expression
 
+  attr_reader :value
+
   def initialize(token, value, src)
     @token = token
     @value = value
