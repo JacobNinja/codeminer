@@ -15,7 +15,12 @@ module MethodProcessor
 
   def on_method_add_arg(exp, args)
     exp.args = args
+    exp.src = extract_src_by_tokens(exp, args) if args
     exp
+  end
+
+  def on_arg_paren(*args)
+    ArgumentsExpression.new(*args.compact, lineno(), column())
   end
 
   def on_brace_block(args, body)

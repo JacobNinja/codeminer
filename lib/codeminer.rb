@@ -31,6 +31,7 @@ require File.expand_path('../codeminer/expressions/string_embedded_expression', 
 require File.expand_path('../codeminer/expressions/symbol_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/unknown_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/unary_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/variable_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/void_expression', __FILE__)
 
 require File.expand_path('../codeminer/token', __FILE__)

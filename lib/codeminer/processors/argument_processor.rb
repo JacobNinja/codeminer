@@ -1,7 +1,7 @@
 module ArgumentProcessor
 
   def on_args_new
-    ArgumentsExpression.new
+    ArgumentsExpression.new(lineno(), column())
   end
 
   def on_args_add_block(exp, block)

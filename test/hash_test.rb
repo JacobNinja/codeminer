@@ -14,7 +14,7 @@ class HashTest < ParseTestCase
 
   test 'bare hash' do
     ruby 'method(foo: bar)'
-    assert_valid_child_expression HashMatcher.new(HashPairMatcher.new(Matcher.new(:symbol, 'foo', 'foo:'), CallMatcher.new('bar', 'bar'), 'foo: bar'), 'foo: bar'), 4
+    assert_valid_child_expression HashMatcher.new(HashPairMatcher.new(Matcher.new(:symbol, 'foo', 'foo:'), CallMatcher.new('bar', 'bar'), 'foo: bar'), 'foo: bar'), 5
   end
 
   test 'empty hash' do

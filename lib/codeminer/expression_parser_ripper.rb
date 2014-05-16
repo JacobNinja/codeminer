@@ -72,10 +72,6 @@ class ExpressionParserRipper < Ripper
     RootExpression.new(body, @src)
   end
 
-  def on_arg_paren(*args)
-    args.compact
-  end
-
   def compile_error(msg)
     raise CodeMiner::ParseError, msg
   end

@@ -6,7 +6,7 @@ module CallProcessor
 
   def on_call(receiver, delimiter, token)
     receiver.delimiter = delimiter
-    CallExpression.new(token, extract_src_by_token(receiver), receiver: receiver)
+    CallExpression.new(token, extract_src_by_tokens(receiver, token), receiver: receiver)
   end
 
   def on_fcall(token)
