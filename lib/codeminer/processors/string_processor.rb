@@ -1,11 +1,11 @@
 module StringProcessor
 
   def on_tstring_content(value)
-    StringExpression.new(Token.new(:tstring_content, value, lineno(), column()), value)
+    Token.new(:string, value, extract_src_by_value(value))
   end
 
   def on_string_add(string_content, string)
-    string_content.add(string)
+    string_content.add(string, extract_src_by_tokens(string, string))
   end
 
   def on_string_content
@@ -19,37 +19,44 @@ module StringProcessor
   end
 
   def on_string_literal(string_content)
-    string_content.tap do |string|
-      string.src = extract_src_by_tokens(@string_begin.pop, @string_end.pop)
-    end
+    string_content.src = extract_src_by_tokens(@string_begin.pop, @string_end.pop)
+    string_content
   end
 
-  def on_tstring_beg(value)
-    Token.new(:tstring_beg, value, lineno(), column()).tap do |token|
+  def on_xstring_new
+    StringContentExpression.new
+  end
+
+  def on_xstring_add(body, string)
+    body.add(string, extract_src_by_tokens(string, string))
+  end
+
+  def on_tstring_beg(*)
+    super.tap do |token|
       @string_begin << token
     end
   end
 
-  def on_tstring_end(value)
-    Token.new(:tstring_end, value, lineno(), column()).tap do |token|
+  def on_tstring_end(*)
+    super.tap do |token|
       @string_end << token
     end
   end
 
-  def on_embexpr_beg(value)
-    Token.new(:embexpr_beg, value, lineno(), column()).tap do |token|
+  def on_embexpr_beg(*)
+    super.tap do |token|
       @embexpr << token
     end
   end
 
-  def on_heredoc_beg(value)
-    Token.new(:heredoc_beg, value, lineno(), column()).tap do |token|
+  def on_heredoc_beg(*)
+    super.tap do |token|
       @string_begin << token
     end
   end
 
-  def on_heredoc_end(value)
-    Token.new(:heredoc_end, value, lineno(), column()).tap do |token|
+  def on_heredoc_end(*)
+    super.tap do |token|
       @string_end << token
     end
   end

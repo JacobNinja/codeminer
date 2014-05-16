@@ -7,7 +7,7 @@ module RegexpProcessor
   end
 
   def on_regexp_beg(value)
-    Token.new(:regexp_beg, value, lineno(), column()).tap do |token|
+    super.tap do |token|
       @begin_regex << token
     end
   end

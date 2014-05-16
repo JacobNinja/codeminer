@@ -12,13 +12,14 @@ require File.expand_path('../processors/params_processor', __FILE__)
 require File.expand_path('../processors/regexp_processor', __FILE__)
 require File.expand_path('../processors/return_processor', __FILE__)
 require File.expand_path('../processors/string_processor', __FILE__)
+require File.expand_path('../processors/symbol_processor', __FILE__)
 require File.expand_path('../processors/token_processor', __FILE__)
 
 class ExpressionParserRipper < Ripper
 
   include AssignmentProcessor, CallProcessor, ClassProcessor, MethodProcessor, RegexpProcessor, TokenProcessor,
           StringProcessor, ConditionProcessor, BinaryProcessor, ReturnProcessor, ParamsProcessor, ArgumentProcessor,
-          HashProcessor,
+          HashProcessor, SymbolProcessor,
           DefaultProcessor
 
   def initialize(src, *args)
@@ -28,11 +29,13 @@ class ExpressionParserRipper < Ripper
     @embexpr = []
     @string_begin = []
     @string_end = []
+    @symbol_begin = []
+    @string_content = []
     super
   end
 
-  def on_int(value)
-    token = Token.new(:int, value, lineno(), column())
+  def on_int(*)
+    token = super
     IntExpression.new(token, extract_src_by_token(token, token.end_line, token.end_column))
   end
 
@@ -81,6 +84,10 @@ class ExpressionParserRipper < Ripper
 
   def extract_src_by_tokens(begin_token, end_token)
     SourceExtract.extract_by_tokens(@src, begin_token, end_token)
+  end
+
+  def extract_src_by_value(value)
+    extract_src(lineno(), column(), lineno(), column() + value.length)
   end
 
   def extract_src(begin_line, begin_column, end_line=lineno(), end_column=column())

@@ -17,7 +17,7 @@ module HashProcessor
   end
 
   def on_label(value)
-    Token.new(:symbol, value.chomp(':'), lineno(), column(), value)
+    Token.new(:symbol, value.chomp(':'), extract_src_by_value(value))
   end
 
 end

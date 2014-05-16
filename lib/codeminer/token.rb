@@ -1,15 +1,31 @@
-Token = Struct.new(:type, :value, :line, :column, :src) do
+class Token
+
+  attr_reader :type, :value
+
+  def initialize(type, value, src)
+    @type = type
+    @value = value
+    @src = src
+  end
+
+  def line
+    @src.line
+  end
+
+  def column
+    @src.column
+  end
 
   def end_line
-    line
+    @src.end_line
   end
 
   def end_column
-    column + value.length
+    @src.end_column
   end
 
   def src
-    self[:src] || value
+    @src.extract
   end
 
 end

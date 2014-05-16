@@ -19,7 +19,7 @@ module CallProcessor
   end
 
   def on_lbracket(value)
-    @lbracket = Token.new(:lbracket, value, lineno(), column())
+    @lbracket = super
   end
 
 end

@@ -1,6 +1,7 @@
 class DynamicStringExpression < Expression
 
-  def initialize(*body)
+  def initialize(*body, src)
+    @src = src
     @body = body
   end
 
@@ -9,11 +10,12 @@ class DynamicStringExpression < Expression
   end
 
   def each
-    @body.each
+    @body
   end
 
-  def add(string)
+  def add(string, src)
     @body << string
+    @src = src
     self
   end
 

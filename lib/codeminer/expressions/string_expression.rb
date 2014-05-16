@@ -17,16 +17,18 @@ class StringExpression < Expression
     @token.value
   end
 
-  def add(string)
-    DynamicStringExpression.new(*[self, *string], @src)
+  def add(string, src)
+    DynamicStringExpression.new(*[self, *string], src)
   end
 
   def add_quotes(src)
-    StringExpression.new(@token, src)
+    @src = src
+    self
+    #StringExpression.new(@token, src)
   end
 
   def each
-    []
+    [@token]
   end
 
 end

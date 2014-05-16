@@ -18,6 +18,7 @@ class MethodTest < ParseTestCase
 
   test 'dynamic string' do
     ruby '"foo#{bar}"'
+    debug
     assert_valid_child_expression DynamicStringMatcher.new(StringMatcher.new('foo', 'foo'), StringEmbeddedMatcher.new(CallMatcher.new('bar', 'bar'), '#{bar}'), ruby)
   end
 

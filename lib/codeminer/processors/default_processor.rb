@@ -3,8 +3,8 @@ require 'ripper'
 module DefaultProcessor
 
   Ripper::SCANNER_EVENTS.each do |event|
-    define_method :"on_#{event}" do |token|
-      Token.new(event.to_sym, token, lineno(), column())
+    define_method :"on_#{event}" do |value|
+      Token.new(event.to_sym, value, extract_src_by_value(value))
     end
   end
 
