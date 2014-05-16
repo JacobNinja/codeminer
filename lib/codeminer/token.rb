@@ -28,4 +28,8 @@ class Token
     @src.extract
   end
 
+  def each
+    []
+  end
+
 end
