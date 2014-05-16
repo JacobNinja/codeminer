@@ -1,12 +1,11 @@
 module SymbolProcessor
 
   def on_symbol_literal(symbol)
-    symbol.src = extract_src_by_tokens(@symbol_begin.pop, symbol)
-    symbol
+    SymbolExpression.convert(symbol)
   end
 
   def on_symbol(token)
-    SymbolExpression.new(token, extract_src_by_token(token))
+    SymbolExpression.new(token, extract_src_by_token(@symbol_begin.pop))
   end
 
   def on_dyna_symbol(*body)

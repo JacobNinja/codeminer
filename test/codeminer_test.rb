@@ -31,6 +31,11 @@ foo = bar
     assert_valid_child_expression UnaryMatcher.new('-', Matcher.new(:int, '1', '1'), ruby)
   end
 
+  test 'alias' do
+    ruby 'alias foo bar'
+    assert_valid_child_expression AliasMatcher.new(Matcher.new(:symbol, 'foo', 'foo'), Matcher.new(:symbol, 'bar', 'bar'), ruby)
+  end
+
   test 'malformed statement' do
     assert_raise(CodeMiner::ParseError) { CodeMiner.parse(<<-RUBY) }
 case

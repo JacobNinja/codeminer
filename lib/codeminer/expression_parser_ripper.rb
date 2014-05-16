@@ -34,6 +34,10 @@ class ExpressionParserRipper < Ripper
     super
   end
 
+  def on_alias(left, right)
+    AliasExpression.new(left, right, extract_src_by_token(pop_keyword))
+  end
+
   def on_int(*)
     token = super
     IntExpression.new(token, extract_src_by_token(token, token.end_line, token.end_column))

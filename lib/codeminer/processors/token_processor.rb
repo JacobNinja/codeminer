@@ -17,7 +17,7 @@ module TokenProcessor
 
   def on_kw(kw)
     super.tap do |token|
-      if %w(do class def if else unless return).include?(kw.gsub(/[^a-z]/, ''))
+      if %w(do class def if else unless return alias).include?(kw.gsub(/[^a-z]/, ''))
         @keywords << token
       end
     end
