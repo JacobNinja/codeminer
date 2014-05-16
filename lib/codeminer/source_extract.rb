@@ -15,6 +15,10 @@ class SourceExtract
     new(src, token.line, token.column, end_line, end_column)
   end
 
+  def self.extract_by_tokens(src, token, end_token)
+    new(src, token.line, token.column, end_token.end_line, end_token.end_column)
+  end
+
   def extract
     lines = extract_lines(line-1..end_line-1).join
     lines.slice(column, lines.length - (lines.lines.last.length - end_column) - column).to_s.chomp

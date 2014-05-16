@@ -1,4 +1,4 @@
-Token = Struct.new(:type, :value, :line, :column) do
+Token = Struct.new(:type, :value, :line, :column, :src) do
 
   def end_line
     line
@@ -9,7 +9,7 @@ Token = Struct.new(:type, :value, :line, :column) do
   end
 
   def src
-    value
+    self[:src] || value
   end
 
 end

@@ -18,6 +18,8 @@ require File.expand_path('../matchers/defs_matcher', __FILE__)
 require File.expand_path('../matchers/dynamic_string_matcher', __FILE__)
 require File.expand_path('../matchers/else_matcher', __FILE__)
 require File.expand_path('../matchers/empty_params_matcher', __FILE__)
+require File.expand_path('../matchers/hash_matcher', __FILE__)
+require File.expand_path('../matchers/hash_pair_matcher', __FILE__)
 require File.expand_path('../matchers/local_variable_matcher', __FILE__)
 require File.expand_path('../matchers/nil_matcher', __FILE__)
 require File.expand_path('../matchers/optional_params_matcher', __FILE__)
@@ -39,7 +41,7 @@ class ParseTestCase < Test::Unit::TestCase
   def assert_valid_child_expression(matcher, depth=2)
     expressions = depth.pred.times.reduce([root]) do |exps, depth|
       exps.flat_map(&:each).tap do |nested_expressions|
-        assert_not_empty(nested_expressions)
+        assert_not_empty(nested_expressions, "Found empty expressions at depth #{depth}")
       end
     end
     matched_exp = find_expression(matcher.type, expressions)

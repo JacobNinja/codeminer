@@ -6,6 +6,7 @@ require File.expand_path('../processors/call_processor', __FILE__)
 require File.expand_path('../processors/class_processor', __FILE__)
 require File.expand_path('../processors/condition_processor', __FILE__)
 require File.expand_path('../processors/default_processor', __FILE__)
+require File.expand_path('../processors/hash_processor', __FILE__)
 require File.expand_path('../processors/method_processor', __FILE__)
 require File.expand_path('../processors/params_processor', __FILE__)
 require File.expand_path('../processors/regexp_processor', __FILE__)
@@ -17,6 +18,7 @@ class ExpressionParserRipper < Ripper
 
   include AssignmentProcessor, CallProcessor, ClassProcessor, MethodProcessor, RegexpProcessor, TokenProcessor,
           StringProcessor, ConditionProcessor, BinaryProcessor, ReturnProcessor, ParamsProcessor, ArgumentProcessor,
+          HashProcessor,
           DefaultProcessor
 
   def initialize(src, *args)
@@ -67,6 +69,10 @@ class ExpressionParserRipper < Ripper
 
   def extract_src_by_token(token, line=lineno(), col=column())
     SourceExtract.extract_by_token(@src, token, line, col)
+  end
+
+  def extract_src_by_tokens(begin_token, end_token)
+    SourceExtract.extract_by_tokens(@src, begin_token, end_token)
   end
 
   def extract_src(begin_line, begin_column, end_line=lineno(), end_column=column())
