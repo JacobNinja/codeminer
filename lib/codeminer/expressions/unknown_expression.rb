@@ -14,6 +14,11 @@ class UnknownExpression < Expression
     @children
   end
 
+  def add(obj)
+    @children << obj
+    self
+  end
+
   def end_line
     line
   end
