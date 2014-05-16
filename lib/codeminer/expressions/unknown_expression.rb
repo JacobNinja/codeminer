@@ -14,8 +14,9 @@ class UnknownExpression < Expression
     @children
   end
 
-  def add(obj)
+  def add(obj, src)
     @children << obj
+    @src = src
     self
   end
 
