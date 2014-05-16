@@ -17,14 +17,6 @@ class CallExpression < Expression
     @token.value
   end
 
-  def line
-    @token.line
-  end
-
-  def column
-    @token.column
-  end
-
   def each
     [@receiver, *@args].compact
   end

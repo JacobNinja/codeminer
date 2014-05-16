@@ -4,12 +4,12 @@ class ConditionalTest < ParseTestCase
 
   test 'inline if statement' do
     ruby 'foo if bar'
-    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('bar', 'bar'), CallMatcher.new('foo', 'foo'), NilMatcher, ruby)
+    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('bar', 'bar'), CallMatcher.new('foo', 'foo'), EmptyMatcher, ruby)
   end
 
   test 'inline unless statement' do
     ruby 'foo unless bar'
-    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('bar', 'bar'), NilMatcher, CallMatcher.new('foo', 'foo'), ruby)
+    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('bar', 'bar'), EmptyMatcher, CallMatcher.new('foo', 'foo'), ruby)
   end
 
   test 'if statement' do
