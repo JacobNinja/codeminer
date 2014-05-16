@@ -16,8 +16,8 @@ module SymbolProcessor
 
   def on_symbeg(value)
     super.tap do |token|
-      if value.end_with?('"')
-        @symbol_begin << Token.new(:symbeg, value.chomp('"'), extract_src_by_token(token, token.end_line, token.end_column - 1))
+      if value.end_with?('"', "'")
+        @symbol_begin << Token.new(:symbeg, value.chomp('"').chomp("'"), extract_src_by_token(token, token.end_line, token.end_column - 1))
         @string_begin << Token.new(:tstring_beg, value.slice(1..-1), extract_src(token.line, token.column + 1, token.end_line, token.end_column - 1))
       else
         @symbol_begin << token
