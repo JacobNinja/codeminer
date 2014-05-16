@@ -1,11 +1,11 @@
 module HashProcessor
 
   def on_hash(pairs)
-    HashExpression.new(pairs, extract_src_by_token(pop_keyword))
+    HashExpression.new(pairs.to_a, extract_src_by_token(pop_keyword))
   end
 
   def on_bare_assoc_hash(pairs)
-    HashExpression.new(pairs, extract_src_by_tokens(pairs.first, pairs.last))
+    HashExpression.new(pairs.to_a, extract_src_by_tokens(pairs.first, pairs.last))
   end
 
   def on_assoclist_from_args(pairs)
