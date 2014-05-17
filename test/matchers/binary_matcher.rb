@@ -13,6 +13,7 @@ class BinaryMatcher < Matcher
 
   def assert(exp)
     assert_equal type, exp.type
+    assert_equal @value, exp.value
     @lh_matcher.assert(exp.left)
     @rh_matcher.assert(exp.right)
     assert_equal @src, exp.src
