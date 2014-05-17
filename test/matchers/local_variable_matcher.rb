@@ -5,7 +5,7 @@ class LocalVariableMatcher < Matcher
   end
 
   def type
-    :var_ref
+    :local_variable
   end
 
   def assert(exp)

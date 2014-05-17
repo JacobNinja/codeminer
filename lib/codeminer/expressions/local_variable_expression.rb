@@ -1,39 +1,20 @@
 class LocalVariableExpression < Expression
 
-  def initialize(token)
+  def initialize(token, src)
     @token = token
+    @src = src
   end
 
   def type
-    :var_ref
+    :local_variable
   end
 
   def value
     @token.value
   end
 
-  def line
-    @token.line
-  end
-
-  def column
-    @token.column
-  end
-
-  def end_line
-    @token.end_line
-  end
-
-  def end_column
-    @token.column + value.length
-  end
-
   def each
     []
-  end
-
-  def src
-    value
   end
 
 end

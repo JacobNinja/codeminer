@@ -8,11 +8,7 @@ module TokenProcessor
     end
   end
 
-  tokens :const_ref, :var_field
-
-  def on_var_ref(token)
-    VariableExpression.new(token, extract_src_by_token(token))
-  end
+  tokens :const_ref
 
   def on_lbrace(token)
     @keywords << super

@@ -25,8 +25,12 @@ def test(foo)
   foo.bar
 end
     RUBY
-    debug
     assert_valid_child_expression CallMatcher.new('bar', 'foo.bar', receiver: LocalVariableMatcher.new('foo')), 4
+  end
+
+  test 'global variables' do
+    ruby '$!'
+    assert_valid_child_expression Matcher.new(:global_variable, '!', ruby)
   end
 
 end

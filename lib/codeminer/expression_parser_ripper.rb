@@ -48,8 +48,20 @@ class ExpressionParserRipper < Ripper
     UnaryExpression.new(value.to_s.chomp('@'), receiver, extract_src(receiver.line, receiver.column - 1))
   end
 
-  def on_var_ref(token)
-    LocalVariableExpression.new(token)
+  def on_var_ref(exp)
+    if exp.kind_of?(Token)
+      LocalVariableExpression.new(exp, extract_src_by_tokens(exp, exp))
+    else
+      exp
+    end
+  end
+
+  def on_var_field(token)
+    LocalVariableExpression.new(token, extract_src_by_tokens(token, token))
+  end
+
+  def on_gvar(value)
+    GlobalVariableExpression.new(value.slice(1..-1), extract_src_by_value(value))
   end
 
   def on_void_stmt
