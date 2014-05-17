@@ -41,7 +41,7 @@ class ExpressionParserRipper < Ripper
 
   def on_int(*)
     token = super
-    IntExpression.new(token, extract_src_by_token(token, token.end_line, token.end_column))
+    IntExpression.new(token, extract_src_by_tokens(token))
   end
 
   def on_unary(value, receiver)
@@ -50,14 +50,14 @@ class ExpressionParserRipper < Ripper
 
   def on_var_ref(exp)
     if exp.kind_of?(Token)
-      LocalVariableExpression.new(exp, extract_src_by_tokens(exp, exp))
+      LocalVariableExpression.new(exp, extract_src_by_tokens(exp))
     else
       exp
     end
   end
 
   def on_var_field(token)
-    LocalVariableExpression.new(token, extract_src_by_tokens(token, token))
+    LocalVariableExpression.new(token, extract_src_by_tokens(token))
   end
 
   def on_gvar(value)
@@ -95,7 +95,7 @@ class ExpressionParserRipper < Ripper
     SourceExtract.extract_by_token(@src, token, line, col)
   end
 
-  def extract_src_by_tokens(begin_token, end_token)
+  def extract_src_by_tokens(begin_token, end_token=begin_token)
     SourceExtract.extract_by_tokens(@src, begin_token, end_token)
   end
 

@@ -2,7 +2,7 @@ module ParamsProcessor
 
   def on_params(positional, optional, *)
     ParamsExpression.new(positional_params(positional), optional_params(optional)).tap do |params|
-      params.src = extract_src_by_tokens(params, params) if params.line
+      params.src = extract_src_by_tokens(params) if params.line
     end
   end
 

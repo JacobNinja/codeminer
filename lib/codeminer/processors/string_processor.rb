@@ -5,7 +5,7 @@ module StringProcessor
   end
 
   def on_string_add(string_content, string)
-    string_content.add(string, extract_src_by_tokens(string, string))
+    string_content.add(string, extract_src_by_tokens(string))
   end
 
   def on_string_content
@@ -28,7 +28,7 @@ module StringProcessor
   end
 
   def on_xstring_add(body, string)
-    body.add(string, extract_src_by_tokens(string, string))
+    body.add(string, extract_src_by_tokens(string))
   end
 
   def on_tstring_beg(*)
