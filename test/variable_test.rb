@@ -38,4 +38,9 @@ end
     assert_valid_child_expression Matcher.new(:instance_variable, 'foo', ruby)
   end
 
+  test 'class variable' do
+    ruby '@@foo'
+    assert_valid_child_expression Matcher.new(:class_variable, 'foo', ruby)
+  end
+
 end
