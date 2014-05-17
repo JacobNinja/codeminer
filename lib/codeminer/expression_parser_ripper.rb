@@ -14,12 +14,13 @@ require File.expand_path('../processors/return_processor', __FILE__)
 require File.expand_path('../processors/string_processor', __FILE__)
 require File.expand_path('../processors/symbol_processor', __FILE__)
 require File.expand_path('../processors/token_processor', __FILE__)
+require File.expand_path('../processors/variable_processor', __FILE__)
 
 class ExpressionParserRipper < Ripper
 
   include AssignmentProcessor, CallProcessor, ClassProcessor, MethodProcessor, RegexpProcessor, TokenProcessor,
           StringProcessor, ConditionProcessor, BinaryProcessor, ReturnProcessor, ParamsProcessor, ArgumentProcessor,
-          HashProcessor, SymbolProcessor,
+          HashProcessor, SymbolProcessor, VariableProcessor,
           DefaultProcessor
 
   def initialize(src, *args)
@@ -46,22 +47,6 @@ class ExpressionParserRipper < Ripper
 
   def on_unary(value, receiver)
     UnaryExpression.new(value.to_s.chomp('@'), receiver, extract_src(receiver.line, receiver.column - 1))
-  end
-
-  def on_var_ref(exp)
-    if exp.kind_of?(Token)
-      LocalVariableExpression.new(exp, extract_src_by_tokens(exp))
-    else
-      exp
-    end
-  end
-
-  def on_var_field(token)
-    LocalVariableExpression.new(token, extract_src_by_tokens(token))
-  end
-
-  def on_gvar(value)
-    GlobalVariableExpression.new(value.slice(1..-1), extract_src_by_value(value))
   end
 
   def on_void_stmt

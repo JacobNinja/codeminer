@@ -33,4 +33,9 @@ end
     assert_valid_child_expression Matcher.new(:global_variable, '!', ruby)
   end
 
+  test 'instance variable' do
+    ruby '@foo'
+    assert_valid_child_expression Matcher.new(:instance_variable, 'foo', ruby)
+  end
+
 end
