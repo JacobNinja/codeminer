@@ -1,5 +1,7 @@
 class BodystmtExpression < Expression
 
+  attr_reader :value
+
   def initialize(a, b, c, d)
     @a, @b, @c, @d = a, b, c, d
   end

@@ -18,7 +18,7 @@ module ParamsProcessor
       PositionalParamExpression.new(token, extract_src_by_token(token, token.end_line, token.end_column))
     end
     src = extract_src_by_token(positional.first, positional.last.end_line, positional.last.end_column) if positional
-    ParamsContainer.new(positional_expressions, src)
+    ParamsContainer.new(positional_expressions, :positional, src)
   end
 
   def optional_params(optional)
@@ -26,7 +26,7 @@ module ParamsProcessor
       OptionalParamExpression.new(token, value, extract_src_by_token(token, value.end_line, value.end_column))
     end
     src = extract_src_by_token(optional.first.first, optional.last.last.end_line, optional.last.last.end_column) if optional
-    ParamsContainer.new(optional_expressions, src)
+    ParamsContainer.new(optional_expressions, :optional, src)
   end
 
 end

@@ -1,6 +1,6 @@
 class ArgumentsExpression < Expression
 
-  attr_reader :end_line, :end_column
+  attr_reader :end_line, :end_column, :value
 
   def initialize(*arguments, end_line, end_column)
     @arguments = arguments

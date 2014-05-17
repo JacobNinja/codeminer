@@ -14,7 +14,7 @@ class IntExpression < Expression
   end
 
   def each
-    [@token]
+    []
   end
 
 end

@@ -24,6 +24,10 @@ class SourceExtract
     lines.slice(column, lines.length - (lines.lines.last.length - end_column) - column).to_s.chomp
   end
 
+  def adjust(other)
+    self.class.new(@src, line, column, other.end_line, other.end_column)
+  end
+
   private
 
   def extract_lines(range)

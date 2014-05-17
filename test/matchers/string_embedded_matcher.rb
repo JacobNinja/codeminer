@@ -10,7 +10,7 @@ class StringEmbeddedMatcher < Matcher
   end
 
   def assert(exp)
-    assert_equal @body_matchers.count, exp.each.count, "Expected body matcher count to equal count of children of expression: #{exp}"
+    assert_equal @body_matchers.length, exp.each.length, "Expected body matcher count to equal count of children of expression: #{exp}"
     @body_matchers.take(exp.each.count).zip(exp.each).each do |matcher, e|
       matcher.assert(e)
     end

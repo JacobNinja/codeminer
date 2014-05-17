@@ -1,7 +1,6 @@
 class Expression
 
   attr_writer :src
-  attr_reader :token
 
   def self.not_implemented(*attrs)
     attrs.each do |attr|
@@ -10,6 +9,10 @@ class Expression
       end
     end
   end
+
+  attr_accessor :block, :args, :delimiter
+
+  not_implemented :<<, :each, :type, :value
 
   def src
     if delimiter
@@ -35,16 +38,22 @@ class Expression
     @src.end_column
   end
 
-  def extracted_source
-    if @src.respond_to?(:extract)
-      @src.extract
+  def src_extract
+    @src
+  end
+
+  def adjust_src(other)
+    if @src
+      @src = @src.adjust(other)
     else
-      @src
+      @src = other
     end
   end
 
-  attr_accessor :block, :args, :delimiter
+  private
 
-  not_implemented :<<, :each, :type, :value
+  def extracted_source
+    @src.extract
+  end
 
 end

@@ -1,4 +1,4 @@
-class Token
+class Token < Expression
 
   attr_reader :type, :value
 
@@ -6,26 +6,6 @@ class Token
     @type = type
     @value = value
     @src = src
-  end
-
-  def line
-    @src.line
-  end
-
-  def column
-    @src.column
-  end
-
-  def end_line
-    @src.end_line
-  end
-
-  def end_column
-    @src.end_column
-  end
-
-  def src
-    @src.extract
   end
 
   def each

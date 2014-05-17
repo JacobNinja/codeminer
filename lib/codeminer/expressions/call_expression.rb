@@ -18,7 +18,7 @@ class CallExpression < Expression
   end
 
   def each
-    [@receiver, *@args].compact
+    [@receiver, @args].compact
   end
 
 end

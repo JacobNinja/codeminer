@@ -10,6 +10,7 @@ module ArgumentProcessor
   end
 
   def on_args_add(args, exp)
+    args.adjust_src(exp.src_extract)
     args.add(exp)
   end
 

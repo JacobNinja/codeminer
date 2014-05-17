@@ -18,7 +18,7 @@ foo = bar
 
   test 'return' do
     ruby 'return foo'
-    assert_valid_child_expression ReturnMatcher.new(ArgumentsMatcher.new(CallMatcher.new('foo', 'foo'), nil), ruby)
+    assert_valid_child_expression ReturnMatcher.new(ArgumentsMatcher.new(CallMatcher.new('foo', 'foo'), 'foo'), ruby)
   end
 
   test 'integer' do

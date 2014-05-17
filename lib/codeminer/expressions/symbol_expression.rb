@@ -2,7 +2,7 @@ class SymbolExpression < Expression
 
   def self.convert(exp)
     if exp.kind_of?(Token)
-      new(exp, exp.src)
+      new(exp, exp.src_extract)
     else
       exp
     end
@@ -22,7 +22,7 @@ class SymbolExpression < Expression
   end
 
   def each
-    [@token]
+    []
   end
 
 end

@@ -1,12 +1,11 @@
 class ParamsContainer < Expression
 
-  def initialize(body, src)
-    @body = body
-    @src = src
-  end
+  attr_reader :type, :value
 
-  def type
-    :params
+  def initialize(body, type, src)
+    @body = body
+    @type = type
+    @src = src
   end
 
   def each

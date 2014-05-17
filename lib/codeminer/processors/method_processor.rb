@@ -14,14 +14,17 @@ module MethodProcessor
   end
 
   def on_method_add_arg(exp, args)
-    exp.args = args
-    exp.src = extract_src_by_tokens(exp, args) if args
+    if args
+      exp.args = args
+      exp.adjust_src(extract_src_by_tokens(exp, args))
+    end
     exp
   end
 
   def on_arg_paren(args)
-    args.src = extract_src_by_token(@parens_begin.pop) if args
-    args || ArgumentsExpression.new(lineno(), column())
+    args ||= ArgumentsExpression.new(lineno(), column())
+    args.src = extract_src_by_token(@parens_begin.pop)
+    args
   end
 
   def on_brace_block(args, body)

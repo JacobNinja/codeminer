@@ -1,5 +1,7 @@
 class ElseExpression < Expression
 
+  attr_reader :value
+
   def initialize(consequence, src)
     @consequence = consequence
     @src = src

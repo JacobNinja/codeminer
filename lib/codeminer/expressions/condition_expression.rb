@@ -1,6 +1,6 @@
 class ConditionExpression < Expression
 
-  attr_reader :test, :consequence, :else_statement
+  attr_reader :test, :consequence, :else_statement, :value
 
   def initialize(test, consequence, else_statement, src)
     @test = test

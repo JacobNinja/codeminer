@@ -1,6 +1,6 @@
 class AliasExpression < Expression
 
-  attr_reader :left, :right
+  attr_reader :left, :right, :value
 
   def initialize(left, right, src)
     @left = left

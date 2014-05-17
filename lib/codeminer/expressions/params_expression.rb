@@ -1,6 +1,6 @@
 class ParamsExpression < Expression
 
-  attr_reader :positional, :optional
+  attr_reader :positional, :optional, :value
 
   def initialize(positional, optional)
     @positional = positional
@@ -12,15 +12,15 @@ class ParamsExpression < Expression
   end
 
   def each
-    [*positional.each, *optional.each]
+    [positional, optional]
   end
 
   def line
-    each.map(&:line).first
+    expression_values.map(&:line).first
   end
 
   def column
-    each.map(&:column).first
+    expression_values.map(&:column).first
   end
 
   def end_line
@@ -34,7 +34,7 @@ class ParamsExpression < Expression
   private
 
   def expression_values
-    [*positional.each, *optional.each.map(&:value)]
+    [*positional.each, *optional.each.map(&:token), *optional.each.map(&:value)]
   end
 
 end

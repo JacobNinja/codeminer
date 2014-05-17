@@ -1,5 +1,7 @@
 class RootExpression < Expression
 
+  attr_reader :src, :value
+
   def initialize(body, src)
     @body = body
     @src = src

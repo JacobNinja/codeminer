@@ -1,6 +1,6 @@
 class VoidExpression < Expression
 
-  attr_reader :line, :column
+  attr_reader :line, :column, :value
 
   def initialize(line, column)
     @line = line
