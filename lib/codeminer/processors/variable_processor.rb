@@ -24,4 +24,8 @@ module VariableProcessor
     ClassVariableExpression.new(value.slice(2..-1), extract_src_by_value(value))
   end
 
+  def on_backref(value)
+    BackrefVariableExpression.new(value.slice(1..-1), extract_src_by_value(value))
+  end
+
 end

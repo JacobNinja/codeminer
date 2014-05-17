@@ -43,4 +43,9 @@ end
     assert_valid_child_expression Matcher.new(:class_variable, 'foo', ruby)
   end
 
+  test 'backref variable' do
+    ruby '$1'
+    assert_valid_child_expression Matcher.new(:backref_variable, '1', ruby)
+  end
+
 end
