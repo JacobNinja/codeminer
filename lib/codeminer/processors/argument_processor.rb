@@ -13,4 +13,8 @@ module ArgumentProcessor
     args.add(exp)
   end
 
+  def on_args_add_star(args, exp)
+    args.add(SplatExpression.new(exp, extract_src(exp.line, exp.column - 1, exp.end_line, exp.end_column)))
+  end
+
 end
