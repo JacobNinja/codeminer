@@ -12,4 +12,9 @@ class ArrayTest < ParseTestCase
     assert_valid_child_expression ArrayMatcher.new(ArgumentsMatcher.new(Matcher.new(:int, '1', '1'), Matcher.new(:int, '2', '2'), '1, 2'), ruby)
   end
 
+  test '%w literal' do
+    ruby '%w{foo bar}'
+    assert_valid_child_expression ArrayMatcher.new(ArgumentsMatcher.new(StringMatcher.new('foo', 'foo'), StringMatcher.new('bar', 'bar'), 'foo bar'), ruby)
+  end
+
 end

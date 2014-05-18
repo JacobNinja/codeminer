@@ -1,5 +1,6 @@
 require 'ripper'
 require File.expand_path('../processors/argument_processor', __FILE__)
+require File.expand_path('../processors/array_processor', __FILE__)
 require File.expand_path('../processors/assignment_processor', __FILE__)
 require File.expand_path('../processors/binary_processor', __FILE__)
 require File.expand_path('../processors/call_processor', __FILE__)
@@ -20,7 +21,7 @@ class ExpressionParserRipper < Ripper
 
   include AssignmentProcessor, CallProcessor, ClassProcessor, MethodProcessor, RegexpProcessor, TokenProcessor,
           StringProcessor, ConditionProcessor, BinaryProcessor, ReturnProcessor, ParamsProcessor, ArgumentProcessor,
-          HashProcessor, SymbolProcessor, VariableProcessor,
+          HashProcessor, SymbolProcessor, VariableProcessor, ArrayProcessor,
           DefaultProcessor
 
   def initialize(src, *args)
@@ -33,6 +34,7 @@ class ExpressionParserRipper < Ripper
     @symbol_begin = []
     @string_content = []
     @parens_begin = []
+    @qwords = []
     super
   end
 
@@ -42,11 +44,6 @@ class ExpressionParserRipper < Ripper
 
   def on_yield(args)
     YieldExpression.new(args, extract_src_by_token(pop_keyword))
-  end
-
-  def on_array(args)
-    src = args.nil? ? extract_src(lineno(), column() - 2) : extract_src(args.line, args.column - 1)
-    ArrayExpression.new(args, src)
   end
 
   def on_int(*)
