@@ -14,6 +14,11 @@ class CodeMinerParseTest < ParseTestCase
     assert_valid_child_expression ReturnMatcher.new(ArgumentsMatcher.new(CallMatcher.new('foo', 'foo'), 'foo'), ruby)
   end
 
+  test 'return implicit nil' do
+    ruby 'return'
+    assert_valid_child_expression ReturnMatcher.new(NilMatcher, ruby)
+  end
+
   test 'yield' do
     ruby 'yield foo'
     assert_valid_child_expression YieldMatcher.new(ArgumentsMatcher.new(CallMatcher.new('foo', 'foo'), 'foo'), ruby)
