@@ -14,12 +14,12 @@ module ConditionProcessor
 
   def on_if_mod(test, consequence)
     pop_keyword
-    ConditionExpression.new(test, consequence, EmptyExpression, extract_src(consequence.line, consequence.column))
+    ConditionExpression.new(test, consequence, nil, extract_src(consequence.line, consequence.column))
   end
 
   def on_unless_mod(test, else_expression)
     pop_keyword
-    ConditionExpression.new(test, EmptyExpression, else_expression, extract_src_by_token(else_expression))
+    ConditionExpression.new(test, nil, else_expression, extract_src_by_token(else_expression))
   end
 
   def on_ifop(test, consequence, else_statement)
