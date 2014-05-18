@@ -9,7 +9,7 @@ class LocalAssignExpression < Expression
   end
 
   def type
-    :lasgn
+    :assign
   end
 
   def value
@@ -25,7 +25,7 @@ class LocalAssignExpression < Expression
   end
 
   def each
-    body
+    body.each
   end
 
 end

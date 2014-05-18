@@ -17,8 +17,7 @@ def foo
   bar = baz
 end
     RUBY
-    debug
-    assert_valid_child_expression Matcher.new(:lasgn, 'bar', 'bar = baz'), 4
+    assert_valid_child_expression AssignmentMatcher.new('bar', CallMatcher.new('baz', 'baz'), 'bar = baz'), 4
   end
 
   test 'method on singleton' do

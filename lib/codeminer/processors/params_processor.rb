@@ -27,6 +27,14 @@ module ParamsProcessor
       exp
     end
   end
+
+  def on_mrhs_new_from_args(args)
+    ParamsContainer.new(args.each, :values, args.src_extract)
+  end
+
+  def on_mrhs_add(params, exp)
+    params.add(exp)
+  end
   
   private
 
