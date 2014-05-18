@@ -42,6 +42,10 @@ class ExpressionParserRipper < Ripper
     BreakExpression.new(args, extract_src_by_token(pop_keyword))
   end
 
+  def on_next(args)
+    NextExpression.new(args, extract_src_by_token(pop_keyword))
+  end
+
   def on_alias(left, right)
     AliasExpression.new(left, right, extract_src_by_token(pop_keyword))
   end

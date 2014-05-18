@@ -36,8 +36,13 @@ class CodeMinerParseTest < ParseTestCase
 
   test 'break' do
     ruby 'break'
+    assert_valid_child_expression BreakMatcher.new(ArgumentsMatcher.new(''), ruby)
+  end
+
+  test 'next' do
+    ruby 'next'
     debug
-    assert_valid_child_expression BreakMatcher.new(ArgumentsMatcher.new(''), 'break')
+    assert_valid_child_expression NextMatcher.new(ArgumentsMatcher.new(''), ruby)
   end
 
   test 'malformed statement' do
