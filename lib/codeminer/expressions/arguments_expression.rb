@@ -1,11 +1,10 @@
 class ArgumentsExpression < Expression
 
-  attr_reader :end_line, :end_column, :value, :token
+  attr_reader :value, :token
 
-  def initialize(end_line, end_column, token=nil)
+  def initialize(src=nil, token=nil)
     @arguments = []
-    @end_line = end_line
-    @end_column = end_column
+    @src = src
     @token = token
   end
 

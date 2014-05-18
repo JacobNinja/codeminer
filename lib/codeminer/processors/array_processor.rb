@@ -5,7 +5,7 @@ module ArrayProcessor
   end
 
   def on_qwords_new
-    ArgumentsExpression.new(lineno(), column(), @qwords.pop)
+    ArgumentsExpression.new(SourceExtract::Partial.new(@src, lineno(), column()), @qwords.pop)
   end
 
   def on_qwords_add(args, str)

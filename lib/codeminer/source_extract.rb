@@ -3,12 +3,26 @@ class SourceExtract
   attr_reader :line, :column
   attr_reader :end_line, :end_column
 
-  def initialize(src, line, column, end_line, end_column)
-    @src = src
-    @line = line
-    @column = column
-    @end_line = end_line
-    @end_column = end_column
+  class Partial
+
+    attr_reader :end_line, :end_column
+
+    def initialize(src, end_line, end_column)
+      @src = src
+      @end_line = end_line
+      @end_column = end_column
+    end
+
+    def adjust(other)
+      SourceExtract.new(@src, other.line, other.column, end_line, end_column)
+    end
+
+    def extract
+      ''
+    end
+
+  end
+
   end
 
   def self.extract_by_token(src, token, end_line, end_column)
@@ -17,6 +31,14 @@ class SourceExtract
 
   def self.extract_by_tokens(src, token, end_token)
     new(src, token.line, token.column, end_token.end_line, end_token.end_column)
+  end
+
+  def initialize(src, line, column, end_line, end_column)
+    @src = src
+    @line = line
+    @column = column
+    @end_line = end_line
+    @end_column = end_column
   end
 
   def extract

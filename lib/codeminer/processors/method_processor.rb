@@ -22,7 +22,7 @@ module MethodProcessor
   end
 
   def on_arg_paren(args)
-    args ||= ArgumentsExpression.new(lineno(), column())
+    args ||= ArgumentsExpression.new
     args.src = extract_src_by_token(@parens_begin.pop)
     args
   end

@@ -34,6 +34,12 @@ class CodeMinerParseTest < ParseTestCase
     assert_valid_child_expression AliasMatcher.new(Matcher.new(:symbol, 'foo', 'foo'), Matcher.new(:symbol, 'bar', 'bar'), ruby)
   end
 
+  test 'break' do
+    ruby 'break'
+    debug
+    assert_valid_child_expression BreakMatcher.new(ArgumentsMatcher.new(''), 'break')
+  end
+
   test 'malformed statement' do
     assert_raise(CodeMiner::ParseError) { CodeMiner.parse(<<-RUBY) }
 case
