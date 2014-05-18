@@ -10,12 +10,29 @@ module ParamsProcessor
     params.src = extract_src(params.line, params.column - 1, params.end_line, params.end_column + 1) if params && params.src
     params
   end
+
+  def on_mlhs_new
+    ParamsContainer.new([], :destructured_params)
+  end
+
+  def on_mlhs_add(params, param)
+    params.add(param)
+  end
+
+  def on_mlhs_paren(exp)
+    if exp.kind_of?(Token)
+      DestructuredParamExpression.new(exp, exp.src_extract)
+    else
+      exp.src = extract_src_by_token(@parens_begin.pop)
+      exp
+    end
+  end
   
   private
 
   def positional_params(positional)
-    positional_expressions = positional.to_a.map do |token|
-      PositionalParamExpression.new(token, extract_src_by_token(token, token.end_line, token.end_column))
+    positional_expressions = positional.to_a.map do |exp|
+      PositionalParamExpression.convert(exp, extract_src_by_token(exp, exp.end_line, exp.end_column))
     end
     src = extract_src_by_token(positional.first, positional.last.end_line, positional.last.end_column) if positional
     ParamsContainer.new(positional_expressions, :positional, src)

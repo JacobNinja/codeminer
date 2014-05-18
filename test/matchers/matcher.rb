@@ -5,7 +5,7 @@ class Matcher
 
   attr_reader :type
 
-  def initialize(type, value, src)
+  def initialize(type, value, src=value)
     @type = type
     @value = value
     @src = src

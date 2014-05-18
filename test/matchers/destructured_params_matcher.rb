@@ -1,4 +1,4 @@
-class PositionalParamsMatcher < Matcher
+class DestructuredParamsMatcher < Matcher
 
   def initialize(*positional_matchers, src)
     @positional_matchers = positional_matchers
@@ -6,7 +6,7 @@ class PositionalParamsMatcher < Matcher
   end
 
   def type
-    :positional_params
+    :destructured_params
   end
 
   def assert(exp)

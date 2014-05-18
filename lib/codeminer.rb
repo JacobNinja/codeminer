@@ -13,6 +13,7 @@ require File.expand_path('../codeminer/expressions/class_variable_expression', _
 require File.expand_path('../codeminer/expressions/condition_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/defn_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/defs_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/destructured_param_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/dynamic_symbol_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/else_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/empty_expression', __FILE__)
@@ -39,10 +40,10 @@ require File.expand_path('../codeminer/expressions/unknown_expression', __FILE__
 require File.expand_path('../codeminer/expressions/unary_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/variable_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/void_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/yield_expression', __FILE__)
 
 require File.expand_path('../codeminer/token', __FILE__)
-require File.expand_path('../codeminer/expression_parser_ripper', __FILE__)
-require File.expand_path('../codeminer/source_extract', __FILE__)
+require File.expand_path('../codeminer/expression_parser_ripper', __FILE__)require File.expand_path('../codeminer/source_extract', __FILE__)
 
 class CodeMiner
 
