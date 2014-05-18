@@ -46,6 +46,11 @@ class ExpressionParserRipper < Ripper
     NextExpression.new(args, extract_src_by_token(pop_keyword))
   end
 
+  def on_zsuper
+    token = pop_keyword
+    SuperExpression.new(extract_src_by_token(token))
+  end
+
   def on_alias(left, right)
     AliasExpression.new(left, right, extract_src_by_token(pop_keyword))
   end
