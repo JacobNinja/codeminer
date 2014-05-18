@@ -1,5 +1,6 @@
 require File.expand_path('../codeminer/expressions/expression', __FILE__)
 require File.expand_path('../codeminer/expressions/alias_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/array_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/arguments_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/backref_variable_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/body_expression', __FILE__)
