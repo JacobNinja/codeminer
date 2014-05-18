@@ -5,8 +5,8 @@ module AssignmentProcessor
   end
 
   def on_massign(params, values)
-    p params, values
-    MultipleAssignmentExpression.new(params, values, extract_src_by_tokens(params, values))
+    value_container = ParamsContainer.wrap(values, :values)
+    MultipleAssignmentExpression.new(params, value_container, extract_src_by_tokens(params, values))
   end
 
 end

@@ -33,7 +33,7 @@ class SourceExtract
     new(src, token.line, token.column, end_token.end_line, end_token.end_column)
   end
 
-  def initialize(src, line, column, end_line, end_column)
+  def initialize(src, line, column, end_line=nil, end_column=nil)
     @src = src
     @line = line
     @column = column

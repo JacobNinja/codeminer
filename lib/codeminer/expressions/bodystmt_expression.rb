@@ -2,8 +2,9 @@ class BodystmtExpression < Expression
 
   attr_reader :value
 
-  def initialize(a, b, c, d)
+  def initialize(a, b, c, d, src:)
     @a, @b, @c, @d = a, b, c, d
+    @src = src
   end
 
   def type
@@ -11,7 +12,7 @@ class BodystmtExpression < Expression
   end
 
   def each
-    @a.each.map(&:type).first == :void_stmt ? [] : @a.each
+    @a.each.first.kind_of?(VoidExpression) ? [] : @a.each
   end
 
 end

@@ -69,11 +69,11 @@ class ExpressionParserRipper < Ripper
   end
 
   def on_void_stmt
-    VoidExpression.new(lineno(), column())
+    VoidExpression.new(extract_src(lineno(), column()))
   end
 
   def on_bodystmt(a, b, c, d)
-    BodystmtExpression.new(a, b, c, d)
+    BodystmtExpression.new(a, b, c, d, src: extract_src_by_token(a))
   end
 
   def on_stmts_new

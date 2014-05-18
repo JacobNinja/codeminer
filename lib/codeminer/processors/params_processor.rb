@@ -15,6 +15,10 @@ module ParamsProcessor
     ParamsContainer.new([], :destructured_params)
   end
 
+  def on_mrhs_new
+    ParamsContainer.new([], :values)
+  end
+
   def on_mlhs_add(params, param)
     params.add(param)
   end
@@ -35,6 +39,12 @@ module ParamsProcessor
   def on_mrhs_add(params, exp)
     params.add(exp)
   end
+
+  def on_mrhs_add_star(params, exp)
+    params.add(SplatExpression.new(exp, extract_src(exp.line, exp.column - 1, exp.end_line, exp.end_column)))
+  end
+
+  alias :on_mlhs_add_star :on_mrhs_add_star
   
   private
 
