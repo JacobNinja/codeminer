@@ -92,6 +92,11 @@ rescue
     assert_valid_child_expression LambdaMatcher.new(ParamsMatcher.new(PositionalParamsMatcher.new(Matcher.new(:positional_param, 'arg'), 'arg'), EmptyParamsMatcher, '(arg)'), BodyMatcher.new(CallMatcher.new('foo', 'foo')), ruby)
   end
 
+  test 'redo' do
+    ruby 'redo'
+    assert_valid_child_expression Matcher.new(:redo, nil, 'redo')
+  end
+
   test 'malformed statement' do
     assert_raise(CodeMiner::ParseError) { CodeMiner.parse(<<-RUBY) }
 case
