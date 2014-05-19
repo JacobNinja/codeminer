@@ -106,6 +106,11 @@ class ExpressionParserRipper < Ripper
     RootExpression.new(body, @src)
   end
 
+  def on_operator_ambiguous(value, msg)
+    token = Token.new(:op, value.to_s, extract_src_by_value(value))
+    AmbiguousOperatorExpression.new(token, msg, extract_src_by_token(token))
+  end
+
   def compile_error(msg)
     raise CodeMiner::ParseError, msg
   end

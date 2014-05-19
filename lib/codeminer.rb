@@ -2,6 +2,7 @@ require File.expand_path('../codeminer/source_extract', __FILE__)
 
 require File.expand_path('../codeminer/expressions/expression', __FILE__)
 require File.expand_path('../codeminer/expressions/alias_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/ambiguous_operator_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/array_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/arguments_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/backref_variable_expression', __FILE__)
@@ -58,8 +59,8 @@ class CodeMiner
 
   ParseError = Class.new(RuntimeError)
 
-  def self.parse(code)    expression_parser = ExpressionParserRipper
-    expression_parser.parse(code)
+  def self.parse(code)
+    ExpressionParserRipper.parse(code)
   end
 
 end
