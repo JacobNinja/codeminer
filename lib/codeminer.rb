@@ -42,6 +42,7 @@ require File.expand_path('../codeminer/expressions/positional_param_expression',
 require File.expand_path('../codeminer/expressions/redo_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/regexp_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/rescue_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/retry_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/return_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/root_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/splat_expression', __FILE__)

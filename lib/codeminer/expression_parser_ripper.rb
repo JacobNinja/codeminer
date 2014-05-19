@@ -54,6 +54,10 @@ class ExpressionParserRipper < Ripper
     RedoExpression.new(extract_src_by_token(pop_keyword))
   end
 
+  def on_retry
+    RetryExpression.new(extract_src_by_token(pop_keyword))
+  end
+
   def on_zsuper
     token = pop_keyword
     SuperExpression.new(extract_src_by_token(token))

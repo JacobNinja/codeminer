@@ -97,6 +97,11 @@ rescue
     assert_valid_child_expression Matcher.new(:redo, nil, 'redo')
   end
 
+  test 'retry' do
+    ruby 'retry'
+    assert_valid_child_expression Matcher.new(:retry, nil, 'retry')
+  end
+
   test 'malformed statement' do
     assert_raise(CodeMiner::ParseError) { CodeMiner.parse(<<-RUBY) }
 case
