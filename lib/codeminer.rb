@@ -31,6 +31,7 @@ require File.expand_path('../codeminer/expressions/instance_variable_expression'
 require File.expand_path('../codeminer/expressions/int_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/local_assign_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/local_variable_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/magic_comment_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/multiple_assignment_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/next_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/optional_param_expression', __FILE__)

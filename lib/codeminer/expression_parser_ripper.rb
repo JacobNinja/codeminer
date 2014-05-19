@@ -112,6 +112,10 @@ class ExpressionParserRipper < Ripper
     AmbiguousOperatorExpression.new(token, msg, extract_src_by_token(token))
   end
 
+  def on_magic_comment(key, value)
+    MagicCommentExpression.new(key, value, extract_src(lineno(), column()))
+  end
+
   def compile_error(msg)
     raise CodeMiner::ParseError, msg
   end
