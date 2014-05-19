@@ -24,6 +24,11 @@ class CodeMinerParseTest < ParseTestCase
     assert_valid_child_expression YieldMatcher.new(ArgumentsMatcher.new(CallMatcher.new('foo', 'foo'), 'foo'), ruby)
   end
 
+  test 'yield implicit nil' do
+    ruby 'yield'
+    assert_valid_child_expression YieldMatcher.new(NilMatcher, ruby)
+  end
+
   test 'integer' do
     ruby '1'
     assert_valid_child_expression Matcher.new(:int, '1', '1')
