@@ -79,6 +79,10 @@ class ExpressionParserRipper < Ripper
     CommandExpression.new(token, args, extract_src_by_token(token))
   end
 
+  def on_undef(symbols)
+    UndefExpression.new(symbols, extract_src_by_token(pop_keyword))
+  end
+
   def on_int(*)
     token = super
     IntExpression.new(token, extract_src_by_tokens(token))
