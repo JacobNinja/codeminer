@@ -36,6 +36,14 @@ module ArrayProcessor
 
   end
 
+  def on_words_add(words, word)
+    words.add(StringExpression.convert(word))
+  end
+
+  def on_words_new
+    ArgumentsExpression.new(SourceExtract::Partial.new(@src, lineno(), column()), @words.pop)
+  end
+
   def on_qwords_beg(*)
     super.tap do |token|
       @qwords << token
@@ -51,6 +59,12 @@ module ArrayProcessor
   def on_symbols_beg(*)
     super.tap do |token|
       @symbols << token
+    end
+  end
+
+  def on_words_beg(*)
+    super.tap do |token|
+      @words << token
     end
   end
 
