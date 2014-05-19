@@ -1,9 +1,11 @@
 class BodystmtExpression < Expression
 
-  attr_reader :value
+  attr_reader :body, :rescue, :value
 
-  def initialize(a, b, c, d, src:)
-    @a, @b, @c, @d = a, b, c, d
+  def initialize(body, rescue_exp, c, d, src:)
+    @body = body
+    @rescue = rescue_exp
+    @c, @d = c, d
     @src = src
   end
 
@@ -11,8 +13,17 @@ class BodystmtExpression < Expression
     :bodystmt
   end
 
+  #def body
+  #  if @rescue
+  #    @rescue.wrap(@body)
+  #  else
+  #    @body
+  #  end
+  #end
+
   def each
-    @a.each.first.kind_of?(VoidExpression) ? [] : @a.each
+    #[body, @c, @d].compact
+    @body.each.first.kind_of?(VoidExpression) ? [] : @body.each
   end
 
 end

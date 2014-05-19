@@ -54,6 +54,30 @@ class CodeMinerParseTest < ParseTestCase
     assert_valid_child_expression Matcher.new(:super, nil, ruby)
   end
 
+  test 'begin' do
+    ruby <<-RUBY
+begin
+  foo
+end
+    RUBY
+    assert_valid_child_expression BeginMatcher.new(ruby, BodyMatcher.new(CallMatcher.new('foo', 'foo')))
+  end
+
+  test 'rescue' do
+    ruby <<-RUBY
+begin
+  foo
+rescue
+  bar
+end
+    RUBY
+    debug
+    assert_valid_child_expression BeginMatcher.new(ruby, BodyMatcher.new(CallMatcher.new('foo', 'foo')), rescue_matcher: RescueMatcher.new(<<-RESCUE, BodyMatcher.new(CallMatcher.new('bar', 'bar'))))
+rescue
+  bar
+    RESCUE
+  end
+
   test 'malformed statement' do
     assert_raise(CodeMiner::ParseError) { CodeMiner.parse(<<-RUBY) }
 case

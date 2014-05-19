@@ -72,12 +72,21 @@ class ExpressionParserRipper < Ripper
     VoidExpression.new(extract_src(lineno(), column()))
   end
 
-  def on_bodystmt(a, b, c, d)
-    BodystmtExpression.new(a, b, c, d, src: extract_src_by_token(a))
+  def on_begin(body)
+    BeginExpression.new(body, extract_src_by_token(pop_keyword))
+  end
+
+  def on_rescue(constants, assign, body, d)
+    src = extract_src_by_tokens(pop_keyword, body)
+    RescueExpression.new(constants, assign, body, d, src)
+  end
+
+  def on_bodystmt(body, rescue_exp, c, d)
+    BodystmtExpression.new(body, rescue_exp, c, d, src: extract_src_by_token(body))
   end
 
   def on_stmts_new
-    BodyExpression.new
+    BodyExpression.new(extract_src(lineno(), column()))
   end
 
   def on_stmts_add(body, statement)

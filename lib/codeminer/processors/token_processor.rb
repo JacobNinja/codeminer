@@ -17,7 +17,7 @@ module TokenProcessor
 
   def on_kw(kw)
     super.tap do |token|
-      if %w(do class def if else unless return alias yield break next super).include?(kw.gsub(/[^a-z]/, ''))
+      if %w(do class def if else unless return alias yield break next super begin rescue).include?(kw.gsub(/[^a-z]/, ''))
         @keywords << token
       end
     end
