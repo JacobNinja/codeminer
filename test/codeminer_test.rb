@@ -84,8 +84,12 @@ rescue
 
   test 'command' do
     ruby 'foo -1'
-    debug
     assert_valid_child_expression CommandMatcher.new('foo', ArgumentsMatcher.new(UnaryMatcher.new('-', Matcher.new(:int, '1'), '-1'), '-1'), ruby)
+  end
+
+  test 'lambda' do
+    ruby '-> (arg) { foo }'
+    assert_valid_child_expression LambdaMatcher.new(ParamsMatcher.new(PositionalParamsMatcher.new(Matcher.new(:positional_param, 'arg'), 'arg'), EmptyParamsMatcher, '(arg)'), BodyMatcher.new(CallMatcher.new('foo', 'foo')), ruby)
   end
 
   test 'malformed statement' do

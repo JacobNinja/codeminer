@@ -33,4 +33,14 @@ module MethodProcessor
 
   alias_method :on_do_block, :on_brace_block
 
+  def on_lambda(args, body)
+    LambdaExpression.new(args, body, extract_src_by_token(@lambda.pop))
+  end
+
+  def on_tlambda(*)
+    super.tap do |token|
+      @lambda << token
+    end
+  end
+
 end
