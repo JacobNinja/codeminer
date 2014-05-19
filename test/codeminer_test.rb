@@ -76,11 +76,16 @@ rescue
   bar
 end
     RUBY
-    debug
     assert_valid_child_expression BeginMatcher.new(ruby, BodyMatcher.new(CallMatcher.new('foo', 'foo')), rescue_matcher: RescueMatcher.new(<<-RESCUE, BodyMatcher.new(CallMatcher.new('bar', 'bar'))))
 rescue
   bar
     RESCUE
+  end
+
+  test 'command' do
+    ruby 'foo -1'
+    debug
+    assert_valid_child_expression CommandMatcher.new('foo', ArgumentsMatcher.new(UnaryMatcher.new('-', Matcher.new(:int, '1'), '-1'), '-1'), ruby)
   end
 
   test 'malformed statement' do

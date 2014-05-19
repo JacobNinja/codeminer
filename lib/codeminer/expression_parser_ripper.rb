@@ -63,6 +63,10 @@ class ExpressionParserRipper < Ripper
     YieldExpression.new(nil, extract_src_by_token(pop_keyword))
   end
 
+  def on_command(token, args)
+    CommandExpression.new(token, args, extract_src_by_token(token))
+  end
+
   def on_int(*)
     token = super
     IntExpression.new(token, extract_src_by_tokens(token))
