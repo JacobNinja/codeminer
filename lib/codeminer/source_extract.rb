@@ -5,12 +5,14 @@ class SourceExtract
 
   class Partial
 
-    attr_reader :end_line, :end_column
+    attr_reader :end_line, :end_column, :line, :column
 
     def initialize(src, end_line, end_column)
       @src = src
       @end_line = end_line
       @end_column = end_column
+      @line = end_line
+      @column = end_column
     end
 
     def adjust(other)
