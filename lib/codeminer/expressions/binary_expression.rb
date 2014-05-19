@@ -21,4 +21,6 @@ class BinaryExpression < Expression
     @token.value
   end
 
+  alias receiver left
+
 end
