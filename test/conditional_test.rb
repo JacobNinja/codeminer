@@ -63,15 +63,38 @@ else
     assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), CallMatcher.new('bar', 'bar'), CallMatcher.new('baz', 'baz'), ruby)
   end
 
-  test 'conditional' do
+  test 'case' do
     ruby <<-RUBY
 case foo
 when bar then 5
 else baz
 end
     RUBY
-    debug
     assert_valid_child_expression CaseMatcher.new(ruby, CallMatcher.new('foo', 'foo'), WhenMatcher.new(ArgumentsMatcher.new(CallMatcher.new('bar', 'bar'), 'bar'), BodyMatcher.new(Matcher.new(:int, '5')), 'when bar then 5'), ElseMatcher.new(BodyMatcher.new(CallMatcher.new('baz', 'baz')), 'else baz'))
+  end
+
+  test 'elsif' do
+    ruby <<-RUBY
+if foo
+  1
+elsif bar
+  2
+else
+  3
+end
+    RUBY
+    else_src = <<-RUBY
+else
+  3
+    RUBY
+    elsif_matcher = ConditionalMatcher.new(CallMatcher.new('bar', 'bar'), BodyMatcher.new(Matcher.new(:int, '2')), ElseMatcher.new(BodyMatcher.new(Matcher.new(:int, '3')), else_src), <<-RUBY)
+elsif bar
+  2
+else
+  3
+end
+    RUBY
+    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), BodyMatcher.new(Matcher.new(:int, '1')), elsif_matcher, ruby)
   end
 
 end

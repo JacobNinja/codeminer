@@ -4,6 +4,8 @@ module ConditionProcessor
     ConditionExpression.new(test, consequence, else_statement, extract_src_by_token(pop_keyword))
   end
 
+  alias on_elsif on_if
+
   def on_unless(test, consequence, else_statement)
     ConditionExpression.new(test, else_statement, consequence, extract_src_by_token(pop_keyword))
   end
