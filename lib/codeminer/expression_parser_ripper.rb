@@ -17,12 +17,16 @@ require File.expand_path('../processors/symbol_processor', __FILE__)
 require File.expand_path('../processors/token_processor', __FILE__)
 require File.expand_path('../processors/variable_processor', __FILE__)
 
+require File.expand_path('../expression_processor', __FILE__)
+
 class ExpressionParserRipper < Ripper
 
   include AssignmentProcessor, CallProcessor, ClassProcessor, MethodProcessor, RegexpProcessor, TokenProcessor,
           StringProcessor, ConditionProcessor, BinaryProcessor, ReturnProcessor, ParamsProcessor, ArgumentProcessor,
           HashProcessor, SymbolProcessor, VariableProcessor, ArrayProcessor,
           DefaultProcessor
+
+  attr_accessor :processors
 
   def initialize(src, *args)
     @src = src
@@ -39,7 +43,15 @@ class ExpressionParserRipper < Ripper
     @lambda = []
     @symbols = []
     @words = []
+    @processors = []
     super
+  end
+
+  def self.process(rb, processors)
+    parser = new(rb).extend(ExpressionProcessor)
+    parser.processors = processors
+    parser.parse
+    processors
   end
 
   def on_break(args)

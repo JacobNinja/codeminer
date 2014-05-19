@@ -70,4 +70,8 @@ class CodeMiner
     ExpressionParserRipper.parse(code)
   end
 
+  def self.process(code, processors)
+    ExpressionParserRipper.process(code, processors)
+  end
+
 end
