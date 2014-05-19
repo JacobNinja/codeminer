@@ -26,4 +26,12 @@ module ConditionProcessor
     ConditionExpression.new(test, consequence, else_statement, extract_src_by_tokens(test, else_statement))
   end
 
+  def on_case(test, whens)
+    CaseExpression.new(test, whens, extract_src_by_token(pop_keyword))
+  end
+
+  def on_when(arg, body, else_exp)
+    WhenExpression.new(arg, body, else_exp, extract_src_by_token(pop_keyword, body.end_line, body.end_column))
+  end
+
 end

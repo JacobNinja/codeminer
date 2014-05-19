@@ -9,7 +9,6 @@ class SymbolTest < ParseTestCase
 
   test 'dynamic symbol double quotes' do
     ruby ':"foo"'
-    debug
     assert_valid_child_expression DynamicSymbolMatcher.new(StringMatcher.new('foo', '"foo"'), ruby)
   end
 
