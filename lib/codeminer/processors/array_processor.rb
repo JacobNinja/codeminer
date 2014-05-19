@@ -12,9 +12,23 @@ module ArrayProcessor
     args.add(str)
   end
 
+  def on_qsymbols_new
+    ArgumentsExpression.new(SourceExtract::Partial.new(@src, lineno(), column()), @qsymbols.pop)
+  end
+
+  def on_qsymbols_add(args, string)
+    args.add(SymbolExpression.convert(string))
+  end
+
   def on_qwords_beg(*)
     super.tap do |token|
       @qwords << token
+    end
+  end
+
+  def on_qsymbols_beg(*)
+    super.tap do |token|
+      @qsymbols << token
     end
   end
 

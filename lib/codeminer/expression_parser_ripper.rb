@@ -35,6 +35,7 @@ class ExpressionParserRipper < Ripper
     @string_content = []
     @parens_begin = []
     @qwords = []
+    @qsymbols = []
     super
   end
 

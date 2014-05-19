@@ -17,4 +17,9 @@ class ArrayTest < ParseTestCase
     assert_valid_child_expression ArrayMatcher.new(ArgumentsMatcher.new(StringMatcher.new('foo', 'foo'), StringMatcher.new('bar', 'bar'), 'foo bar'), ruby)
   end
 
+  test 'qsymbol' do
+    ruby '%i{foo}'
+    assert_valid_child_expression ArrayMatcher.new(ArgumentsMatcher.new(Matcher.new(:symbol, 'foo'), 'foo'), ruby)
+  end
+
 end
