@@ -1,6 +1,6 @@
 class BeginExpression < Expression
 
-  attr_reader :body
+  attr_reader :bodystmt, :value
 
   def initialize(bodystmt, src)
     @bodystmt = bodystmt

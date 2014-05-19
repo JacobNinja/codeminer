@@ -22,7 +22,7 @@ class PositionalParamExpression < Expression
   end
 
   def each
-    [@token]
+    []
   end
 
 end
