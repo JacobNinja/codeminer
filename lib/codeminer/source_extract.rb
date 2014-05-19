@@ -23,6 +23,45 @@ class SourceExtract
 
   end
 
+  module Usage
+
+    def line
+      @src.line
+    end
+
+    def column
+      @src.column
+    end
+
+    def end_line
+      @src.end_line
+    end
+
+    def end_column
+      @src.end_column
+    end
+
+    def src
+      extracted_source = @src.extract
+      if delimiter
+        extracted_source.chomp(delimiter.to_s)
+      else
+        extracted_source
+      end
+    end
+
+    def adjust_src(other)
+      if @src
+        @src = @src.adjust(other)
+      else
+        @src = other
+      end
+    end
+
+    def src_extract
+      @src
+    end
+
   end
 
   def self.extract_by_token(src, token, end_line, end_column)

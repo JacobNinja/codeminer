@@ -1,5 +1,7 @@
 class ReturnExpression < Expression
 
+  attr_reader :value
+
   def initialize(args, src)
     @args = args
     @src = src
@@ -10,7 +12,7 @@ class ReturnExpression < Expression
   end
 
   def each
-    @args.each
+    Array(@args)
   end
 
   def body

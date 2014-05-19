@@ -4,6 +4,10 @@ class EmptyExpression
     :empty
   end
 
+  def self.value
+    nil
+  end
+
   def self.each
     []
   end

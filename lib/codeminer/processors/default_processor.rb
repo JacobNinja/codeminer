@@ -9,6 +9,7 @@ module DefaultProcessor
   end
 
   Ripper::PARSER_EVENT_TABLE.each do |event, arity|
+    next if event == :parse_error
     if /_new\z/ =~ event.to_s and arity == 0
       define_method :"on_#{event}" do
         []
@@ -19,7 +20,8 @@ module DefaultProcessor
       end
     else
       define_method :"on_#{event}" do |*args|
-        UnknownExpression.new(event.to_s, nil, nil, [], lineno(), column())
+        src = extract_src_by_token(args.first) if args.first
+        UnknownExpression.new(event.to_s, nil, src, [], lineno(), column())
       end
     end
   end

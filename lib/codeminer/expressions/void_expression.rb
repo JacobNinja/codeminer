@@ -1,18 +1,9 @@
 class VoidExpression < Expression
 
-  attr_reader :line, :column, :value
+  attr_reader :value
 
-  def initialize(line, column)
-    @line = line
-    @column = column
-  end
-
-  def end_line
-    line
-  end
-
-  def end_column
-    column
+  def initialize(src)
+    @src = src
   end
 
   def type

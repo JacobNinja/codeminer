@@ -1,3 +1,5 @@
+require File.expand_path('../codeminer/source_extract', __FILE__)
+
 require File.expand_path('../codeminer/expressions/expression', __FILE__)
 require File.expand_path('../codeminer/expressions/alias_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/array_expression', __FILE__)
@@ -49,14 +51,13 @@ require File.expand_path('../codeminer/expressions/void_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/yield_expression', __FILE__)
 
 require File.expand_path('../codeminer/token', __FILE__)
-require File.expand_path('../codeminer/expression_parser_ripper', __FILE__)require File.expand_path('../codeminer/source_extract', __FILE__)
+require File.expand_path('../codeminer/expression_parser_ripper', __FILE__)
 
 class CodeMiner
 
   ParseError = Class.new(RuntimeError)
 
-  def self.parse(code)
-    expression_parser = ExpressionParserRipper
+  def self.parse(code)    expression_parser = ExpressionParserRipper
     expression_parser.parse(code)
   end
 

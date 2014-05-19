@@ -1,5 +1,7 @@
 class DynamicStringExpression < Expression
 
+  attr_reader :value
+
   def initialize(*body, src)
     @src = src
     @body = body

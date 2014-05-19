@@ -2,7 +2,7 @@ module VariableProcessor
 
   def on_var_ref(exp)
     if exp.kind_of?(Token)
-      LocalVariableExpression.new(exp, extract_src_by_tokens(exp))
+      LocalVariableExpression.new(exp, exp.src_extract)
     else
       exp
     end

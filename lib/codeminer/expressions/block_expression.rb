@@ -1,6 +1,6 @@
 class BlockExpression < Expression
 
-  attr_reader :body
+  attr_reader :body, :value
 
   def initialize(body, args, src)
     @body = body
@@ -13,7 +13,7 @@ class BlockExpression < Expression
   end
 
   def each
-    Array(body)
+    Array(body.each)
   end
 
 end

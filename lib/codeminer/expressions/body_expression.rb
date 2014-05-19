@@ -1,10 +1,14 @@
 class BodyExpression < Expression
 
-  def initialize(*body)
+  attr_reader :value
+
+  def initialize(*body, src)
     @body = body
+    @src = src
   end
 
   def add(statement)
+    adjust_src(statement.src_extract)
     @body << statement
     self
   end
@@ -15,22 +19,6 @@ class BodyExpression < Expression
 
   def type
     :body
-  end
-
-  def line
-    @body.first.line
-  end
-
-  def column
-    @body.first.column
-  end
-
-  def end_line
-    @body.last.end_line
-  end
-
-  def end_column
-    @body.last.end_column
   end
 
 end
