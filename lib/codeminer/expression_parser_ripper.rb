@@ -37,6 +37,7 @@ class ExpressionParserRipper < Ripper
     @qwords = []
     @qsymbols = []
     @lambda = []
+    @symbols = []
     super
   end
 

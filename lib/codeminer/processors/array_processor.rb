@@ -20,6 +20,22 @@ module ArrayProcessor
     args.add(SymbolExpression.convert(string))
   end
 
+  def on_symbols_new
+    ArgumentsExpression.new(SourceExtract::Partial.new(@src, lineno(), column()), @symbols.pop)
+  end
+
+  def on_symbols_add(args, string)
+    args.add(SymbolExpression.convert(string))
+  end
+
+  def on_word_add(words, word)
+    word
+  end
+
+  def on_word_new
+
+  end
+
   def on_qwords_beg(*)
     super.tap do |token|
       @qwords << token
@@ -29,6 +45,12 @@ module ArrayProcessor
   def on_qsymbols_beg(*)
     super.tap do |token|
       @qsymbols << token
+    end
+  end
+
+  def on_symbols_beg(*)
+    super.tap do |token|
+      @symbols << token
     end
   end
 
