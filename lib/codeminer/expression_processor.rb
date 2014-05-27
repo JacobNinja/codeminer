@@ -8,16 +8,16 @@ module ExpressionProcessor
 
     define_method :"on_#{event}" do |*args|
       super(*args).tap do |node|
-        invoke_processor(node)
+        invoke_processor(node, event)
       end
     end
   end
 
   private
 
-  def invoke_processor(node)
+  def invoke_processor(node, event)
     @processors.each do |p|
-      meth = :"process_#{node.type}"
+      meth = :"process_#{event}"
       p.public_send(meth, node) if p.respond_to?(meth)
     end
   end
