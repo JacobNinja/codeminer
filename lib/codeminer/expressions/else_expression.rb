@@ -1,6 +1,6 @@
 class ElseExpression < Expression
 
-  attr_reader :value
+  attr_reader :value, :consequence
 
   def initialize(consequence, src)
     @consequence = consequence
@@ -12,11 +12,11 @@ class ElseExpression < Expression
   end
 
   def body
-    @consequence
+    consequence
   end
 
   def each
-    [@consequence]
+    [consequence]
   end
 
 end
