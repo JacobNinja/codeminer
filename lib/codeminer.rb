@@ -58,6 +58,7 @@ require File.expand_path('../codeminer/expressions/until_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/variable_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/void_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/when_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/while_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/yield_expression', __FILE__)
 
 require File.expand_path('../codeminer/token', __FILE__)

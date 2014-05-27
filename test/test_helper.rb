@@ -49,6 +49,7 @@ require File.expand_path('../matchers/unary_matcher', __FILE__)
 require File.expand_path('../matchers/undef_matcher', __FILE__)
 require File.expand_path('../matchers/until_matcher', __FILE__)
 require File.expand_path('../matchers/when_matcher', __FILE__)
+require File.expand_path('../matchers/while_matcher', __FILE__)
 require File.expand_path('../matchers/yield_matcher', __FILE__)
 
 class ParseTestCase < Test::Unit::TestCase

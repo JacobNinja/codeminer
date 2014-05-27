@@ -20,7 +20,7 @@ module CodeMiner
     def on_kw(kw)
       super.tap do |token|
         if %w(do class def if else unless return alias yield break next super begin rescue case when redo retry undef elsif
-              until).include?(kw.gsub(/[^a-z]/, ''))
+              until while).include?(kw.gsub(/[^a-z]/, ''))
           @keywords << token
         end
       end

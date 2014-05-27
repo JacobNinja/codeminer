@@ -11,6 +11,15 @@ module CodeMiner
       UntilExpression.new(test, body, extract_src_by_token(pop_keyword))
     end
 
+    def on_while(test, body)
+      WhileExpression.new(test, body, extract_src_by_token(pop_keyword))
+    end
+
+    def on_while_mod(test, body)
+      pop_keyword
+      WhileExpression.new(test, body, extract_src_by_token(body))
+    end
+
   end
 
 end
