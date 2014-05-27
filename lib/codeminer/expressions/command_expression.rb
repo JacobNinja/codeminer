@@ -2,12 +2,13 @@ module CodeMiner
 
   class CommandExpression < Expression
 
-    attr_reader :args
+    attr_reader :args, :receiver
 
-    def initialize(token, args, src)
+    def initialize(token, args, src, receiver=nil)
       @token = token
       @args = args
       @src = src
+      @receiver = receiver
     end
 
     def value
@@ -19,7 +20,7 @@ module CodeMiner
     end
 
     def each
-      [@args]
+      [@receiver, @args].compact
     end
 
   end

@@ -4,6 +4,7 @@ require File.expand_path('../processors/array_processor', __FILE__)
 require File.expand_path('../processors/assignment_processor', __FILE__)
 require File.expand_path('../processors/binary_processor', __FILE__)
 require File.expand_path('../processors/call_processor', __FILE__)
+require File.expand_path('../processors/command_processor', __FILE__)
 require File.expand_path('../processors/class_processor', __FILE__)
 require File.expand_path('../processors/condition_processor', __FILE__)
 require File.expand_path('../processors/default_processor', __FILE__)
@@ -25,7 +26,7 @@ module CodeMiner
 
     include AssignmentProcessor, CallProcessor, ClassProcessor, MethodProcessor, RegexpProcessor, TokenProcessor,
             StringProcessor, ConditionProcessor, BinaryProcessor, ReturnProcessor, ParamsProcessor, ArgumentProcessor,
-            HashProcessor, SymbolProcessor, VariableProcessor, ArrayProcessor,
+            HashProcessor, SymbolProcessor, VariableProcessor, ArrayProcessor, CommandProcessor,
             DefaultProcessor
 
     attr_accessor :processors
@@ -87,10 +88,6 @@ module CodeMiner
 
     def on_yield0
       YieldExpression.new(nil, extract_src_by_token(pop_keyword))
-    end
-
-    def on_command(token, args)
-      CommandExpression.new(token, args, extract_src_by_token(token))
     end
 
     def on_undef(symbols)
