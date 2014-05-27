@@ -1,29 +1,33 @@
-class BodystmtExpression < Expression
+module CodeMiner
 
-  attr_reader :body, :rescue, :value
+  class BodystmtExpression < Expression
 
-  def initialize(body, rescue_exp, c, d, src:)
-    @body = body
-    @rescue = rescue_exp
-    @c, @d = c, d
-    @src = src
-  end
+    attr_reader :body, :rescue, :value
 
-  def type
-    :bodystmt
-  end
+    def initialize(body, rescue_exp, c, d, src:)
+      @body = body
+      @rescue = rescue_exp
+      @c, @d = c, d
+      @src = src
+    end
 
-  #def body
-  #  if @rescue
-  #    @rescue.wrap(@body)
-  #  else
-  #    @body
-  #  end
-  #end
+    def type
+      :bodystmt
+    end
 
-  def each
-    #[body, @c, @d].compact
-    @body.each.first.kind_of?(VoidExpression) ? [] : @body.each
+    #def body
+    #  if @rescue
+    #    @rescue.wrap(@body)
+    #  else
+    #    @body
+    #  end
+    #end
+
+    def each
+      #[body, @c, @d].compact
+      @body.each.first.kind_of?(VoidExpression) ? [] : @body.each
+    end
+
   end
 
 end

@@ -1,18 +1,22 @@
-class BackrefVariableExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class BackrefVariableExpression < Expression
 
-  def initialize(value, src)
-    @value = value
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :backref_variable
-  end
+    def initialize(value, src)
+      @value = value
+      @src = src
+    end
 
-  def each
-    []
+    def type
+      :backref_variable
+    end
+
+    def each
+      []
+    end
+
   end
 
 end

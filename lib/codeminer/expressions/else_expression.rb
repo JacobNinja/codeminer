@@ -1,22 +1,26 @@
-class ElseExpression < Expression
+module CodeMiner
 
-  attr_reader :value, :consequence
+  class ElseExpression < Expression
 
-  def initialize(consequence, src)
-    @consequence = consequence
-    @src = src
-  end
+    attr_reader :value, :consequence
 
-  def type
-    :else
-  end
+    def initialize(consequence, src)
+      @consequence = consequence
+      @src = src
+    end
 
-  def body
-    consequence
-  end
+    def type
+      :else
+    end
 
-  def each
-    [consequence]
+    def body
+      consequence
+    end
+
+    def each
+      [consequence]
+    end
+
   end
 
 end

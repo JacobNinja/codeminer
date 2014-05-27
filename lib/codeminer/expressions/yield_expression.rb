@@ -1,18 +1,22 @@
-class YieldExpression < Expression
+module CodeMiner
 
-  attr_reader :body, :value
+  class YieldExpression < Expression
 
-  def initialize(body, src)
-    @body = body
-    @src = src
-  end
+    attr_reader :body, :value
 
-  def type
-    :yield
-  end
+    def initialize(body, src)
+      @body = body
+      @src = src
+    end
 
-  def each
-    [@body]
+    def type
+      :yield
+    end
+
+    def each
+      [@body]
+    end
+
   end
 
 end

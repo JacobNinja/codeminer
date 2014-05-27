@@ -1,23 +1,27 @@
-class CommandExpression < Expression
+module CodeMiner
 
-  attr_reader :args
+  class CommandExpression < Expression
 
-  def initialize(token, args, src)
-    @token = token
-    @args = args
-    @src = src
-  end
+    attr_reader :args
 
-  def value
-    @token.value
-  end
+    def initialize(token, args, src)
+      @token = token
+      @args = args
+      @src = src
+    end
 
-  def type
-    :command
-  end
+    def value
+      @token.value
+    end
 
-  def each
-    [@args]
+    def type
+      :command
+    end
+
+    def each
+      [@args]
+    end
+
   end
 
 end

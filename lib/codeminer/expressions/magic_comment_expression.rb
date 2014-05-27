@@ -1,19 +1,23 @@
-class MagicCommentExpression < Expression
+module CodeMiner
 
-  attr_reader :value, :key
+  class MagicCommentExpression < Expression
 
-  def initialize(key, value, src)
-    @key = key
-    @value = value
-    @src = src
-  end
+    attr_reader :value, :key
 
-  def type
-    :magic_comment
-  end
+    def initialize(key, value, src)
+      @key = key
+      @value = value
+      @src = src
+    end
 
-  def each
-    []
+    def type
+      :magic_comment
+    end
+
+    def each
+      []
+    end
+
   end
 
 end

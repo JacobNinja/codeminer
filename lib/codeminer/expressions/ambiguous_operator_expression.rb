@@ -1,21 +1,25 @@
-class AmbiguousOperatorExpression < Expression
+module CodeMiner
 
-  def initialize(token, msg, src)
-    @token = token
-    @msg = msg
-    @src = src
-  end
+  class AmbiguousOperatorExpression < Expression
 
-  def type
-    :ambiguous_operator
-  end
+    def initialize(token, msg, src)
+      @token = token
+      @msg = msg
+      @src = src
+    end
 
-  def value
-    @token.value
-  end
+    def type
+      :ambiguous_operator
+    end
 
-  def each
-    [msg]
+    def value
+      @token.value
+    end
+
+    def each
+      [msg]
+    end
+
   end
 
 end

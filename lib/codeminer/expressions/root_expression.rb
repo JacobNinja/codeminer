@@ -1,18 +1,22 @@
-class RootExpression < Expression
+module CodeMiner
 
-  attr_reader :src, :value
+  class RootExpression < Expression
 
-  def initialize(body, src)
-    @body = body
-    @src = src
-  end
+    attr_reader :src, :value
 
-  def each
-    @body.each
-  end
+    def initialize(body, src)
+      @body = body
+      @src = src
+    end
 
-  def type
-    :root
+    def each
+      @body.each
+    end
+
+    def type
+      :root
+    end
+
   end
 
 end

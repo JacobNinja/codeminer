@@ -1,20 +1,24 @@
-class IntExpression < Expression
+module CodeMiner
 
-  def initialize(token, src)
-    @token = token
-    @src = src
-  end
+  class IntExpression < Expression
 
-  def type
-    :int
-  end
+    def initialize(token, src)
+      @token = token
+      @src = src
+    end
 
-  def value
-    @token.value
-  end
+    def type
+      :int
+    end
 
-  def each
-    []
+    def value
+      @token.value
+    end
+
+    def each
+      []
+    end
+
   end
 
 end

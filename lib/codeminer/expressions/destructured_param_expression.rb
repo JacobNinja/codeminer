@@ -1,20 +1,24 @@
-class DestructuredParamExpression < Expression
+module CodeMiner
 
-  def initialize(token, src)
-    @token = token
-    @src = src
-  end
+  class DestructuredParamExpression < Expression
 
-  def value
-    @token.value
-  end
+    def initialize(token, src)
+      @token = token
+      @src = src
+    end
 
-  def type
-    :destructured_param
-  end
+    def value
+      @token.value
+    end
 
-  def each
-    []
+    def type
+      :destructured_param
+    end
+
+    def each
+      []
+    end
+
   end
 
 end

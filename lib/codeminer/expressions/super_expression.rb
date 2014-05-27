@@ -1,17 +1,21 @@
-class SuperExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class SuperExpression < Expression
 
-  def initialize(src)
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :super
-  end
+    def initialize(src)
+      @src = src
+    end
 
-  def each
-    []
+    def type
+      :super
+    end
+
+    def each
+      []
+    end
+
   end
 
 end

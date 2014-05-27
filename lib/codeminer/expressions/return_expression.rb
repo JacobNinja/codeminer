@@ -1,22 +1,26 @@
-class ReturnExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class ReturnExpression < Expression
 
-  def initialize(args, src)
-    @args = args
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :return
-  end
+    def initialize(args, src)
+      @args = args
+      @src = src
+    end
 
-  def each
-    Array(@args)
-  end
+    def type
+      :return
+    end
 
-  def body
-    @args
+    def each
+      Array(@args)
+    end
+
+    def body
+      @args
+    end
+
   end
 
 end

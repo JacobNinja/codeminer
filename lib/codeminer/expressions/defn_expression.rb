@@ -1,20 +1,24 @@
-class DefnExpression < Expression
+module CodeMiner
 
-  attr_reader :value, :params
+  class DefnExpression < Expression
 
-  def initialize(name, params, body, src)
-    @value = name
-    @params = params
-    @body = body
-    @src = src
-  end
+    attr_reader :value, :params
 
-  def type
-    :defn
-  end
+    def initialize(name, params, body, src)
+      @value = name
+      @params = params
+      @body = body
+      @src = src
+    end
 
-  def each
-    [@params, @body]
+    def type
+      :defn
+    end
+
+    def each
+      [@params, @body]
+    end
+
   end
 
 end

@@ -1,17 +1,21 @@
-class RetryExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class RetryExpression < Expression
 
-  def initialize(src)
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :retry
-  end
+    def initialize(src)
+      @src = src
+    end
 
-  def each
-    []
+    def type
+      :retry
+    end
+
+    def each
+      []
+    end
+
   end
 
 end

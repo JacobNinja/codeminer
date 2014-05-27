@@ -1,18 +1,22 @@
-class GlobalVariableExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class GlobalVariableExpression < Expression
 
-  def initialize(value, src)
-    @value = value
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :global_variable
-  end
+    def initialize(value, src)
+      @value = value
+      @src = src
+    end
 
-  def each
-    []
+    def type
+      :global_variable
+    end
+
+    def each
+      []
+    end
+
   end
 
 end

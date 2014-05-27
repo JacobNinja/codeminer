@@ -1,19 +1,23 @@
-class ClassExpression < Expression
+module CodeMiner
 
-  attr_reader :value, :body
+  class ClassExpression < Expression
 
-  def initialize(name, body, src)
-    @value = name
-    @body = body
-    @src = src
-  end
+    attr_reader :value, :body
 
-  def type
-    :class
-  end
+    def initialize(name, body, src)
+      @value = name
+      @body = body
+      @src = src
+    end
 
-  def each
-    [body]
+    def type
+      :class
+    end
+
+    def each
+      [body]
+    end
+
   end
 
 end

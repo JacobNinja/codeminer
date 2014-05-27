@@ -1,31 +1,35 @@
-class LocalAssignExpression < Expression
+module CodeMiner
 
-  attr_reader :receiver, :body
+  class LocalAssignExpression < Expression
 
-  def initialize(receiver, body, src)
-    @receiver = receiver
-    @body = body
-    @src = src
-  end
+    attr_reader :receiver, :body
 
-  def type
-    :assign
-  end
+    def initialize(receiver, body, src)
+      @receiver = receiver
+      @body = body
+      @src = src
+    end
 
-  def value
-    @receiver.value
-  end
+    def type
+      :assign
+    end
 
-  def line
-    @receiver.line
-  end
+    def value
+      @receiver.value
+    end
 
-  def column
-    @receiver.column
-  end
+    def line
+      @receiver.line
+    end
 
-  def each
-    [body]
+    def column
+      @receiver.column
+    end
+
+    def each
+      [body]
+    end
+
   end
 
 end

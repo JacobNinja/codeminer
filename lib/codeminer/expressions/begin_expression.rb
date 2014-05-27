@@ -1,26 +1,30 @@
-class BeginExpression < Expression
+module CodeMiner
 
-  attr_reader :bodystmt, :value
+  class BeginExpression < Expression
 
-  def initialize(bodystmt, src)
-    @bodystmt = bodystmt
-    @src = src
-  end
+    attr_reader :bodystmt, :value
 
-  def type
-    :begin
-  end
+    def initialize(bodystmt, src)
+      @bodystmt = bodystmt
+      @src = src
+    end
 
-  def body
-    @bodystmt.body
-  end
+    def type
+      :begin
+    end
 
-  def rescue
-    @bodystmt.rescue
-  end
+    def body
+      @bodystmt.body
+    end
 
-  def each
-    body.each
+    def rescue
+      @bodystmt.rescue
+    end
+
+    def each
+      body.each
+    end
+
   end
 
 end

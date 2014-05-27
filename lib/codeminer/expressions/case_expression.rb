@@ -1,23 +1,27 @@
-class CaseExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class CaseExpression < Expression
 
-  def initialize(test, whens, src)
-    @test = test
-    @whens = whens
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :case
-  end
+    def initialize(test, whens, src)
+      @test = test
+      @whens = whens
+      @src = src
+    end
 
-  def else_exp
-    Array(@whens).map(&:else).last
-  end
+    def type
+      :case
+    end
 
-  def each
-    [@test, @whens, else_exp].compact
+    def else_exp
+      Array(@whens).map(&:else).last
+    end
+
+    def each
+      [@test, @whens, else_exp].compact
+    end
+
   end
 
 end

@@ -1,24 +1,28 @@
-class RegexpExpression < Expression
+module CodeMiner
 
-  def initialize
-    @content = []
-  end
+  class RegexpExpression < Expression
 
-  def type
-    :regexp
-  end
+    def initialize
+      @content = []
+    end
 
-  def value
-    src
-  end
+    def type
+      :regexp
+    end
 
-  def each
-    @content
-  end
+    def value
+      src
+    end
 
-  def add(regex)
-    @content << regex
-    self
+    def each
+      @content
+    end
+
+    def add(regex)
+      @content << regex
+      self
+    end
+
   end
 
 end

@@ -1,20 +1,24 @@
-class SplatExpression < Expression
+module CodeMiner
 
-  def initialize(body, src)
-    @body = body
-    @src = src
-  end
+  class SplatExpression < Expression
 
-  def type
-    :splat
-  end
+    def initialize(body, src)
+      @body = body
+      @src = src
+    end
 
-  def value
-    @body.value
-  end
+    def type
+      :splat
+    end
 
-  def each
-    @body.each
+    def value
+      @body.value
+    end
+
+    def each
+      @body.each
+    end
+
   end
 
 end

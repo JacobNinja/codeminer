@@ -1,18 +1,22 @@
-class StringEmbeddedExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class StringEmbeddedExpression < Expression
 
-  def initialize(body, src)
-    @body = body
-    @src = src
-  end
+    attr_reader :value
 
-  def each
-    @body.each
-  end
+    def initialize(body, src)
+      @body = body
+      @src = src
+    end
 
-  def type
-    :string_embexp
+    def each
+      @body.each
+    end
+
+    def type
+      :string_embexp
+    end
+
   end
 
 end

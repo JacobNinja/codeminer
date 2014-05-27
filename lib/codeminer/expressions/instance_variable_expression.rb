@@ -1,18 +1,22 @@
-class InstanceVariableExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class InstanceVariableExpression < Expression
 
-  def initialize(value, src)
-    @value = value
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :instance_variable
-  end
+    def initialize(value, src)
+      @value = value
+      @src = src
+    end
 
-  def each
-    []
+    def type
+      :instance_variable
+    end
+
+    def each
+      []
+    end
+
   end
 
 end

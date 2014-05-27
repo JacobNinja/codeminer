@@ -1,20 +1,24 @@
-class LocalVariableExpression < Expression
+module CodeMiner
 
-  def initialize(token, src)
-    @token = token
-    @src = src
-  end
+  class LocalVariableExpression < Expression
 
-  def type
-    :local_variable
-  end
+    def initialize(token, src)
+      @token = token
+      @src = src
+    end
 
-  def value
-    @token.value
-  end
+    def type
+      :local_variable
+    end
 
-  def each
-    []
+    def value
+      @token.value
+    end
+
+    def each
+      []
+    end
+
   end
 
 end

@@ -1,24 +1,28 @@
-class BodyExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class BodyExpression < Expression
 
-  def initialize(*body, src)
-    @body = body
-    @src = src
-  end
+    attr_reader :value
 
-  def add(statement)
-    adjust_src(statement.src_extract)
-    @body << statement
-    self
-  end
+    def initialize(*body, src)
+      @body = body
+      @src = src
+    end
 
-  def each
-    @body
-  end
+    def add(statement)
+      adjust_src(statement.src_extract)
+      @body << statement
+      self
+    end
 
-  def type
-    :body
+    def each
+      @body
+    end
+
+    def type
+      :body
+    end
+
   end
 
 end

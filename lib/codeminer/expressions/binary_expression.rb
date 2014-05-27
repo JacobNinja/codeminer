@@ -1,26 +1,30 @@
-class BinaryExpression < Expression
+module CodeMiner
 
-  attr_reader :left, :right
+  class BinaryExpression < Expression
 
-  def initialize(token, left, right, src)
-    @token = token
-    @left = left
-    @right = right
-    @src = src
+    attr_reader :left, :right
+
+    def initialize(token, left, right, src)
+      @token = token
+      @left = left
+      @right = right
+      @src = src
+    end
+
+    def each
+      [left, right]
+    end
+
+    def type
+      :binary
+    end
+
+    def value
+      @token.value
+    end
+
+    alias receiver left
+
   end
-
-  def each
-    [left, right]
-  end
-
-  def type
-    :binary
-  end
-
-  def value
-    @token.value
-  end
-
-  alias receiver left
 
 end

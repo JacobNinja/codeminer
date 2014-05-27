@@ -1,17 +1,21 @@
-class VoidExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class VoidExpression < Expression
 
-  def initialize(src)
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :void_stmt
-  end
+    def initialize(src)
+      @src = src
+    end
 
-  def each
-    []
+    def type
+      :void_stmt
+    end
+
+    def each
+      []
+    end
+
   end
 
 end

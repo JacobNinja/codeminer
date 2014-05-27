@@ -1,25 +1,29 @@
-class ArgumentsExpression < Expression
+module CodeMiner
 
-  attr_reader :value, :token
+  class ArgumentsExpression < Expression
 
-  def initialize(src=nil, token=nil)
-    @arguments = []
-    @src = src
-    @token = token
-  end
+    attr_reader :value, :token
 
-  def add(exp)
-    @arguments << exp
-    adjust_src(exp.src_extract)
-    self
-  end
+    def initialize(src=nil, token=nil)
+      @arguments = []
+      @src = src
+      @token = token
+    end
 
-  def type
-    :arguments
-  end
+    def add(exp)
+      @arguments << exp
+      adjust_src(exp.src_extract)
+      self
+    end
 
-  def each
-    @arguments
+    def type
+      :arguments
+    end
+
+    def each
+      @arguments
+    end
+
   end
 
 end

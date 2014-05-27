@@ -1,19 +1,23 @@
-class HashPairExpression < Expression
+module CodeMiner
 
-  attr_reader :key, :value
+  class HashPairExpression < Expression
 
-  def initialize(key, value, src)
-    @key = key
-    @value = value
-    @src = src
-  end
+    attr_reader :key, :value
 
-  def type
-    :hash_pair
-  end
+    def initialize(key, value, src)
+      @key = key
+      @value = value
+      @src = src
+    end
 
-  def each
-    [key, value]
+    def type
+      :hash_pair
+    end
+
+    def each
+      [key, value]
+    end
+
   end
 
 end

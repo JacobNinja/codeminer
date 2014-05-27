@@ -1,15 +1,19 @@
-class EmptyExpression
+module CodeMiner
 
-  def self.type
-    :empty
-  end
+  class EmptyExpression
 
-  def self.value
-    nil
-  end
+    def self.type
+      :empty
+    end
 
-  def self.each
-    []
+    def self.value
+      nil
+    end
+
+    def self.each
+      []
+    end
+
   end
 
 end

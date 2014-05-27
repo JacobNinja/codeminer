@@ -1,18 +1,22 @@
-class BreakExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class BreakExpression < Expression
 
-  def initialize(args, src)
-    @args = args
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :break
-  end
+    def initialize(args, src)
+      @args = args
+      @src = src
+    end
 
-  def each
-    [@args]
+    def type
+      :break
+    end
+
+    def each
+      [@args]
+    end
+
   end
 
 end

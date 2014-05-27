@@ -1,28 +1,32 @@
-class DefsExpression < Expression
+module CodeMiner
 
-  attr_reader :body
+  class DefsExpression < Expression
 
-  def initialize(receiver, name, src, body)
-    @receiver_token = receiver
-    @name = name
-    @src = src
-    @body = body
-  end
+    attr_reader :body
 
-  def receiver
-    @receiver_token.value
-  end
+    def initialize(receiver, name, src, body)
+      @receiver_token = receiver
+      @name = name
+      @src = src
+      @body = body
+    end
 
-  def value
-    @name
-  end
+    def receiver
+      @receiver_token.value
+    end
 
-  def type
-    :defs
-  end
+    def value
+      @name
+    end
 
-  def each
-    @body
+    def type
+      :defs
+    end
+
+    def each
+      @body
+    end
+
   end
 
 end

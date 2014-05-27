@@ -1,18 +1,22 @@
-class ClassVariableExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class ClassVariableExpression < Expression
 
-  def initialize(value, src)
-    @value = value
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :class_variable
-  end
+    def initialize(value, src)
+      @value = value
+      @src = src
+    end
 
-  def each
-    []
+    def type
+      :class_variable
+    end
+
+    def each
+      []
+    end
+
   end
 
 end

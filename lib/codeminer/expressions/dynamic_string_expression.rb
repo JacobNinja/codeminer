@@ -1,24 +1,28 @@
-class DynamicStringExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class DynamicStringExpression < Expression
 
-  def initialize(*body, src)
-    @src = src
-    @body = body
-  end
+    attr_reader :value
 
-  def type
-    :dynamic_string
-  end
+    def initialize(*body, src)
+      @src = src
+      @body = body
+    end
 
-  def each
-    @body
-  end
+    def type
+      :dynamic_string
+    end
 
-  def add(string, src)
-    @body << string
-    @src = src
-    self
+    def each
+      @body
+    end
+
+    def add(string, src)
+      @body << string
+      @src = src
+      self
+    end
+
   end
 
 end

@@ -1,24 +1,28 @@
-class CallExpression < Expression
+module CodeMiner
 
-  attr_reader :receiver
+  class CallExpression < Expression
 
-  def initialize(token, src, receiver: nil, arguments: nil)
-    @token = token
-    @src = src
-    @receiver = receiver
-    @args = arguments
-  end
+    attr_reader :receiver
 
-  def type
-    :call
-  end
+    def initialize(token, src, receiver: nil, arguments: nil)
+      @token = token
+      @src = src
+      @receiver = receiver
+      @args = arguments
+    end
 
-  def value
-    @token.value
-  end
+    def type
+      :call
+    end
 
-  def each
-    [@receiver, @args, @block].compact
+    def value
+      @token.value
+    end
+
+    def each
+      [@receiver, @args, @block].compact
+    end
+
   end
 
 end

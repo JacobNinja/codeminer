@@ -1,19 +1,23 @@
-class UnaryExpression < Expression
+module CodeMiner
 
-  attr_reader :value, :receiver
+  class UnaryExpression < Expression
 
-  def initialize(value, receiver, src)
-    @value = value
-    @receiver = receiver
-    @src = src
-  end
+    attr_reader :value, :receiver
 
-  def type
-    :unary
-  end
+    def initialize(value, receiver, src)
+      @value = value
+      @receiver = receiver
+      @src = src
+    end
 
-  def each
-    [@value, @receiver]
+    def type
+      :unary
+    end
+
+    def each
+      [@value, @receiver]
+    end
+
   end
 
 end

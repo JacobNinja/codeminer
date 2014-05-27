@@ -1,20 +1,24 @@
-class WhenExpression < Expression
+module CodeMiner
 
-  attr_reader :value, :else, :body
+  class WhenExpression < Expression
 
-  def initialize(args, body, else_exp, src)
-    @args = args
-    @body = body
-    @else = else_exp
-    @src = src
-  end
+    attr_reader :value, :else, :body
 
-  def type
-    :when
-  end
+    def initialize(args, body, else_exp, src)
+      @args = args
+      @body = body
+      @else = else_exp
+      @src = src
+    end
 
-  def each
-    [@args, @body]
+    def type
+      :when
+    end
+
+    def each
+      [@args, @body]
+    end
+
   end
 
 end

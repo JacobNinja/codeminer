@@ -1,19 +1,23 @@
-class LambdaExpression < Expression
+module CodeMiner
 
-  attr_reader :args, :body, :value
+  class LambdaExpression < Expression
 
-  def initialize(args, body, src)
-    @args = args
-    @body = body
-    @src = src
-  end
+    attr_reader :args, :body, :value
 
-  def type
-    :lambda
-  end
+    def initialize(args, body, src)
+      @args = args
+      @body = body
+      @src = src
+    end
 
-  def each
-    [@args, @body]
+    def type
+      :lambda
+    end
+
+    def each
+      [@args, @body]
+    end
+
   end
 
 end

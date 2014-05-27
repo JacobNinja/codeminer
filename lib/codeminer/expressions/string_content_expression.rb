@@ -1,25 +1,29 @@
-class StringContentExpression < Expression
+module CodeMiner
 
-  def add(string, src)
-    if string.kind_of? StringEmbeddedExpression
-      DynamicStringExpression.new(string, src)
-    elsif string.kind_of? Token
-      StringExpression.new(string, src)
-    else
-      string
+  class StringContentExpression < Expression
+
+    def add(string, src)
+      if string.kind_of? StringEmbeddedExpression
+        DynamicStringExpression.new(string, src)
+      elsif string.kind_of? Token
+        StringExpression.new(string, src)
+      else
+        string
+      end
     end
-  end
 
-  def type
-    :string
-  end
+    def type
+      :string
+    end
 
-  def value
-    ''
-  end
+    def value
+      ''
+    end
 
-  def each
-    []
+    def each
+      []
+    end
+
   end
 
 end

@@ -1,16 +1,20 @@
-class VariableExpression < Expression
+module CodeMiner
 
-  def initialize(token, src)
-    @token = token
-    @src = src
-  end
+  class VariableExpression < Expression
 
-  def type
-    :var_ref
-  end
+    def initialize(token, src)
+      @token = token
+      @src = src
+    end
 
-  def each
-    [@token]
+    def type
+      :var_ref
+    end
+
+    def each
+      [@token]
+    end
+
   end
 
 end

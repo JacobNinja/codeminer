@@ -1,18 +1,22 @@
-class DynamicSymbolExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class DynamicSymbolExpression < Expression
 
-  def initialize(*body, src)
-    @body = body
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :dynamic_symbol
-  end
+    def initialize(*body, src)
+      @body = body
+      @src = src
+    end
 
-  def each
-    @body
+    def type
+      :dynamic_symbol
+    end
+
+    def each
+      @body
+    end
+
   end
 
 end

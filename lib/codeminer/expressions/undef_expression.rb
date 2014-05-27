@@ -1,18 +1,22 @@
-class UndefExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class UndefExpression < Expression
 
-  def initialize(symbols, src)
-    @symbols = symbols
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :undef
-  end
+    def initialize(symbols, src)
+      @symbols = symbols
+      @src = src
+    end
 
-  def each
-    @symbols
+    def type
+      :undef
+    end
+
+    def each
+      @symbols
+    end
+
   end
 
 end

@@ -1,17 +1,21 @@
-class RedoExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class RedoExpression < Expression
 
-  def initialize(src)
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :redo
-  end
+    def initialize(src)
+      @src = src
+    end
 
-  def each
-    []
+    def type
+      :redo
+    end
+
+    def each
+      []
+    end
+
   end
 
 end

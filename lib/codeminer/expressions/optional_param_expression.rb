@@ -1,27 +1,31 @@
-class OptionalParamExpression < Expression
+module CodeMiner
 
-  attr_reader :token, :value
+  class OptionalParamExpression < Expression
 
-  def initialize(token, value, src)
-    @token = token
-    @value = value
-    @src = src
-  end
+    attr_reader :token, :value
 
-  def type
-    :optional_param
-  end
+    def initialize(token, value, src)
+      @token = token
+      @value = value
+      @src = src
+    end
 
-  def variable
-    @token.value
-  end
+    def type
+      :optional_param
+    end
 
-  def default
-    @value
-  end
+    def variable
+      @token.value
+    end
 
-  def each
-    [@token, @value]
+    def default
+      @value
+    end
+
+    def each
+      [@token, @value]
+    end
+
   end
 
 end

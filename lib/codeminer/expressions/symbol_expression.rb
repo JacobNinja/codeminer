@@ -1,28 +1,32 @@
-class SymbolExpression < Expression
+module CodeMiner
 
-  def self.convert(exp)
-    if exp.kind_of?(Token)
-      new(exp, exp.src_extract)
-    else
-      exp
+  class SymbolExpression < Expression
+
+    def self.convert(exp)
+      if exp.kind_of?(Token)
+        new(exp, exp.src_extract)
+      else
+        exp
+      end
     end
-  end
 
-  def initialize(token, src)
-    @token = token
-    @src = src
-  end
+    def initialize(token, src)
+      @token = token
+      @src = src
+    end
 
-  def type
-    :symbol
-  end
+    def type
+      :symbol
+    end
 
-  def value
-    @token.value
-  end
+    def value
+      @token.value
+    end
 
-  def each
-    []
+    def each
+      []
+    end
+
   end
 
 end

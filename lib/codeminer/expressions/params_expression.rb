@@ -1,40 +1,44 @@
-class ParamsExpression < Expression
+module CodeMiner
 
-  attr_reader :positional, :optional, :value
+  class ParamsExpression < Expression
 
-  def initialize(positional, optional)
-    @positional = positional
-    @optional = optional
-  end
+    attr_reader :positional, :optional, :value
 
-  def type
-    :params
-  end
+    def initialize(positional, optional)
+      @positional = positional
+      @optional = optional
+    end
 
-  def each
-    [positional, optional]
-  end
+    def type
+      :params
+    end
 
-  def line
-    expression_values.map(&:line).first
-  end
+    def each
+      [positional, optional]
+    end
 
-  def column
-    expression_values.map(&:column).first
-  end
+    def line
+      expression_values.map(&:line).first
+    end
 
-  def end_line
-    expression_values.map(&:end_line).last
-  end
+    def column
+      expression_values.map(&:column).first
+    end
 
-  def end_column
-    expression_values.map(&:end_column).last
-  end
+    def end_line
+      expression_values.map(&:end_line).last
+    end
 
-  private
+    def end_column
+      expression_values.map(&:end_column).last
+    end
 
-  def expression_values
-    [*positional.each, *optional.each.map(&:token), *optional.each.map(&:value)]
+    private
+
+    def expression_values
+      [*positional.each, *optional.each.map(&:token), *optional.each.map(&:value)]
+    end
+
   end
 
 end

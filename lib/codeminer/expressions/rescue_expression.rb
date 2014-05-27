@@ -1,21 +1,25 @@
-class RescueExpression < Expression
+module CodeMiner
 
-  attr_reader :body, :value
+  class RescueExpression < Expression
 
-  def initialize(constants, token, resbody, d, src)
-    @constants = constants
-    @token = token
-    @resbody = resbody
-    @d = d
-    @src = src
-  end
+    attr_reader :body, :value
 
-  def type
-    :rescue
-  end
+    def initialize(constants, token, resbody, d, src)
+      @constants = constants
+      @token = token
+      @resbody = resbody
+      @d = d
+      @src = src
+    end
 
-  def each
-    [@resbody]
+    def type
+      :rescue
+    end
+
+    def each
+      [@resbody]
+    end
+
   end
 
 end

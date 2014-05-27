@@ -1,15 +1,19 @@
-class Token < Expression
+module CodeMiner
 
-  attr_reader :type, :value
+  class Token < Expression
 
-  def initialize(type, value, src)
-    @type = type
-    @value = value
-    @src = src
-  end
+    attr_reader :type, :value
 
-  def each
-    []
+    def initialize(type, value, src)
+      @type = type
+      @value = value
+      @src = src
+    end
+
+    def each
+      []
+    end
+
   end
 
 end

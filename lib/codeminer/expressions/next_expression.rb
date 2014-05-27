@@ -1,18 +1,22 @@
-class NextExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class NextExpression < Expression
 
-  def initialize(args, src)
-    @args = args
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :next
-  end
+    def initialize(args, src)
+      @args = args
+      @src = src
+    end
 
-  def each
-    [@args]
+    def type
+      :next
+    end
+
+    def each
+      [@args]
+    end
+
   end
 
 end

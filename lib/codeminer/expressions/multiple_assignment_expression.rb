@@ -1,19 +1,23 @@
-class MultipleAssignmentExpression < Expression
+module CodeMiner
 
-  attr_reader :params, :values, :value
+  class MultipleAssignmentExpression < Expression
 
-  def initialize(params, values, src)
-    @params = params
-    @values = values
-    @src = src
-  end
+    attr_reader :params, :values, :value
 
-  def type
-    :massign
-  end
+    def initialize(params, values, src)
+      @params = params
+      @values = values
+      @src = src
+    end
 
-  def each
-    [params, values]
+    def type
+      :massign
+    end
+
+    def each
+      [params, values]
+    end
+
   end
 
 end

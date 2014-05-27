@@ -1,18 +1,22 @@
-class ArrayExpression < Expression
+module CodeMiner
 
-  attr_reader :value
+  class ArrayExpression < Expression
 
-  def initialize(items, src)
-    @items = items
-    @src = src
-  end
+    attr_reader :value
 
-  def type
-    :array
-  end
+    def initialize(items, src)
+      @items = items
+      @src = src
+    end
 
-  def each
-    Array(@items)
+    def type
+      :array
+    end
+
+    def each
+      Array(@items)
+    end
+
   end
 
 end
