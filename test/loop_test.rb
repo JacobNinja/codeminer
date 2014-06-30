@@ -39,4 +39,12 @@ end
     assert_valid_child_expression ForMatcher.new(PositionalParamsMatcher.new(LocalVariableMatcher.new('i'), 'i'), CallMatcher.new('foo', 'foo'), BodyMatcher.new(CallMatcher.new('bar', 'bar')), ruby)
   end
 
+  test 'for multiple params' do
+    ruby <<-RUBY
+for a, b in foo
+end
+    RUBY
+    assert_valid_child_expression ForMatcher.new(DestructuredParamsMatcher.new(LocalVariableMatcher.new('a'), LocalVariableMatcher.new('b'), 'a, b'), CallMatcher.new('foo', 'foo'), BodyMatcher.new, ruby)
+  end
+
 end

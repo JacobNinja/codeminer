@@ -16,7 +16,7 @@ module CodeMiner
     end
 
     def each
-      @body
+      @body.each.first.kind_of?(VoidExpression) ? [] : @body
     end
 
     def type

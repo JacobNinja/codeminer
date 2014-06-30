@@ -15,17 +15,8 @@ module CodeMiner
       :bodystmt
     end
 
-    #def body
-    #  if @rescue
-    #    @rescue.wrap(@body)
-    #  else
-    #    @body
-    #  end
-    #end
-
     def each
-      #[body, @c, @d].compact
-      @body.each.first.kind_of?(VoidExpression) ? [] : @body.each
+      @body.each
     end
 
   end
