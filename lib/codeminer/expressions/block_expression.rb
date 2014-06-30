@@ -2,11 +2,11 @@ module CodeMiner
 
   class BlockExpression < Expression
 
-    attr_reader :body, :value
+    attr_reader :body, :params, :value
 
-    def initialize(body, args, src)
+    def initialize(body, params, src)
       @body = body
-      @args = args
+      @params = params
       @src = src
     end
 
@@ -15,7 +15,7 @@ module CodeMiner
     end
 
     def each
-      Array(body.each)
+      [@params, Array(@body.each)]
     end
 
   end

@@ -1,8 +1,9 @@
 class BlockMatcher < Matcher
 
-  def initialize(src, *matchers)
+  def initialize(src, *body_matchers, params_matcher: nil)
     @src = src
-    @matchers = matchers
+    @body_matchers = body_matchers
+    @params_matcher = params_matcher
   end
 
   def type
@@ -10,10 +11,12 @@ class BlockMatcher < Matcher
   end
 
   def assert(exp)
-    assert_equal @src.chomp, exp.src.chomp
-    exp.each.each do |e|
-      @matchers.each {|m| m.type == e.type and m.assert(e) }
+    assert_equal exp.body.each.count, @body_matchers.count
+    exp.body.each.zip(@body_matchers).each do |(e, matcher)|
+      matcher.assert(e)
     end
+    @params_matcher.assert(exp.params) if @params_matcher
+    assert_equal @src.chomp, exp.src.chomp
   end
 
 end

@@ -29,8 +29,8 @@ module CodeMiner
       args
     end
 
-    def on_brace_block(args, body)
-      BlockExpression.new(body, args, extract_src_by_token(pop_keyword))
+    def on_brace_block(params, body)
+      BlockExpression.new(body, params, extract_src_by_token(pop_keyword))
     end
 
     alias_method :on_do_block, :on_brace_block

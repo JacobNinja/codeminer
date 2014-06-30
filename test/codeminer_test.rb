@@ -84,7 +84,7 @@ rescue
 
   test 'lambda' do
     ruby '-> (arg) { foo }'
-    assert_valid_child_expression LambdaMatcher.new(ParamsMatcher.new(PositionalParamsMatcher.new(Matcher.new(:positional_param, 'arg'), 'arg'), EmptyParamsMatcher, '(arg)'), BodyMatcher.new(CallMatcher.new('foo', 'foo')), ruby)
+    assert_valid_child_expression LambdaMatcher.new(ParamsMatcher.new('(arg)', PositionalParamsMatcher.new(Matcher.new(:positional_param, 'arg'), 'arg')), BodyMatcher.new(CallMatcher.new('foo', 'foo')), ruby)
   end
 
   test 'redo' do

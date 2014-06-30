@@ -2,7 +2,7 @@ class ParamsMatcher < Matcher
 
   attr_reader :src
 
-  def initialize(positional_matcher, optional_matcher=EmptyParamsMatcher, src)
+  def initialize(src, positional_matcher, optional_matcher=EmptyParamsMatcher)
     @positional_matcher = positional_matcher
     @optional_matcher = optional_matcher
     @src = src

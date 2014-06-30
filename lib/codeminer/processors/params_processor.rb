@@ -13,6 +13,10 @@ module CodeMiner
       params
     end
 
+    def on_block_var(params, _)
+      params
+    end
+
     def on_mlhs_new
       ParamsContainer.new([], :destructured_params)
     end
