@@ -65,7 +65,7 @@ begin
   foo
 end
     RUBY
-    assert_valid_child_expression BeginMatcher.new(ruby, BodyMatcher.new(CallMatcher.new('foo', 'foo')))
+    assert_valid_child_expression BeginMatcher.new(ruby, BodyMatcher.new(CallMatcher.new('foo', 'foo'), 'foo'))
   end
 
   test 'rescue' do
@@ -76,7 +76,7 @@ rescue
   bar
 end
     RUBY
-    assert_valid_child_expression BeginMatcher.new(ruby, BodyMatcher.new(CallMatcher.new('foo', 'foo')), rescue_matcher: RescueMatcher.new(<<-RESCUE, BodyMatcher.new(CallMatcher.new('bar', 'bar'))))
+    assert_valid_child_expression BeginMatcher.new(ruby, BodyMatcher.new(CallMatcher.new('foo', 'foo'), 'foo'), rescue_matcher: RescueMatcher.new(<<-RESCUE, BodyMatcher.new(CallMatcher.new('bar', 'bar'), 'bar')))
 rescue
   bar
     RESCUE
@@ -84,7 +84,7 @@ rescue
 
   test 'lambda' do
     ruby '-> (arg) { foo }'
-    assert_valid_child_expression LambdaMatcher.new(ParamsMatcher.new('(arg)', PositionalParamsMatcher.new(Matcher.new(:positional_param, 'arg'), 'arg')), BodyMatcher.new(CallMatcher.new('foo', 'foo')), ruby)
+    assert_valid_child_expression LambdaMatcher.new(ParamsMatcher.new('(arg)', PositionalParamsMatcher.new(Matcher.new(:positional_param, 'arg'), 'arg')), BodyMatcher.new(CallMatcher.new('foo', 'foo'), 'foo'), ruby)
   end
 
   test 'redo' do

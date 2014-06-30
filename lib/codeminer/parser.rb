@@ -122,7 +122,7 @@ module CodeMiner
     end
 
     def on_stmts_new
-      BodyExpression.new(extract_src(lineno(), column()))
+      BodyExpression.new
     end
 
     def on_stmts_add(body, statement)

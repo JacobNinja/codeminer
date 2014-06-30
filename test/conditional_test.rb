@@ -18,7 +18,7 @@ if foo
   bar
 end
     RUBY
-    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), BodyMatcher.new(CallMatcher.new('bar', 'bar')), NilMatcher, ruby)
+    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), BodyMatcher.new(CallMatcher.new('bar', 'bar'), 'bar'), NilMatcher, ruby)
   end
 
   test 'if and else statement' do
@@ -29,7 +29,7 @@ else
   baz
 end
     RUBY
-    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), BodyMatcher.new(CallMatcher.new('bar', 'bar')), ElseMatcher.new(BodyMatcher.new(CallMatcher.new('baz', 'baz')), <<-ELSE), ruby)
+    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), BodyMatcher.new(CallMatcher.new('bar', 'bar'), 'bar'), ElseMatcher.new(BodyMatcher.new(CallMatcher.new('baz', 'baz'), 'baz'), <<-ELSE), ruby)
 else
   baz
     ELSE
@@ -41,7 +41,7 @@ unless foo
   bar
 end
     RUBY
-    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), NilMatcher, BodyMatcher.new(CallMatcher.new('bar', 'bar')), ruby)
+    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), NilMatcher, BodyMatcher.new(CallMatcher.new('bar', 'bar'), 'bar'), ruby)
   end
 
   test 'unless with else statement' do
@@ -52,7 +52,7 @@ else
   baz
 end
     RUBY
-    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), ElseMatcher.new(BodyMatcher.new(CallMatcher.new('baz', 'baz')), <<-ELSE), BodyMatcher.new(CallMatcher.new('bar', 'bar')), ruby)
+    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), ElseMatcher.new(BodyMatcher.new(CallMatcher.new('baz', 'baz'), 'baz'), <<-ELSE), BodyMatcher.new(CallMatcher.new('bar', 'bar'), 'bar'), ruby)
 else
   baz
     ELSE
@@ -70,7 +70,8 @@ when bar then 5
 else baz
 end
     RUBY
-    assert_valid_child_expression CaseMatcher.new(ruby, CallMatcher.new('foo', 'foo'), WhenMatcher.new(ArgumentsMatcher.new(CallMatcher.new('bar', 'bar'), 'bar'), BodyMatcher.new(Matcher.new(:int, '5')), 'when bar then 5'), ElseMatcher.new(BodyMatcher.new(CallMatcher.new('baz', 'baz')), 'else baz'))
+    debug
+    assert_valid_child_expression CaseMatcher.new(ruby, CallMatcher.new('foo', 'foo'), WhenMatcher.new(ArgumentsMatcher.new(CallMatcher.new('bar', 'bar'), 'bar'), BodyMatcher.new(Matcher.new(:int, '5'), '5'), 'when bar then 5'), ElseMatcher.new(BodyMatcher.new(CallMatcher.new('baz', 'baz'), 'baz'), 'else baz'))
   end
 
   test 'elsif' do
@@ -87,14 +88,14 @@ end
 else
   3
     RUBY
-    elsif_matcher = ConditionalMatcher.new(CallMatcher.new('bar', 'bar'), BodyMatcher.new(Matcher.new(:int, '2')), ElseMatcher.new(BodyMatcher.new(Matcher.new(:int, '3')), else_src), <<-RUBY)
+    elsif_matcher = ConditionalMatcher.new(CallMatcher.new('bar', 'bar'), BodyMatcher.new(Matcher.new(:int, '2'), '2'), ElseMatcher.new(BodyMatcher.new(Matcher.new(:int, '3'), '3'), else_src), <<-RUBY)
 elsif bar
   2
 else
   3
 end
     RUBY
-    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), BodyMatcher.new(Matcher.new(:int, '1')), elsif_matcher, ruby)
+    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), BodyMatcher.new(Matcher.new(:int, '1'), '1'), elsif_matcher, ruby)
   end
 
 end

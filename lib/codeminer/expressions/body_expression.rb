@@ -4,9 +4,8 @@ module CodeMiner
 
     attr_reader :value
 
-    def initialize(*body, src)
-      @body = body
-      @src = src
+    def initialize
+      @body = []
     end
 
     def add(statement)
