@@ -23,7 +23,7 @@ require File.expand_path('../expression_processor', __FILE__)
 
 module CodeMiner
 
-  class ExpressionParserRipper < Ripper
+  class Parser < Ripper
 
     include AssignmentProcessor, CallProcessor, ClassProcessor, MethodProcessor, RegexpProcessor, TokenProcessor,
             StringProcessor, ConditionProcessor, BinaryProcessor, ReturnProcessor, ParamsProcessor, ArgumentProcessor,

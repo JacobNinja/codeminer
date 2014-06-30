@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = %w[
     codeminer.gemspec
     lib/codeminer.rb
-    lib/codeminer/expression_parser_ripper.rb
+    lib/codeminer/parser.rb
     lib/codeminer/expression_processor.rb
     lib/codeminer/source_extract.rb
     lib/codeminer/token.rb
