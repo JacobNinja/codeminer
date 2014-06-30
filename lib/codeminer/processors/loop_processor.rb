@@ -20,6 +20,11 @@ module CodeMiner
       WhileExpression.new(test, body, extract_src_by_token(body))
     end
 
+    def on_for(params, receiver, body)
+      params_container = ParamsContainer.wrap(params, :positional)
+      ForExpression.new(params_container, receiver, body, extract_src_by_token(pop_keyword))
+    end
+
   end
 
 end

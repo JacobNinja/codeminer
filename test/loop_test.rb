@@ -30,4 +30,13 @@ end
     assert_valid_child_expression WhileMatcher.new(CallMatcher.new('bar', 'bar'), CallMatcher.new('foo', 'foo'), ruby)
   end
 
+  test 'for' do
+    ruby <<-RUBY
+for i in foo
+  bar
+end
+    RUBY
+    assert_valid_child_expression ForMatcher.new(PositionalParamsMatcher.new(LocalVariableMatcher.new('i'), 'i'), CallMatcher.new('foo', 'foo'), BodyMatcher.new(CallMatcher.new('bar', 'bar')), ruby)
+  end
+
 end
