@@ -15,7 +15,7 @@ module CodeMiner
     end
 
     def each
-      [@value, @receiver]
+      [@receiver]
     end
 
   end
