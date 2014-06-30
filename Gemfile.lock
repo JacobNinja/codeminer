@@ -1,5 +1,10 @@
+PATH
+  remote: .
+  specs:
+    codeminer (0.1.0)
+
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     test-unit (2.5.5)
 
@@ -7,4 +12,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  test-unit
+  codeminer!
+  test-unit (= 2.5.5)
