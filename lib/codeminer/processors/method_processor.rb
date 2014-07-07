@@ -10,8 +10,9 @@ module CodeMiner
       DefnExpression.new(token.value, params, body, extract_src_by_token(pop_keyword))
     end
 
-    def on_method_add_block(exp, args)
-      exp.block = args
+    def on_method_add_block(exp, block)
+      exp.block = block
+      exp.adjust_src(block.src_extract)
       exp
     end
 

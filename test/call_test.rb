@@ -20,18 +20,18 @@ foo.bar()
     ruby <<-RUBY
 foo { bar() }
     RUBY
-    assert_valid_child_expression CallWithBlockMatcher.new('foo', BlockMatcher.new(<<-RUBY, CallMatcher.new('bar', 'bar()')), ruby)
+    assert_valid_child_expression CallMatcher.new('foo', ruby, block: BlockMatcher.new(<<-RUBY, CallMatcher.new('bar', 'bar()')))
 { bar() }
     RUBY
   end
 
   test 'method block do' do
     ruby <<-RUBY
-foo do
+foo.each do
   bar()
 end
     RUBY
-    assert_valid_child_expression CallWithBlockMatcher.new('foo', BlockMatcher.new(<<-RUBY, CallMatcher.new('bar', 'bar()')), ruby)
+    assert_valid_child_expression CallMatcher.new('each', ruby, receiver: CallMatcher.new('foo', 'foo'), block: BlockMatcher.new(<<-RUBY, CallMatcher.new('bar', 'bar()')))
 do
   bar()
 end
@@ -45,7 +45,7 @@ foo do |bar|
 end
     RUBY
     params_matcher = ParamsMatcher.new('bar', PositionalParamsMatcher.new(Matcher.new(:positional_param, 'bar'), 'bar'))
-    assert_valid_child_expression CallWithBlockMatcher.new('foo', BlockMatcher.new(<<-RUBY, CallMatcher.new('baz', 'baz()'), params_matcher: params_matcher), ruby)
+    assert_valid_child_expression CallMatcher.new('foo', ruby, block: BlockMatcher.new(<<-RUBY, CallMatcher.new('baz', 'baz()'), params_matcher: params_matcher))
 do |bar|
   baz()
 end

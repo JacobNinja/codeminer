@@ -24,6 +24,7 @@ module CodeMiner
     end
 
     alias receiver left
+    alias body right
 
   end
 
