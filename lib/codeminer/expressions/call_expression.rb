@@ -2,7 +2,7 @@ module CodeMiner
 
   class CallExpression < Expression
 
-    attr_reader :receiver
+    attr_reader :receiver, :args
 
     def initialize(token, src, receiver: nil, arguments: nil)
       @token = token
@@ -22,6 +22,8 @@ module CodeMiner
     def each
       [@receiver, @args, @block].compact
     end
+
+    alias body args
 
   end
 

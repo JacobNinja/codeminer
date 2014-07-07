@@ -23,6 +23,8 @@ module CodeMiner
       [@receiver, @args].compact
     end
 
+    alias body args
+
   end
 
 end
