@@ -4,7 +4,7 @@ module CodeMiner
 
     attr_reader :type, :value
 
-    def self.wrap(exp, type, src=exp.src_extract)
+    def self.wrap(exp, type)
       if exp.kind_of?(ParamsContainer)
         exp
       else

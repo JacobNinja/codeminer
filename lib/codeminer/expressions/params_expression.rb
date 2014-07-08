@@ -17,6 +17,10 @@ module CodeMiner
       [positional, optional]
     end
 
+    def each_param
+      each.flat_map(&:each)
+    end
+
     def line
       expression_values.map(&:line).first
     end
