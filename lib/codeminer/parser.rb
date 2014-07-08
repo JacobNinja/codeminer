@@ -12,6 +12,7 @@ require File.expand_path('../processors/hash_processor', __FILE__)
 require File.expand_path('../processors/loop_processor', __FILE__)
 require File.expand_path('../processors/method_processor', __FILE__)
 require File.expand_path('../processors/params_processor', __FILE__)
+require File.expand_path('../processors/range_processor', __FILE__)
 require File.expand_path('../processors/regexp_processor', __FILE__)
 require File.expand_path('../processors/return_processor', __FILE__)
 require File.expand_path('../processors/string_processor', __FILE__)
@@ -28,6 +29,7 @@ module CodeMiner
     include AssignmentProcessor, CallProcessor, ClassProcessor, MethodProcessor, RegexpProcessor, TokenProcessor,
             StringProcessor, ConditionProcessor, BinaryProcessor, ReturnProcessor, ParamsProcessor, ArgumentProcessor,
             HashProcessor, SymbolProcessor, VariableProcessor, ArrayProcessor, CommandProcessor, LoopProcessor,
+            RangeProcessor,
             DefaultProcessor
 
     attr_accessor :processors

@@ -1,6 +1,6 @@
 class CallMatcher < Matcher
 
-  def initialize(name, src, receiver: nil, arguments: nil, block: nil)
+  def initialize(name, src=name, receiver: nil, arguments: nil, block: nil)
     @name = name
     @src = src
     @receiver = receiver
