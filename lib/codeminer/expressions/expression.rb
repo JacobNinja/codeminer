@@ -15,6 +15,7 @@ module CodeMiner
     end
 
     attr_accessor :block, :args, :delimiter
+    attr_reader :token
 
     not_implemented :<<, :each, :type, :value
 
