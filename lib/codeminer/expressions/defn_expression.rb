@@ -2,7 +2,7 @@ module CodeMiner
 
   class DefnExpression < Expression
 
-    attr_reader :value, :params
+    attr_reader :value, :params, :body
 
     def initialize(name, params, body, src)
       @value = name
