@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
     lib/codeminer/parser.rb
     lib/codeminer/expression_processor.rb
     lib/codeminer/source_extract.rb
+    lib/codeminer/substitution.rb
     lib/codeminer/token.rb
   ]
   s.files += Dir.glob('lib/codeminer/expressions/*.rb')
