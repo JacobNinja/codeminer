@@ -65,6 +65,7 @@ require File.expand_path('../codeminer/expressions/yield_expression', __FILE__)
 
 require File.expand_path('../codeminer/token', __FILE__)
 require File.expand_path('../codeminer/parser', __FILE__)
+require File.expand_path('../codeminer/substitution', __FILE__)
 
 module CodeMiner
 
