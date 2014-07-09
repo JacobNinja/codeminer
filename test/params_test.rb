@@ -32,7 +32,6 @@ end
 def test((foo, bar), baz)
 end
     RUBY
-    debug
     assert_valid_child_expression ParamsMatcher.new('((foo, bar), baz)', PositionalParamsMatcher.new(DestructuredParamsMatcher.new(Matcher.new(:destructured_param, 'foo'), Matcher.new(:destructured_param, 'bar'), '(foo, bar)'), Matcher.new(:positional_param, 'baz'), '(foo, bar), baz')), 3
   end
 

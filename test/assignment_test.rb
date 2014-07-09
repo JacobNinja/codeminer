@@ -14,13 +14,11 @@ class AssignmentTest < ParseTestCase
 
   test 'assignment with left splat' do
     ruby 'foo, *bar = baz'
-    debug
     assert_valid_child_expression MultipleAssignmentMatcher.new(ruby, DestructuredParamsMatcher.new(Matcher.new(:ident, 'foo'), SplatMatcher.new('bar', '*bar'), 'foo, *bar'), [CallMatcher.new('baz', 'baz')])
   end
 
   test 'assignment with right splat' do
     ruby 'foo, bar = *baz'
-    debug
     assert_valid_child_expression MultipleAssignmentMatcher.new(ruby, DestructuredParamsMatcher.new(Matcher.new(:ident, 'foo'), Matcher.new(:ident, 'bar'), 'foo, bar'), [SplatMatcher.new('baz', '*baz')])
   end
 
