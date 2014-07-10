@@ -21,6 +21,8 @@ require File.expand_path('../processors/token_processor', __FILE__)
 require File.expand_path('../processors/variable_processor', __FILE__)
 
 require File.expand_path('../expression_processor', __FILE__)
+require File.expand_path('../sexp_formatter', __FILE__)
+
 
 module CodeMiner
 
@@ -58,6 +60,11 @@ module CodeMiner
       parser.processors = processors
       parser.parse
       processors
+    end
+
+    def self.sexp(rb)
+      parser = new(rb).extend(SexpFormatter)
+      parser.parse
     end
 
     def on_break(args)
