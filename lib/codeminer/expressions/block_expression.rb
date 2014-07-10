@@ -15,7 +15,7 @@ module CodeMiner
     end
 
     def each
-      [@params, Array(@body.each)]
+      [@params, *Array(@body.each)]
     end
 
   end

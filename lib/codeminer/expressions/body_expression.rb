@@ -4,18 +4,21 @@ module CodeMiner
 
     attr_reader :value
 
-    def initialize
+    def initialize(src)
+      @src_fallback = src
       @body = []
     end
 
     def add(statement)
-      adjust_src(statement.src_extract)
-      @body << statement
+      unless statement.kind_of?(VoidExpression)
+        adjust_src(statement.src_extract)
+        @body << statement
+      end
       self
     end
 
     def each
-      @body.each.first.kind_of?(VoidExpression) ? [] : @body
+      @body.each.reject{|e| e.kind_of?(VoidExpression)}
     end
 
     def type

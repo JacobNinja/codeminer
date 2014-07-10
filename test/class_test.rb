@@ -51,4 +51,18 @@ end
     assert_valid_root_expression RootMatcher.new(ClassMatcher.new('Test', "class Test\nend"), ClassMatcher.new('Foo', "class Foo\nend"), ruby)
   end
 
+  test 'module' do
+    ruby <<-RUBY
+module Test
+  def foo
+  end
+end
+    RUBY
+    defn = <<-RUBY
+def foo
+  end
+    RUBY
+    assert_valid_child_expression ModuleMatcher.new('Test', ruby, BodystmtMatcher.new(DefnMatcher.new('foo', defn), defn))
+  end
+
 end

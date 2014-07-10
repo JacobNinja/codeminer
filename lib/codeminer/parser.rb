@@ -120,11 +120,11 @@ module CodeMiner
     end
 
     def on_bodystmt(body, rescue_exp, c, d)
-      BodystmtExpression.new(body, rescue_exp, c, d, src: extract_src_by_token(body))
+      BodystmtExpression.new(body, rescue_exp, c, d, src: extract_src_by_tokens(body, body))
     end
 
     def on_stmts_new
-      BodyExpression.new
+      BodyExpression.new(extract_src(lineno(), column()))
     end
 
     def on_stmts_add(body, statement)

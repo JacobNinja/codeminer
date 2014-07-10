@@ -30,23 +30,23 @@ module CodeMiner
     module Usage
 
       def line
-        @src.line
+        src_extract.line
       end
 
       def column
-        @src.column
+        src_extract.column
       end
 
       def end_line
-        @src.end_line
+        src_extract.end_line
       end
 
       def end_column
-        @src.end_column
+        src_extract.end_column
       end
 
       def src
-        extracted_source = @src.extract
+        extracted_source = src_extract.extract
         if delimiter
           extracted_source.chomp(delimiter.to_s)
         else
@@ -63,7 +63,7 @@ module CodeMiner
       end
 
       def src_extract
-        @src
+        @src || @src_fallback
       end
 
     end

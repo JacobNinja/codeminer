@@ -2,12 +2,17 @@ module CodeMiner
 
   class ClassExpression < Expression
 
-    attr_reader :value, :body
+    attr_reader :body, :parent
 
-    def initialize(name, body, src)
-      @value = name
+    def initialize(token, parent, body, src)
+      @token = token
+      @parent = parent
       @body = body
       @src = src
+    end
+
+    def value
+      @token.value
     end
 
     def type
@@ -15,7 +20,7 @@ module CodeMiner
     end
 
     def each
-      [body]
+      [parent, body]
     end
 
   end
