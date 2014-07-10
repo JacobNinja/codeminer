@@ -12,8 +12,8 @@ module CodeMiner
       ConditionExpression.new(test, else_statement, consequence, extract_src_by_token(pop_keyword))
     end
 
-    def on_else(consequence)
-      ElseExpression.new(consequence, extract_src_by_token(pop_keyword, consequence.each.last.end_line, consequence.each.last.end_column))
+    def on_else(body)
+      ElseExpression.new(body, extract_src_by_token(pop_keyword, body.end_line, body.end_column))
     end
 
     def on_if_mod(test, consequence)
