@@ -2,6 +2,8 @@ module CodeMiner
 
   class AmbiguousOperatorExpression < Expression
 
+    attr_reader :msg
+
     def initialize(token, msg, src)
       @token = token
       @msg = msg
