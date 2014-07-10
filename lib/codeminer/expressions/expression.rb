@@ -14,6 +14,10 @@ module CodeMiner
       end
     end
 
+    def to_a
+      [self]
+    end
+
     attr_accessor :block, :args, :delimiter
     attr_reader :token
 

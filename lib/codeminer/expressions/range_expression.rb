@@ -2,7 +2,7 @@ module CodeMiner
 
   class RangeExpression < Expression
 
-    attr_reader :left, :right
+    attr_reader :left, :right, :value
 
     def initialize(left, right, inclusive, src)
       @left = left

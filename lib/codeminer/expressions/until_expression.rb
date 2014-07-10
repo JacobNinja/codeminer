@@ -2,7 +2,7 @@ module CodeMiner
 
   class UntilExpression < Expression
 
-    attr_reader :test, :body
+    attr_reader :test, :body, :value
 
     def initialize(test, body, src)
       @test = test

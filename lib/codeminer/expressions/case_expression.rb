@@ -15,7 +15,7 @@ module CodeMiner
     end
 
     def else_exp
-      Array(@whens).map(&:else).last
+      @whens.to_a.map(&:else).last
     end
 
     def each
