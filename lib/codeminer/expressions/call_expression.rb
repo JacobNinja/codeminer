@@ -20,7 +20,7 @@ module CodeMiner
     end
 
     def each
-      [@receiver, @args, @block].compact
+      [@receiver, *[@args, @block].compact]
     end
 
     alias body args

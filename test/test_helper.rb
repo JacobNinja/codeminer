@@ -72,7 +72,7 @@ class ParseTestCase < Test::Unit::TestCase
   end
 
   def find_expression(type, expressions)
-    expressions.find {|exp| exp.type == type }.tap do |exp|
+    expressions.compact.find {|exp| exp.type == type }.tap do |exp|
       assert_not_nil exp, "Couldn't find parsed expression of type: #{type} in #{expressions}\n#{Ripper.sexp(ruby)}"
     end
   end
