@@ -2,11 +2,15 @@ module CodeMiner
 
   class BodyExpression < Expression
 
-    attr_reader :value
+    def self.from(expression)
+      new(expression.src_extract, [expression])
+    end
 
-    def initialize(src)
+    attr_reader :value, :body
+
+    def initialize(src, body=[])
       @src_fallback = src
-      @body = []
+      @body = body
     end
 
     def add(statement)

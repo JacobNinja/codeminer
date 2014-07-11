@@ -19,11 +19,13 @@ module CodeMiner
     end
 
     def on_if_mod(test, consequence)
-      ConditionExpression.new(test, consequence, nil, pop_keyword, extract_src(consequence.line, consequence.column))
+      consequence_body = BodyExpression.from(consequence)
+      ConditionExpression.new(test, consequence_body, nil, pop_keyword, extract_src(consequence.line, consequence.column))
     end
 
     def on_unless_mod(test, else_expression)
-      ConditionExpression.new(test, nil, else_expression, pop_keyword, extract_src_by_token(else_expression))
+      else_body = BodyExpression.from(else_expression)
+      ConditionExpression.new(test, nil, else_body, pop_keyword, extract_src_by_token(else_expression))
     end
 
     def on_ifop(test, consequence, else_statement)

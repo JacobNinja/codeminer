@@ -18,7 +18,7 @@ module CodeMiner
     end
 
     def each
-      [consequence]
+      consequence.each
     end
 
   end
