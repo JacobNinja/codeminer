@@ -81,8 +81,8 @@ module CodeMiner
     Parser.process(code, processors)
   end
 
-  def self.sexp(code)
-    Parser.sexp(code)
+  def self.sexp(code, formatters={})
+    Parser.sexp(code, formatters)
   end
 
 end

@@ -21,7 +21,7 @@ require File.expand_path('../processors/token_processor', __FILE__)
 require File.expand_path('../processors/variable_processor', __FILE__)
 
 require File.expand_path('../expression_processor', __FILE__)
-require File.expand_path('../sexp_formatter', __FILE__)
+require File.expand_path('../sexp_processor', __FILE__)
 
 
 module CodeMiner
@@ -34,7 +34,7 @@ module CodeMiner
             RangeProcessor,
             DefaultProcessor
 
-    attr_accessor :processors
+    attr_accessor :processors, :formatters
 
     def initialize(src, *args)
       @src = src
@@ -52,6 +52,7 @@ module CodeMiner
       @symbols = []
       @words = []
       @processors = []
+      @formatters = {}
       super
     end
 
@@ -62,8 +63,9 @@ module CodeMiner
       processors
     end
 
-    def self.sexp(rb)
-      parser = new(rb).extend(SexpFormatter)
+    def self.sexp(rb, formatters={})
+      parser = new(rb).extend(SexpProcessor)
+      parser.formatters = formatters
       parser.parse
     end
 
