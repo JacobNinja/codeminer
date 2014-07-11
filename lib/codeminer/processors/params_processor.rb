@@ -2,8 +2,8 @@ module CodeMiner
 
   module ParamsProcessor
 
-    def on_params(positional, optional, *)
-      ParamsExpression.new(positional_params(positional), optional_params(optional)).tap do |params|
+    def on_params(positional, optional, _, _, keyword, _, _)
+      ParamsExpression.new(positional_params(positional), optional_params(optional), keyword_params(keyword)).tap do |params|
         params.src = extract_src_by_tokens(params) if params.line
       end
     end
@@ -68,6 +68,14 @@ module CodeMiner
       end
       src = extract_src_by_token(optional.first.first, optional.last.last.end_line, optional.last.last.end_column) if optional
       ParamsContainer.new(optional_expressions, :optional, src)
+    end
+
+    def keyword_params(keyword)
+      keyword_expressions = keyword.to_a.map do |token, value|
+        KeywordParamExpression.new(token, value, extract_src_by_tokens(token, value))
+      end
+      src = extract_src_by_tokens(keyword_expressions.first, keyword_expressions.last) unless keyword_expressions.empty?
+      ParamsContainer.new(keyword_expressions, :keyword, src)
     end
 
   end

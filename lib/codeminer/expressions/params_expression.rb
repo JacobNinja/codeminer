@@ -2,11 +2,12 @@ module CodeMiner
 
   class ParamsExpression < Expression
 
-    attr_reader :positional, :optional, :value
+    attr_reader :positional, :optional, :keyword, :value
 
-    def initialize(positional, optional)
+    def initialize(positional, optional, keyword)
       @positional = positional
       @optional = optional
+      @keyword = keyword
     end
 
     def type
@@ -14,7 +15,7 @@ module CodeMiner
     end
 
     def each
-      [positional, optional]
+      [positional, optional, keyword]
     end
 
     def each_param
@@ -40,7 +41,9 @@ module CodeMiner
     private
 
     def expression_values
-      [*positional.each, *optional.each.map(&:token), *optional.each.map(&:value)]
+      [*positional.each,
+       *optional.each.map(&:token), *optional.each.map(&:value),
+       *keyword.each.map(&:token), *keyword.each.map(&:value)]
     end
 
   end
