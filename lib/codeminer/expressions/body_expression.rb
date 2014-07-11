@@ -18,7 +18,7 @@ module CodeMiner
     end
 
     def each
-      @body.each.reject{|e| e.kind_of?(VoidExpression)}
+      @body.each.reject(&:void?)
     end
 
     def type

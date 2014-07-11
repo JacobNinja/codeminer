@@ -12,6 +12,10 @@ module CodeMiner
       :void_stmt
     end
 
+    def void?
+      true
+    end
+
     def each
       []
     end

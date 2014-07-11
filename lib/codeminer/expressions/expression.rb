@@ -18,6 +18,10 @@ module CodeMiner
       [self]
     end
 
+    def void?
+      false
+    end
+
     attr_accessor :block, :args, :delimiter
     attr_reader :token
 
