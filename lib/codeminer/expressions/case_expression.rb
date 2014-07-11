@@ -15,11 +15,11 @@ module CodeMiner
     end
 
     def else_exp
-      @whens.to_a.map(&:else).last
+      @whens.map(&:else).last
     end
 
     def each
-      [@test, @whens, else_exp].compact
+      [@test, *@whens, else_exp].compact
     end
 
   end

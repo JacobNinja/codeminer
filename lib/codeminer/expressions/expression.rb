@@ -14,10 +14,6 @@ module CodeMiner
       end
     end
 
-    def to_a
-      [self]
-    end
-
     def void?
       false
     end

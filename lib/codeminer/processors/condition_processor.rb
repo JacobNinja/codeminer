@@ -33,7 +33,8 @@ module CodeMiner
     end
 
     def on_case(test, whens)
-      CaseExpression.new(test, whens, extract_src_by_token(pop_keyword))
+      whens_array = whens.class == Array ? whens : [whens]
+      CaseExpression.new(test, whens_array, extract_src_by_token(pop_keyword))
     end
 
     def on_when(arg, body, else_exp)
