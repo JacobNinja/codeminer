@@ -4,10 +4,11 @@ module CodeMiner
 
     attr_reader :test, :consequence, :else_statement, :value
 
-    def initialize(test, consequence, else_statement, src)
+    def initialize(test, consequence, else_statement, token, src)
       @test = test
       @consequence = consequence
       @else_statement = else_statement
+      @token = token
       @src = src
     end
 
