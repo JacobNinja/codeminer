@@ -86,7 +86,8 @@ module CodeMiner
 
   module SexpProcessor
 
-    BLACKLIST = %w(string_embexpr else)
+    BLACKLIST = %w(string_embexpr else void_stmt)
+    TOKENS = %w(int)
 
     Ripper::PARSER_EVENT_TABLE.each do |event, arity|
       next if /_new\z/ =~ event.to_s and arity == 0
@@ -94,6 +95,7 @@ module CodeMiner
       next if /_content\z/ =~ event.to_s
       next if /_from_[a-z]+\z/ =~ event.to_s
       next if BLACKLIST.include?(event.to_s)
+
       if /_add_[a-z]+\z/ =~ event.to_s
         define_method :"on_#{event}" do |*args|
           to_sexp_replace(super(*args))
@@ -102,6 +104,12 @@ module CodeMiner
         define_method :"on_#{event}" do |*args|
           to_sexp(super(*args))
         end
+      end
+    end
+
+    TOKENS.each do |token|
+      define_method :"on_#{token}" do |exp|
+        to_sexp(super(exp))
       end
     end
 
