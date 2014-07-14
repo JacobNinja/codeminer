@@ -2,8 +2,9 @@ module CodeMiner
 
   class BodyExpression < Expression
 
-    def self.from(expression)
-      new(expression.src_extract, [expression])
+    def self.from(*expressions)
+      adjusted_src = expressions.first.src_extract.adjust(expressions.last.src_extract)
+      new(adjusted_src, expressions)
     end
 
     attr_reader :value, :body
