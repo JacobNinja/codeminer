@@ -72,7 +72,7 @@ module CodeMiner
 
     def keyword_params(keyword)
       keyword_expressions = keyword.to_a.map do |token, value|
-        KeywordParamExpression.new(token, value, extract_src_by_tokens(token, value))
+        KeywordParamExpression.new(token, value || nil, extract_src_by_tokens(token, value || token))
       end
       src = extract_src_by_tokens(keyword_expressions.first, keyword_expressions.last) unless keyword_expressions.empty?
       ParamsContainer.new(keyword_expressions, :keyword, src)

@@ -43,4 +43,12 @@ end
     assert_valid_child_expression ParamsMatcher.new('(a: 1)', EmptyParamsMatcher, EmptyParamsMatcher, KeywordParamsMatcher.new('a: 1', a: Matcher.new(:int, '1'))), 3
   end
 
+  test 'mandatory keyword param' do
+    ruby <<-RUBY
+def test(a:)
+end
+    RUBY
+    assert_valid_child_expression ParamsMatcher.new('(a:)', EmptyParamsMatcher, EmptyParamsMatcher, KeywordParamsMatcher.new('a:', a: NilMatcher)), 3
+  end
+
 end

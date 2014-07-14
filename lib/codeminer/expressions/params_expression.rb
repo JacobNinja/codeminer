@@ -43,7 +43,7 @@ module CodeMiner
     def expression_values
       [*positional.each,
        *optional.each.map(&:token), *optional.each.map(&:value),
-       *keyword.each.map(&:token), *keyword.each.map(&:value)]
+       *keyword.each.map(&:token), *keyword.each.map(&:value)].select{|e| e}
     end
 
   end
