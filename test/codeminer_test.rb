@@ -102,6 +102,11 @@ rescue
     assert_valid_child_expression UndefMatcher.new(Matcher.new(:symbol, 'foo', ':foo'), Matcher.new(:symbol, 'bar', ':bar'), ruby)
   end
 
+  test 'constant' do
+    ruby 'Exception'
+    assert_valid_child_expression Matcher.new(:constant, 'Exception')
+  end
+
   test 'malformed statement' do
     assert_raise(CodeMiner::ParseError) { CodeMiner.parse(<<-RUBY) }
 case

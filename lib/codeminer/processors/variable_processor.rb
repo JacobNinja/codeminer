@@ -4,7 +4,12 @@ module CodeMiner
 
     def on_var_ref(exp)
       if exp.kind_of?(Token)
-        LocalVariableExpression.new(exp, exp.src_extract)
+        case exp.type
+          when :const
+            ConstantVariableExpression.new(exp, exp.src_extract)
+          else
+            LocalVariableExpression.new(exp, exp.src_extract)
+        end
       else
         exp
       end
