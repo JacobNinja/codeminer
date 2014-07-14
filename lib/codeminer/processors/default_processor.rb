@@ -23,7 +23,7 @@ module CodeMiner
       else
         define_method :"on_#{event}" do |*args|
           src = extract_src_by_token(args.first) if args.first
-          UnknownExpression.new(event.to_s, nil, src, [], lineno(), column())
+          UnknownExpression.new(event.to_sym, nil, src, [], lineno(), column())
         end
       end
     end
