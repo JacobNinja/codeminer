@@ -22,7 +22,7 @@ module CodeMiner
     end
 
     def each
-      @body.each.reject(&:void?)
+      @body.each.to_a
     end
 
     def type
