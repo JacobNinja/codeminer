@@ -16,7 +16,11 @@ module CodeMiner
     end
 
     def each
-      @body.each
+      if @rescue
+        [*body.each, @rescue]
+      else
+        @body.each
+      end
     end
 
   end

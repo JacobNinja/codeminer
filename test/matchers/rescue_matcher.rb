@@ -1,8 +1,9 @@
 class RescueMatcher < Matcher
 
-  def initialize(src, *body_matchers)
+  def initialize(src, match_matcher, body_matcher)
     @src = src
-    @body_matchers = body_matchers
+    @match_matcher = match_matcher
+    @body_matcher = body_matcher
   end
 
   def type
@@ -11,10 +12,8 @@ class RescueMatcher < Matcher
 
   def assert(exp)
     assert_equal type, exp.type
-    assert_equal @body_matchers.length, exp.each.length
-    @body_matchers.zip(exp.each).each do |matcher, e|
-      matcher.assert(e)
-    end
+    @match_matcher.assert(exp.match)
+    @body_matcher.assert(exp.body)
     assert_equal @src.chomp, exp.src
   end
 

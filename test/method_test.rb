@@ -29,4 +29,32 @@ end
     assert_valid_child_expression DefsMatcher.new('a', 'foo', ruby)
   end
 
+  test 'rescue' do
+    ruby <<-RUBY
+def foo
+  bar
+rescue Exception => e
+  baz
+end
+    RUBY
+    assert_valid_child_expression RescueMatcher.new(<<-RESCUE, RescueMatchMatcher.new('Exception => e', LocalVariableMatcher.new('e'), Matcher.new(:constant, 'Exception')), RescueBodyMatcher.new(CallMatcher.new('baz'), 'baz')), 4
+rescue Exception => e
+  baz
+    RESCUE
+  end
+
+  test 'rescue multiple constants' do
+    ruby <<-RUBY
+def foo
+  bar
+rescue Exception, RuntimeError => e
+  baz
+end
+    RUBY
+    assert_valid_child_expression RescueMatcher.new(<<-RESCUE, RescueMatchMatcher.new('Exception, RuntimeError => e', LocalVariableMatcher.new('e'), Matcher.new(:constant, 'Exception'), Matcher.new(:constant, 'RuntimeError')), RescueBodyMatcher.new(CallMatcher.new('baz'), 'baz')), 4
+rescue Exception, RuntimeError => e
+  baz
+    RESCUE
+  end
+
 end

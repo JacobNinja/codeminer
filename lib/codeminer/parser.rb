@@ -124,8 +124,10 @@ module CodeMiner
     end
 
     def on_rescue(constants, assign, body, d)
-      src = extract_src_by_tokens(pop_keyword, body)
-      RescueExpression.new(constants, assign, body, d, src)
+      rescue_body = RescueBodyExpression.wrap(body)
+      rescue_match = rescue_match(constants.each.to_a, assign) if constants
+      src = extract_src_by_tokens(pop_keyword, rescue_body)
+      RescueExpression.new(rescue_match, rescue_body, d, src)
     end
 
     def on_bodystmt(body, rescue_exp, c, d)
@@ -186,6 +188,14 @@ module CodeMiner
 
     def pop_keyword
       @keywords.pop
+    end
+
+    def rescue_match(constants, assign)
+      if assign
+        RescueMatchExpression.new(constants, assign, extract_src_by_tokens(constants.first, assign))
+      else
+        RescueMatchExpression.new(constants, nil, extract_src_by_tokens(constants.first, constants.last))
+      end
     end
 
   end
