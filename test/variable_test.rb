@@ -30,17 +30,17 @@ end
 
   test 'global variables' do
     ruby '$!'
-    assert_valid_child_expression Matcher.new(:global_variable, '!', ruby)
+    assert_valid_child_expression Matcher.new(:global_variable, '$!', ruby)
   end
 
   test 'instance variable' do
     ruby '@foo'
-    assert_valid_child_expression Matcher.new(:instance_variable, 'foo', ruby)
+    assert_valid_child_expression Matcher.new(:instance_variable, '@foo', ruby)
   end
 
   test 'class variable' do
     ruby '@@foo'
-    assert_valid_child_expression Matcher.new(:class_variable, 'foo', ruby)
+    assert_valid_child_expression Matcher.new(:class_variable, '@@foo', ruby)
   end
 
   test 'backref variable' do
