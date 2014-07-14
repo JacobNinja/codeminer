@@ -107,6 +107,11 @@ rescue
     assert_valid_child_expression Matcher.new(:constant, 'Exception')
   end
 
+  test 'nil' do
+    ruby 'nil'
+    assert_valid_child_expression Matcher.new(:nil, 'nil')
+  end
+
   test 'malformed statement' do
     assert_raise(CodeMiner::ParseError) { CodeMiner.parse(<<-RUBY) }
 case

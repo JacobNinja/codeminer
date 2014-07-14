@@ -39,6 +39,7 @@ require File.expand_path('../codeminer/expressions/magic_comment_expression', __
 require File.expand_path('../codeminer/expressions/module_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/multiple_assignment_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/next_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/nil_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/optional_param_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/params_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/params_container', __FILE__)
