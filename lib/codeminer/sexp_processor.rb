@@ -1,13 +1,13 @@
 module CodeMiner
 
-  class Sexp < Array
+  class Sexp
 
     include SourceExtract::Usage
 
     attr_reader :exp, :file
 
     def initialize(expressions, exp)
-      super(expressions)
+      @expressions = expressions
       @exp = exp
     end
 
@@ -19,16 +19,28 @@ module CodeMiner
       end
     end
 
-    def each
-      @exp.each
-    end
-
     def src_extract
       @exp.src_extract
     end
 
+    def each
+      @exp.each
+    end
+
+    def length
+      @expressions.length
+    end
+
+    def to_a
+      @expressions
+    end
+
     def inspect
-      "s(#{to_a.each.map(&:inspect).join(', ')})"
+      "s(#{to_a.map(&:inspect).join(', ')})"
+    end
+
+    def ==(other)
+      @expressions == other
     end
 
   end
