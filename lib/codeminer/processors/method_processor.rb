@@ -2,8 +2,8 @@ module CodeMiner
 
   module MethodProcessor
 
-    def on_defs(receiver, period_token, name_token, params, body)
-      DefsExpression.new(receiver, name_token.value, extract_src_by_token(pop_keyword), body)
+    def on_defs(receiver, delimiter, token, params, body)
+      DefsExpression.new(receiver, token, params, body, extract_src_by_token(pop_keyword))
     end
 
     def on_def(token, params, body)

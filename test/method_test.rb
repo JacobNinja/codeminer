@@ -26,7 +26,7 @@ def a.foo
   bar()
 end
     RUBY
-    assert_valid_child_expression DefsMatcher.new('a', 'foo', ruby)
+    assert_valid_child_expression DefsMatcher.new('a', 'foo', BodystmtMatcher.new(CallMatcher.new('bar', 'bar()'), 'bar()'), ruby)
   end
 
   test 'rescue' do

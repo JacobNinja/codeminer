@@ -2,21 +2,18 @@ module CodeMiner
 
   class DefsExpression < Expression
 
-    attr_reader :body
+    attr_reader :body, :receiver, :params
 
-    def initialize(receiver, name, src, body)
-      @receiver_token = receiver
-      @name = name
-      @src = src
+    def initialize(receiver, token, params, body, src)
+      @receiver = receiver
+      @token = token
+      @params = params
       @body = body
-    end
-
-    def receiver
-      @receiver_token.value
+      @src = src
     end
 
     def value
-      @name
+      @token.value
     end
 
     def type
@@ -24,7 +21,7 @@ module CodeMiner
     end
 
     def each
-      @body
+      [receiver, params, *body.each]
     end
 
   end
