@@ -43,6 +43,11 @@ end
     assert_valid_child_expression Matcher.new(:instance_variable, '@foo', ruby)
   end
 
+  test 'instance variable assignment' do
+    ruby '@foo = 1'
+    assert_valid_child_expression InstanceVariableAssignMatcher.new('@foo', Matcher.new(:int, '1'), '@foo = 1')
+  end
+
   test 'class variable' do
     ruby '@@foo'
     assert_valid_child_expression Matcher.new(:class_variable, '@@foo', ruby)

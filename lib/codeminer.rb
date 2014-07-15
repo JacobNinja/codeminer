@@ -30,6 +30,7 @@ require File.expand_path('../codeminer/expressions/global_variable_assign_expres
 require File.expand_path('../codeminer/expressions/global_variable_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/hash_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/hash_pair_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/instance_variable_assign_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/instance_variable_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/int_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/keyword_param_expression', __FILE__)

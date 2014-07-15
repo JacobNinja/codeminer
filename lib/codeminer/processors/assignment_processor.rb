@@ -8,6 +8,8 @@ module CodeMiner
                   LocalAssignExpression
                 when GlobalVariableExpression
                   GlobalVariableAssignExpression
+                when InstanceVariableExpression
+                  InstanceVariableAssignExpression
               end
       klass.new(exp, body, extract_src_by_tokens(exp, body))
     end
