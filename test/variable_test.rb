@@ -53,6 +53,11 @@ end
     assert_valid_child_expression Matcher.new(:class_variable, '@@foo', ruby)
   end
 
+  test 'class variable assignment' do
+    ruby '@@foo = 1'
+    assert_valid_child_expression ClassVariableAssignMatcher.new('@@foo', Matcher.new(:int, '1'), '@@foo = 1')
+  end
+
   test 'backref variable' do
     ruby '$1'
     assert_valid_child_expression Matcher.new(:backref_variable, '1', ruby)
