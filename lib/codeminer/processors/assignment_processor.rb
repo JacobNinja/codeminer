@@ -14,6 +14,8 @@ module CodeMiner
                   ClassVariableAssignExpression
                 when :field
                   AttributeAssignExpression
+                when :constant
+                  ConstantAssignExpression
               end
       klass.new(exp, body, extract_src_by_tokens(exp, body))
     end

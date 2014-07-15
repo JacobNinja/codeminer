@@ -27,4 +27,9 @@ class AssignmentTest < ParseTestCase
     assert_valid_child_expression AttributeAssignMatcher.new(CallMatcher.new('foo'), 'bar', CallMatcher.new('baz'), ruby)
   end
 
+  test 'constant assign' do
+    ruby 'Foo = bar'
+    assert_valid_child_expression ConstantAssignMatcher.new('Foo', CallMatcher.new('bar'), 'Foo = bar')
+  end
+
 end
