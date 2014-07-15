@@ -33,6 +33,11 @@ end
     assert_valid_child_expression Matcher.new(:global_variable, '$!', ruby)
   end
 
+  test 'global variable assignment' do
+    ruby '$foo = 1'
+    assert_valid_child_expression GlobalVariableAssignMatcher.new('$foo', Matcher.new(:int, '1'), '$foo = 1')
+  end
+
   test 'instance variable' do
     ruby '@foo'
     assert_valid_child_expression Matcher.new(:instance_variable, '@foo', ruby)

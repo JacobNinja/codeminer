@@ -10,9 +10,7 @@ module CodeMiner
       end
     end
 
-    def on_var_field(token)
-      LocalVariableExpression.new(token, extract_src_by_tokens(token))
-    end
+    alias on_var_field on_var_ref
 
     def on_gvar(value)
       GlobalVariableExpression.new(value, extract_src_by_value(value))

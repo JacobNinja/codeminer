@@ -2,8 +2,14 @@ module CodeMiner
 
   module AssignmentProcessor
 
-    def on_assign(token, body)
-      LocalAssignExpression.new(token, body, extract_src_by_tokens(token, body))
+    def on_assign(exp, body)
+      klass = case exp
+                when LocalVariableExpression
+                  LocalAssignExpression
+                when GlobalVariableExpression
+                  GlobalVariableAssignExpression
+              end
+      klass.new(exp, body, extract_src_by_tokens(exp, body))
     end
 
     def on_massign(params, values)
