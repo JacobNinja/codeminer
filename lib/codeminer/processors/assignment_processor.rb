@@ -3,14 +3,14 @@ module CodeMiner
   module AssignmentProcessor
 
     def on_assign(exp, body)
-      klass = case exp
-                when LocalVariableExpression
+      klass = case exp.type
+                when :local_variable
                   LocalAssignExpression
-                when GlobalVariableExpression
+                when :global_variable
                   GlobalVariableAssignExpression
-                when InstanceVariableExpression
+                when :instance_variable
                   InstanceVariableAssignExpression
-                when ClassVariableExpression
+                when :class_variable
                   ClassVariableAssignExpression
               end
       klass.new(exp, body, extract_src_by_tokens(exp, body))
