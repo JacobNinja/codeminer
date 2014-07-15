@@ -2,6 +2,10 @@ module CodeMiner
 
   class ParamsExpression < Expression
 
+    def self.empty
+      new([], [], [])
+    end
+
     attr_reader :positional, :optional, :keyword, :value
 
     def initialize(positional, optional, keyword)
