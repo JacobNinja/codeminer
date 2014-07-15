@@ -22,4 +22,9 @@ class AssignmentTest < ParseTestCase
     assert_valid_child_expression MultipleAssignmentMatcher.new(ruby, DestructuredParamsMatcher.new(Matcher.new(:ident, 'foo'), Matcher.new(:ident, 'bar'), 'foo, bar'), [SplatMatcher.new('baz', '*baz')])
   end
 
+  test 'field assign' do
+    ruby 'foo.bar = baz'
+    assert_valid_child_expression AttributeAssignMatcher.new(CallMatcher.new('foo'), 'bar', CallMatcher.new('baz'), ruby)
+  end
+
 end

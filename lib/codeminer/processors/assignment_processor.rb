@@ -12,6 +12,8 @@ module CodeMiner
                   InstanceVariableAssignExpression
                 when :class_variable
                   ClassVariableAssignExpression
+                when :field
+                  AttributeAssignExpression
               end
       klass.new(exp, body, extract_src_by_tokens(exp, body))
     end
