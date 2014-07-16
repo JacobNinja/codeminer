@@ -4,8 +4,8 @@ module CodeMiner
 
     attr_reader :value
 
-    def initialize(items, src)
-      @items = items
+    def initialize(args, src)
+      @args = args
       @src = src
     end
 
@@ -14,7 +14,7 @@ module CodeMiner
     end
 
     def each
-      Array(@items)
+      Array(args)
     end
 
   end
