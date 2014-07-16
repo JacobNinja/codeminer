@@ -73,4 +73,10 @@ end
     assert_valid_child_expression Colon2AssignMatcher.new(Colon2Matcher.new('Bar', Matcher.new(:constant, 'Foo'), 'Foo::Bar'), Matcher.new(:int, '1'), ruby)
   end
 
+  # top_const_field
+  test 'colon3' do
+    ruby '::Foo'
+    assert_valid_child_expression Matcher.new(:colon3, 'Foo', ruby)
+  end
+
 end

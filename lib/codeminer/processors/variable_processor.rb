@@ -38,6 +38,10 @@ module CodeMiner
 
     alias on_const_path_field on_const_path_ref
 
+    def on_top_const_ref(token)
+      Colon3Expression.new(token, extract_src(token.line, token.column - 2, token.end_line, token.end_column))
+    end
+
     private
 
     def cast_variable_to_type(exp)
