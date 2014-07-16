@@ -79,4 +79,9 @@ end
     assert_valid_child_expression Matcher.new(:colon3, 'Foo', ruby)
   end
 
+  test 'colon3 assign' do
+    ruby '::Foo = bar'
+    assert_valid_child_expression Colon3AssignMatcher.new(Matcher.new(:colon3, 'Foo', '::Foo'), CallMatcher.new('bar'), ruby)
+  end
+
 end

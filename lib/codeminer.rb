@@ -22,6 +22,7 @@ require File.expand_path('../codeminer/expressions/class_variable_assign_express
 require File.expand_path('../codeminer/expressions/class_variable_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/colon2_assign_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/colon2_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/colon3_assign_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/colon3_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/command_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/condition_expression', __FILE__)

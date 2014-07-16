@@ -20,6 +20,8 @@ module CodeMiner
                   ArefAssignExpression
                 when :colon2
                   Colon2AssignExpression
+                when :colon3
+                  Colon3AssignExpression
               end
       klass.new(exp, body, extract_src_by_tokens(exp, body))
     end

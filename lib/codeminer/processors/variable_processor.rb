@@ -42,6 +42,8 @@ module CodeMiner
       Colon3Expression.new(token, extract_src(token.line, token.column - 2, token.end_line, token.end_column))
     end
 
+    alias on_top_const_field on_top_const_ref
+
     private
 
     def cast_variable_to_type(exp)
