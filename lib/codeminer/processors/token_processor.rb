@@ -13,15 +13,15 @@ module CodeMiner
     tokens :const_ref
 
     def on_lbrace(token)
-      @keywords << super
+      @lbrace << super
       token
     end
 
     def on_kw(kw)
       super.tap do |token|
         if %w(do class def if else unless return alias yield break next super begin rescue case when redo retry undef elsif
-              until while for module nil).include?(kw.gsub(/[^a-z]/, ''))
-          @keywords << token
+              until while for module).include?(kw.gsub(/[^a-z]/, ''))
+          @keywords.unshift(token)
         end
       end
     end

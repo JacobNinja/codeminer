@@ -52,6 +52,7 @@ module CodeMiner
       @symbols = []
       @words = []
       @processors = []
+      @lbrace = []
       @formatters = {}
       super
     end
@@ -70,40 +71,45 @@ module CodeMiner
     end
 
     def on_break(args)
-      BreakExpression.new(args, extract_src_by_token(pop_keyword))
+      BreakExpression.new(args, extract_src_by_token(pop_keyword('break')))
     end
 
     def on_next(args)
-      NextExpression.new(args, extract_src_by_token(pop_keyword))
+      NextExpression.new(args, extract_src_by_token(pop_keyword('next')))
     end
 
     def on_redo
-      RedoExpression.new(extract_src_by_token(pop_keyword))
+      RedoExpression.new(extract_src_by_token(pop_keyword('redo')))
     end
 
     def on_retry
-      RetryExpression.new(extract_src_by_token(pop_keyword))
+      RetryExpression.new(extract_src_by_token(pop_keyword('retry')))
     end
 
     def on_zsuper
-      token = pop_keyword
+      token = pop_keyword('super')
       SuperExpression.new(extract_src_by_token(token))
     end
 
+    def on_super(body)
+      pop_keyword('super')
+      super
+    end
+
     def on_alias(left, right)
-      AliasExpression.new(left, right, extract_src_by_token(pop_keyword))
+      AliasExpression.new(left, right, extract_src_by_token(pop_keyword('alias')))
     end
 
     def on_yield(args)
-      YieldExpression.new(args, extract_src_by_token(pop_keyword))
+      YieldExpression.new(args, extract_src_by_token(pop_keyword('yield')))
     end
 
     def on_yield0
-      YieldExpression.new(nil, extract_src_by_token(pop_keyword))
+      YieldExpression.new(nil, extract_src_by_token(pop_keyword('yield')))
     end
 
     def on_undef(symbols)
-      UndefExpression.new(symbols, extract_src_by_token(pop_keyword))
+      UndefExpression.new(symbols, extract_src_by_token(pop_keyword('undef')))
     end
 
     def on_int(*)
@@ -120,13 +126,13 @@ module CodeMiner
     end
 
     def on_begin(body)
-      BeginExpression.new(body, extract_src_by_token(pop_keyword))
+      BeginExpression.new(body, extract_src_by_token(pop_keyword('begin')))
     end
 
     def on_rescue(constants, assign, body, d)
       rescue_body = RescueBodyExpression.wrap(body)
       rescue_match = rescue_match(constants.each.to_a, assign) if constants
-      src = extract_src_by_tokens(pop_keyword, rescue_body)
+      src = extract_src_by_tokens(pop_keyword('rescue'), rescue_body)
       RescueExpression.new(rescue_match, rescue_body, d, src)
     end
 
@@ -186,8 +192,9 @@ module CodeMiner
       raise CodeMiner::ParseError, msg unless t
     end
 
-    def pop_keyword
-      @keywords.pop
+    def pop_keyword(type)
+      i = @keywords.index {|k| k.value == type }
+      @keywords.delete_at(i)
     end
 
     def rescue_match(constants, assign)

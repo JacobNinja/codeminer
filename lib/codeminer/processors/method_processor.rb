@@ -3,11 +3,11 @@ module CodeMiner
   module MethodProcessor
 
     def on_defs(receiver, delimiter, token, params, body)
-      DefsExpression.new(receiver, token, params, body, extract_src_by_token(pop_keyword))
+      DefsExpression.new(receiver, token, params, body, extract_src_by_token(pop_keyword('def')))
     end
 
     def on_def(token, params, body)
-      DefnExpression.new(token.value, params, body, extract_src_by_token(pop_keyword))
+      DefnExpression.new(token.value, params, body, extract_src_by_token(pop_keyword('def')))
     end
 
     def on_method_add_block(exp, block)
@@ -31,10 +31,12 @@ module CodeMiner
     end
 
     def on_brace_block(params, body)
-      BlockExpression.new(body, params, extract_src_by_token(pop_keyword))
+      BlockExpression.new(body, params, extract_src_by_token(@lbrace.pop))
     end
 
-    alias_method :on_do_block, :on_brace_block
+    def on_do_block(params, body)
+      BlockExpression.new(body, params, extract_src_by_token(pop_keyword('do')))
+    end
 
     def on_lambda(args, body)
       LambdaExpression.new(args, body, extract_src_by_token(@lambda.pop))

@@ -3,7 +3,7 @@ module CodeMiner
   module HashProcessor
 
     def on_hash(pairs)
-      HashExpression.new(pairs.to_a, extract_src_by_token(pop_keyword))
+      HashExpression.new(pairs.to_a, extract_src_by_token(@lbrace.pop))
     end
 
     def on_bare_assoc_hash(pairs)

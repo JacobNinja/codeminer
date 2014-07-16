@@ -50,8 +50,7 @@ module CodeMiner
       if exp.type == :const
         ConstantVariableExpression.new(exp, exp.src_extract)
       elsif exp.value == 'nil'
-        token = pop_keyword
-        NilExpression.new(token, extract_src_by_tokens(token, token))
+        NilExpression.new(exp, extract_src_by_tokens(exp))
       else
         LocalVariableExpression.new(exp, exp.src_extract)
       end
