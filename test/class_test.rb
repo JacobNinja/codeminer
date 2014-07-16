@@ -65,4 +65,13 @@ def foo
     assert_valid_child_expression ModuleMatcher.new('Test', ruby, BodystmtMatcher.new(DefnMatcher.new('foo', defn), defn))
   end
 
+  test 'sclass' do
+    ruby <<-RUBY
+class << foo
+  bar
+end
+    RUBY
+    assert_valid_child_expression SClassMatcher.new(CallMatcher.new('foo'), BodystmtMatcher.new(CallMatcher.new('bar'), 'bar'), ruby)
+  end
+
 end
