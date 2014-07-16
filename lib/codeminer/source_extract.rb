@@ -2,8 +2,8 @@ module CodeMiner
 
   class SourceExtract
 
-    attr_reader :line, :column
-    attr_reader :end_line, :end_column
+    attr_accessor :line, :column
+    attr_accessor :end_line, :end_column
 
     class Partial
 
@@ -43,6 +43,22 @@ module CodeMiner
 
       def end_column
         src_extract.end_column
+      end
+
+      def line=(line)
+        src_extract.line = line
+      end
+
+      def column=(column)
+        src_extract.column = column
+      end
+
+      def end_line=(line)
+        src_extract.end_line = line
+      end
+
+      def end_column=(column)
+        src_extract.end_column = column
       end
 
       def src

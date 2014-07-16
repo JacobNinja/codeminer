@@ -6,12 +6,13 @@ module CodeMiner
       new([], [], [])
     end
 
-    attr_reader :positional, :optional, :keyword, :value
+    attr_reader :positional, :optional, :keyword, :splat, :value
 
-    def initialize(positional, optional, keyword)
+    def initialize(positional, optional, keyword, splat=nil)
       @positional = positional
       @optional = optional
       @keyword = keyword
+      @splat = splat
     end
 
     def type
@@ -19,7 +20,7 @@ module CodeMiner
     end
 
     def each
-      [positional, optional, keyword]
+      [positional, optional, keyword, splat]
     end
 
     def each_param
@@ -47,7 +48,12 @@ module CodeMiner
     def expression_values
       [*positional.each,
        *optional.each.map(&:token), *optional.each.map(&:value),
-       *keyword.each.map(&:token), *keyword.each.map(&:value)].select{|e| e}
+       *keyword.each.map(&:token), *keyword.each.map(&:value),
+       *splat_token].select{|e| e}
+    end
+
+    def splat_token
+      splat && splat.token
     end
 
   end

@@ -51,4 +51,12 @@ end
     assert_valid_child_expression ParamsMatcher.new('(a:)', EmptyParamsMatcher, EmptyParamsMatcher, KeywordParamsMatcher.new('a:', a: NilMatcher)), 3
   end
 
+  test 'splat param' do
+    ruby <<-RUBY
+def test(*bar)
+end
+    RUBY
+    assert_valid_child_expression ParamsMatcher.new('(*bar)', EmptyParamsMatcher, splat: Matcher.new(:splat, 'bar', '*bar')), 3
+  end
+
 end

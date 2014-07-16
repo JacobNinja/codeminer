@@ -2,8 +2,8 @@ module CodeMiner
 
   class SplatExpression < Expression
 
-    def initialize(body, src)
-      @body = body
+    def initialize(token, src)
+      @token = token
       @src = src
     end
 
@@ -12,11 +12,11 @@ module CodeMiner
     end
 
     def value
-      @body.value
+      @token.value
     end
 
     def each
-      @body.each
+      @token.each
     end
 
   end

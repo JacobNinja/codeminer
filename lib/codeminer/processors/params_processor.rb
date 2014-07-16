@@ -2,10 +2,15 @@ module CodeMiner
 
   module ParamsProcessor
 
-    def on_params(positional, optional, _, _, keyword, _, _)
-      ParamsExpression.new(positional_params(positional), optional_params(optional), keyword_params(keyword)).tap do |params|
+    def on_params(positional, optional, splat, _, keyword, _, _)
+      ParamsExpression.new(positional_params(positional), optional_params(optional), keyword_params(keyword), splat).tap do |params|
         params.src = extract_src_by_tokens(params) if params.line
       end
+    end
+
+    def on_rest_param(token)
+      token.column -= 1
+      SplatExpression.new(token, extract_src(token.line, token.column, token.end_line, token.end_column))
     end
 
     def on_paren(params)
