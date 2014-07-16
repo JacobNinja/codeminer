@@ -23,6 +23,10 @@ module CodeMiner
       CallExpression.new(@lbracket, extract_src_by_token(receiver), receiver: receiver, arguments: args)
     end
 
+    def on_aref_field(receiver, args)
+      ArefFieldExpression.new(@lbracket, receiver, args, extract_src_by_tokens(receiver, args))
+    end
+
   end
 
 end

@@ -6,7 +6,6 @@ module CodeMiner
 
     def initialize(field, body, src)
       @field = field
-      @token = token
       @body = body
       @src = src
     end

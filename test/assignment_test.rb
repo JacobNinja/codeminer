@@ -32,4 +32,9 @@ class AssignmentTest < ParseTestCase
     assert_valid_child_expression ConstantAssignMatcher.new('Foo', CallMatcher.new('bar'), 'Foo = bar')
   end
 
+  test 'aref assign' do
+    ruby 'foo[0] = bar'
+    assert_valid_child_expression ArefAssignMatcher.new(ArefFieldMatcher.new('[', CallMatcher.new('foo'), ArgumentsMatcher.new(Matcher.new(:int, '0'), '0'), 'foo[0'), CallMatcher.new('bar'), ruby)
+  end
+
 end
