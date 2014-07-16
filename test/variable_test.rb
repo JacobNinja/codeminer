@@ -63,4 +63,9 @@ end
     assert_valid_child_expression Matcher.new(:backref_variable, '1', ruby)
   end
 
+  test 'const path ref' do
+    ruby 'Foo::Bar'
+    assert_valid_child_expression Colon2Matcher.new('Bar', Matcher.new(:constant, 'Foo'), ruby)
+  end
+
 end

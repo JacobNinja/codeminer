@@ -32,6 +32,10 @@ module CodeMiner
       FieldExpression.new(receiver, token, extract_src_by_tokens(receiver, token))
     end
 
+    def on_const_path_ref(const, token)
+      Colon2Expression.new(token, const, extract_src_by_tokens(const, token))
+    end
+
     private
 
     def cast_variable_to_type(exp)
