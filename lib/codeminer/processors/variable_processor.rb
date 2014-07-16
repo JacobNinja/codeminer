@@ -36,6 +36,8 @@ module CodeMiner
       Colon2Expression.new(token, const, extract_src_by_tokens(const, token))
     end
 
+    alias on_const_path_field on_const_path_ref
+
     private
 
     def cast_variable_to_type(exp)

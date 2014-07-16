@@ -68,4 +68,9 @@ end
     assert_valid_child_expression Colon2Matcher.new('Bar', Matcher.new(:constant, 'Foo'), ruby)
   end
 
+  test 'colon2 assign' do
+    ruby 'Foo::Bar = 1'
+    assert_valid_child_expression Colon2AssignMatcher.new(Colon2Matcher.new('Bar', Matcher.new(:constant, 'Foo'), 'Foo::Bar'), Matcher.new(:int, '1'), ruby)
+  end
+
 end

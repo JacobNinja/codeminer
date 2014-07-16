@@ -18,6 +18,8 @@ module CodeMiner
                   ConstantAssignExpression
                 when :aref_field
                   ArefAssignExpression
+                when :colon2
+                  Colon2AssignExpression
               end
       klass.new(exp, body, extract_src_by_tokens(exp, body))
     end
