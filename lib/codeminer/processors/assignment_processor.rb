@@ -31,6 +31,10 @@ module CodeMiner
       MultipleAssignmentExpression.new(params, value_container, extract_src_by_tokens(params, values))
     end
 
+    def on_opassign(variable, op, body)
+      OpAssignExpression.new(variable, op, body, extract_src_by_tokens(variable, body))
+    end
+
   end
 
 end

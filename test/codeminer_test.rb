@@ -117,6 +117,11 @@ rescue
     assert_valid_child_expression Matcher.new(:self, nil, 'self')
   end
 
+  test '||=' do
+    ruby 'foo ||= bar'
+    assert_valid_child_expression OpAssignMatcher.new('foo', CallMatcher.new('bar'), ruby)
+  end
+
   test 'malformed statement' do
     assert_raise(CodeMiner::ParseError) { CodeMiner.parse(<<-RUBY) }
 case
