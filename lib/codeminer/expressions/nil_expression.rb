@@ -2,6 +2,8 @@ module CodeMiner
 
   class NilExpression < Expression
 
+    attr_reader :value
+
     def initialize(token, src)
       @token = token
       @src = src
@@ -9,10 +11,6 @@ module CodeMiner
 
     def type
       :nil
-    end
-
-    def value
-      @token.value
     end
 
     def each

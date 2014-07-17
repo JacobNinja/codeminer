@@ -109,7 +109,7 @@ rescue
 
   test 'nil' do
     ruby 'nil'
-    assert_valid_child_expression Matcher.new(:nil, 'nil')
+    assert_valid_child_expression Matcher.new(:nil, nil, 'nil')
   end
 
   test 'self' do
