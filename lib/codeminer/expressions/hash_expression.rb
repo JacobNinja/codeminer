@@ -2,7 +2,7 @@ module CodeMiner
 
   class HashExpression < Expression
 
-    attr_reader :value
+    attr_reader :pairs, :value
 
     def initialize(pairs, src)
       @pairs = pairs
@@ -14,7 +14,7 @@ module CodeMiner
     end
 
     def each
-      @pairs
+      @pairs.flat_map(&:each)
     end
 
   end

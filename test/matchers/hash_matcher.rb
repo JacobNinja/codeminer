@@ -10,8 +10,8 @@ class HashMatcher < Matcher
   end
 
   def assert(exp)
-    assert_equal @pair_matchers.length, exp.each.length, 'Expected hash pairs count to match body'
-    @pair_matchers.zip(exp.each).each do |matcher, e|
+    assert_equal @pair_matchers.length, exp.pairs.length, 'Expected hash pairs count to match body'
+    @pair_matchers.zip(exp.pairs).each do |matcher, e|
       matcher.assert(e)
     end
     assert_equal @src, exp.src
