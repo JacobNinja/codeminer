@@ -12,6 +12,7 @@ require File.expand_path('../codeminer/expressions/backref_variable_expression',
 require File.expand_path('../codeminer/expressions/begin_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/binary_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/block_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/block_param_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/body_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/bodystmt_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/break_expression', __FILE__)

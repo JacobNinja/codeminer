@@ -42,6 +42,11 @@ module CodeMiner
       LambdaExpression.new(args, body, extract_src_by_token(@lambda.pop))
     end
 
+    def on_blockarg(token)
+      token.column -= 1
+      BlockParamExpression.new(token, extract_src_by_tokens(token))
+    end
+
     def on_tlambda(*)
       super.tap do |token|
         @lambda << token

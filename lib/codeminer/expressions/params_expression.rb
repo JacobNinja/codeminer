@@ -3,16 +3,17 @@ module CodeMiner
   class ParamsExpression < Expression
 
     def self.empty
-      new([], [], [])
+      new([], [], [], nil, nil)
     end
 
     attr_reader :positional, :optional, :keyword, :splat, :value
 
-    def initialize(positional, optional, keyword, splat=nil)
+    def initialize(positional, optional, keyword, splat, block)
       @positional = positional
       @optional = optional
       @keyword = keyword
       @splat = splat
+      @block = block
     end
 
     def type
@@ -49,11 +50,16 @@ module CodeMiner
       [*positional.each,
        *optional.each.map(&:token), *optional.each.map(&:value),
        *keyword.each.map(&:token), *keyword.each.map(&:value),
-       *splat_token].select{|e| e}
+       *splat_token,
+       *block_token].select{|e| e}
     end
 
     def splat_token
       splat && splat.token
+    end
+
+    def block_token
+      block && block.token
     end
 
   end

@@ -2,8 +2,8 @@ module CodeMiner
 
   module ParamsProcessor
 
-    def on_params(positional, optional, splat, _, keyword, _, _)
-      ParamsExpression.new(positional_params(positional), optional_params(optional), keyword_params(keyword), splat).tap do |params|
+    def on_params(positional, optional, splat, _, keyword, _, block)
+      ParamsExpression.new(positional_params(positional), optional_params(optional), keyword_params(keyword), splat, block).tap do |params|
         params.src = extract_src_by_tokens(params) if params.line
       end
     end

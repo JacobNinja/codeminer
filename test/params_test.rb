@@ -59,4 +59,12 @@ end
     assert_valid_child_expression ParamsMatcher.new('(*bar)', EmptyParamsMatcher, splat: Matcher.new(:splat, 'bar', '*bar')), 3
   end
 
+  test 'block param' do
+    ruby <<-RUBY
+def test(&foo)
+end
+    RUBY
+    assert_valid_child_expression ParamsMatcher.new('(&foo)', EmptyParamsMatcher, block: Matcher.new(:block_param, 'foo', '&foo')), 3
+  end
+
 end
