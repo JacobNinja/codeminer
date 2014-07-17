@@ -59,6 +59,13 @@ end
     assert_valid_child_expression ParamsMatcher.new('(*bar)', EmptyParamsMatcher, splat: Matcher.new(:splat, 'bar', '*bar')), 3
   end
 
+  test 'splat except really comma' do
+    ruby <<-RUBY
+foo {|a,|}
+    RUBY
+    assert_valid_child_expression ParamsMatcher.new('a', PositionalParamsMatcher.new(Matcher.new(:positional_param, 'a'), 'a')), 4
+  end
+
   test 'block param' do
     ruby <<-RUBY
 def test(&foo)

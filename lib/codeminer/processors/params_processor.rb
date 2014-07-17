@@ -3,7 +3,7 @@ module CodeMiner
   module ParamsProcessor
 
     def on_params(positional, optional, splat, _, keyword, _, block)
-      ParamsExpression.new(positional_params(positional), optional_params(optional), keyword_params(keyword), splat, block).tap do |params|
+      ParamsExpression.new(positional_params(positional), optional_params(optional), keyword_params(keyword), splat_param(splat), block).tap do |params|
         params.src = extract_src_by_tokens(params) if params.line
       end
     end
@@ -86,6 +86,10 @@ module CodeMiner
       end
       src = extract_src_by_tokens(keyword_expressions.first, keyword_expressions.last) unless keyword_expressions.empty?
       ParamsContainer.new(keyword_expressions, :keyword, src)
+    end
+
+    def splat_param(splat)
+      splat unless splat == 0
     end
 
   end
