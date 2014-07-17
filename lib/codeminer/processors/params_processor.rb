@@ -9,8 +9,13 @@ module CodeMiner
     end
 
     def on_rest_param(token)
-      token.column -= 1
-      SplatExpression.new(token, extract_src(token.line, token.column, token.end_line, token.end_column))
+      if token
+        token.column -= 1
+        src = extract_src(token.line, token.column, token.end_line, token.end_column)
+      else
+        src = extract_src(lineno(), column() - 1, lineno(), column())
+      end
+      SplatExpression.new(token, src)
     end
 
     def on_paren(params)
