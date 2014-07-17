@@ -122,6 +122,11 @@ rescue
     assert_valid_child_expression OpAssignMatcher.new('foo', CallMatcher.new('bar'), ruby)
   end
 
+  test 'false' do
+    ruby 'false'
+    assert_valid_child_expression Matcher.new(:false, nil, ruby)
+  end
+
   test 'malformed statement' do
     assert_raise(CodeMiner::ParseError) { CodeMiner.parse(<<-RUBY) }
 case
