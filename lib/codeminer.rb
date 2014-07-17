@@ -76,6 +76,7 @@ require File.expand_path('../codeminer/expressions/string_content_expression', _
 require File.expand_path('../codeminer/expressions/string_embedded_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/super_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/symbol_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/true_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/unknown_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/unary_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/undef_expression', __FILE__)

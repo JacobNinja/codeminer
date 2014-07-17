@@ -55,6 +55,8 @@ module CodeMiner
         SelfExpression.new(exp, extract_src_by_tokens(exp))
       elsif exp.value == 'false'
         FalseExpression.new(exp, extract_src_by_tokens(exp))
+      elsif exp.value == 'true'
+        TrueExpression.new(exp, extract_src_by_tokens(exp))
       else
         LocalVariableExpression.new(exp, exp.src_extract)
       end
