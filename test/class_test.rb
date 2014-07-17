@@ -33,7 +33,7 @@ class Test
   end
 end
     RUBY
-    assert_valid_child_expression DefsMatcher.new('self', 'foo', BodystmtMatcher.new(CallMatcher.new('stuff'), 'stuff'), <<-EXPECTED), 4
+    assert_valid_child_expression DefsMatcher.new(Matcher.new(:self, nil, 'self'), 'foo', BodystmtMatcher.new(CallMatcher.new('stuff'), 'stuff'), <<-EXPECTED), 4
 def self.foo
     stuff
   end

@@ -51,6 +51,8 @@ module CodeMiner
         ConstantVariableExpression.new(exp, exp.src_extract)
       elsif exp.value == 'nil'
         NilExpression.new(exp, extract_src_by_tokens(exp))
+      elsif exp.value == 'self'
+        SelfExpression.new(exp, extract_src_by_tokens(exp))
       else
         LocalVariableExpression.new(exp, exp.src_extract)
       end

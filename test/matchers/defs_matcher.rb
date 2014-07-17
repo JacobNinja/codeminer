@@ -14,7 +14,7 @@ class DefsMatcher < Matcher
 
   def assert(exp)
     assert_equal type, exp.type
-    assert_equal @receiver, exp.receiver.value
+    @receiver.assert(exp.receiver)
     assert_equal @name, exp.value
     @body_matcher.assert(exp.body)
     @params_matcher.assert(exp.params) if @params_matcher
