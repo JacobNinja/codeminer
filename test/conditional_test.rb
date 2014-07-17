@@ -67,10 +67,11 @@ else
     ruby <<-RUBY
 case foo
 when bar then 5
+when something then 6
 else baz
 end
     RUBY
-    assert_valid_child_expression CaseMatcher.new(ruby, CallMatcher.new('foo', 'foo'), WhenMatcher.new(ArgumentsMatcher.new(CallMatcher.new('bar', 'bar'), 'bar'), BodyMatcher.new(Matcher.new(:int, '5'), '5'), 'when bar then 5'), ElseMatcher.new(BodyMatcher.new(CallMatcher.new('baz', 'baz'), 'baz'), 'else baz'))
+    assert_valid_child_expression CaseMatcher.new(ruby, CallMatcher.new('foo', 'foo'), WhenMatcher.new(ArgumentsMatcher.new(CallMatcher.new('bar', 'bar'), 'bar'), BodyMatcher.new(Matcher.new(:int, '5'), '5'), 'when bar then 5'), WhenMatcher.new(ArgumentsMatcher.new(CallMatcher.new('something'), 'something'), BodyMatcher.new(Matcher.new(:int, '6'), '6'), 'when something then 6'), ElseMatcher.new(BodyMatcher.new(CallMatcher.new('baz', 'baz'), 'baz'), 'else baz'))
   end
 
   test 'elsif' do

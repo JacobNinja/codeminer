@@ -36,12 +36,22 @@ module CodeMiner
     end
 
     def on_case(test, whens)
-      whens_array = whens.class == Array ? whens : [whens]
-      CaseExpression.new(test, whens_array, extract_src_by_token(pop_keyword('case')))
+      CaseExpression.new(test, extract_whens(whens), extract_src_by_token(pop_keyword('case')))
     end
 
     def on_when(arg, body, else_exp)
       WhenExpression.new(arg, body, else_exp, extract_src_by_tokens(pop_keyword('when'), body))
+    end
+
+    private
+
+    def extract_whens(when_exp)
+      [when_exp].tap do |whens|
+        until when_exp.else.nil? || when_exp.else.type == :else
+          whens << when_exp.else
+          when_exp = when_exp.else
+        end
+      end
     end
 
   end

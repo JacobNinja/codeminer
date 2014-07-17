@@ -2,7 +2,7 @@ module CodeMiner
 
   class CaseExpression < Expression
 
-    attr_reader :value
+    attr_reader :test, :whens, :value
 
     def initialize(test, whens, src)
       @test = test
@@ -18,8 +18,12 @@ module CodeMiner
       @whens.map(&:else).last
     end
 
+    def whens
+      @whens.map(&:else).select {|e| e.type == :when }
+    end
+
     def each
-      [@test, *@whens, else_exp].compact
+      [@test, *@whens, *[else_exp].compact]
     end
 
   end
