@@ -60,7 +60,7 @@ else
 
   test 'ternary' do
     ruby 'foo ? bar : baz'
-    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), CallMatcher.new('bar', 'bar'), CallMatcher.new('baz', 'baz'), ruby)
+    assert_valid_child_expression ConditionalMatcher.new(CallMatcher.new('foo', 'foo'), BodyMatcher.new(CallMatcher.new('bar'), 'bar'), BodyMatcher.new(CallMatcher.new('baz'), 'baz'), ruby)
   end
 
   test 'case' do

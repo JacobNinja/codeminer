@@ -32,7 +32,7 @@ module CodeMiner
     end
 
     def on_ifop(test, consequence, else_statement)
-      ConditionExpression.new(test, consequence, else_statement, nil, extract_src_by_tokens(test, else_statement))
+      ConditionExpression.new(test, BodyExpression.from(consequence), BodyExpression.from(else_statement), nil, extract_src_by_tokens(test, else_statement))
     end
 
     def on_case(test, whens)
