@@ -19,6 +19,8 @@ module CodeMiner
       [variable, op, body]
     end
 
+    alias receiver variable
+
   end
 
 end
