@@ -86,7 +86,7 @@ module CodeMiner
 
   module SexpProcessor
 
-    BLACKLIST = %w(string_embexpr else void_stmt)
+    BLACKLIST = %w(string_embexpr void_stmt)
     TOKENS = %w(int)
 
     Ripper::PARSER_EVENT_TABLE.each do |event, arity|
