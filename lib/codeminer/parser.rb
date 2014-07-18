@@ -130,10 +130,10 @@ module CodeMiner
     end
 
     def on_rescue(constants, assign, body, d)
+      constants ||= []
       rescue_body = RescueBodyExpression.wrap(body)
-      rescue_match = rescue_match(constants.each.to_a, assign) if constants
       src = extract_src_by_tokens(pop_keyword('rescue'), rescue_body)
-      RescueExpression.new(rescue_match, rescue_body, d, src)
+      RescueExpression.new(constants.each.to_a, assign, rescue_body, d, src)
     end
 
     def on_ensure(body)
@@ -203,14 +203,6 @@ module CodeMiner
     def pop_keyword(type)
       i = @keywords.index {|k| k.value == type }
       @keywords.delete_at(i)
-    end
-
-    def rescue_match(constants, assign)
-      if assign
-        RescueMatchExpression.new(constants, assign, extract_src_by_tokens(constants.first, assign))
-      else
-        RescueMatchExpression.new(constants, nil, extract_src_by_tokens(constants.first, constants.last))
-      end
     end
 
   end

@@ -2,10 +2,11 @@ module CodeMiner
 
   class RescueExpression < Expression
 
-    attr_reader :body, :value, :match
+    attr_reader :body, :value, :constants, :variable
 
-    def initialize(match, body, d, src)
-      @match = match
+    def initialize(constants, variable, body, d, src)
+      @constants = constants
+      @variable = variable
       @body = body
       @d = d
       @src = src
@@ -16,7 +17,7 @@ module CodeMiner
     end
 
     def each
-      [match, *body.each]
+      [constants, variable, *body.each]
     end
 
   end

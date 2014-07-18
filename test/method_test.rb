@@ -37,8 +37,22 @@ rescue Exception => e
   baz
 end
     RUBY
-    assert_valid_child_expression RescueMatcher.new(<<-RESCUE, RescueMatchMatcher.new('Exception => e', LocalVariableMatcher.new('e'), Matcher.new(:constant, 'Exception')), RescueBodyMatcher.new(CallMatcher.new('baz'), 'baz')), 4
+    assert_valid_child_expression RescueMatcher.new(<<-RESCUE, [Matcher.new(:constant, 'Exception')], LocalVariableMatcher.new('e'), RescueBodyMatcher.new(CallMatcher.new('baz'), 'baz')), 4
 rescue Exception => e
+  baz
+    RESCUE
+  end
+
+  test 'rescue assign' do
+    ruby <<-RUBY
+def foo
+  bar
+rescue => e
+  baz
+end
+    RUBY
+    assert_valid_child_expression RescueMatcher.new(<<-RESCUE, [], LocalVariableMatcher.new('e'), RescueBodyMatcher.new(CallMatcher.new('baz'), 'baz')), 4
+rescue => e
   baz
     RESCUE
   end
@@ -51,7 +65,7 @@ rescue Exception, RuntimeError => e
   baz
 end
     RUBY
-    assert_valid_child_expression RescueMatcher.new(<<-RESCUE, RescueMatchMatcher.new('Exception, RuntimeError => e', LocalVariableMatcher.new('e'), Matcher.new(:constant, 'Exception'), Matcher.new(:constant, 'RuntimeError')), RescueBodyMatcher.new(CallMatcher.new('baz'), 'baz')), 4
+    assert_valid_child_expression RescueMatcher.new(<<-RESCUE, [Matcher.new(:constant, 'Exception'), Matcher.new(:constant, 'RuntimeError')], LocalVariableMatcher.new('e'), RescueBodyMatcher.new(CallMatcher.new('baz'), 'baz')), 4
 rescue Exception, RuntimeError => e
   baz
     RESCUE

@@ -81,7 +81,7 @@ rescue
   bar
 end
     RUBY
-    assert_valid_child_expression BeginMatcher.new(ruby, BodyMatcher.new(CallMatcher.new('foo', 'foo'), 'foo'), rescue_matcher: RescueMatcher.new(<<-RESCUE, NilMatcher, RescueBodyMatcher.new(CallMatcher.new('bar', 'bar'), 'bar')))
+    assert_valid_child_expression BeginMatcher.new(ruby, BodyMatcher.new(CallMatcher.new('foo', 'foo'), 'foo'), rescue_matcher: RescueMatcher.new(<<-RESCUE, [], NilMatcher, RescueBodyMatcher.new(CallMatcher.new('bar', 'bar'), 'bar')))
 rescue
   bar
     RESCUE
