@@ -2,6 +2,14 @@ module CodeMiner
 
   class DynamicStringExpression < Expression
 
+    def self.wrap(exp)
+      if exp.type == :dynamic_string
+        exp
+      else
+        new(exp, exp.src_extract)
+      end
+    end
+
     attr_reader :value
 
     def initialize(*body, src)
@@ -17,9 +25,9 @@ module CodeMiner
       @body
     end
 
-    def add(string, src)
+    def add(string, src=string.src_extract)
       @body << string
-      @src = src
+      adjust_src(src)
       self
     end
 

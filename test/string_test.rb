@@ -40,4 +40,12 @@ HEREDOC
     assert_valid_child_expression StringMatcher.new("foo\n", ruby)
   end
 
+  test 'string concat' do
+    ruby %Q!
+"foo " \\
+"bar"
+!
+    assert_valid_child_expression DynamicStringMatcher.new(StringMatcher.new('foo ', '"foo "'), StringMatcher.new('bar', '"bar"'), ruby.strip)
+  end
+
 end
