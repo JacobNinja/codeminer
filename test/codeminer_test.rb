@@ -132,6 +132,11 @@ rescue
     assert_valid_child_expression Matcher.new(:true, nil, ruby)
   end
 
+  test 'defined?' do
+    ruby 'defined? foo'
+    assert_valid_child_expression DefinedMatcher.new(CallMatcher.new('foo'), ruby)
+  end
+
   test 'malformed statement' do
     assert_raise(CodeMiner::ParseError) { CodeMiner.parse(<<-RUBY) }
 case

@@ -29,6 +29,7 @@ require File.expand_path('../codeminer/expressions/command_expression', __FILE__
 require File.expand_path('../codeminer/expressions/condition_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/constant_assign_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/constant_variable_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/defined_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/defn_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/defs_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/destructured_param_expression', __FILE__)

@@ -149,6 +149,10 @@ module CodeMiner
       body.add(statement)
     end
 
+    def on_defined(body)
+      DefinedExpression.new(body, extract_src_by_tokens(pop_keyword('defined?'),body))
+    end
+
     def on_program(body)
       RootExpression.new(body, @src)
     end
