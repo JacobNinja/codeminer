@@ -22,13 +22,15 @@ module CodeMiner
                   Colon2AssignExpression
                 when :colon3
                   Colon3AssignExpression
+                else
+                  assert(false, "#{exp.type} is not a valid assignment")
               end
       klass.new(exp, body, extract_src_by_tokens(exp, body))
     end
 
-    def on_massign(params, values)
-      value_container = ParamsContainer.wrap(values, :values)
-      MultipleAssignmentExpression.new(params, value_container, extract_src_by_tokens(params, values))
+    def on_massign(container, values)
+      value_container = ExpressionContainer.wrap(values, :values)
+      MultipleAssignmentExpression.new(container, value_container, extract_src_by_tokens(container, values))
     end
 
     def on_opassign(variable, op, body)

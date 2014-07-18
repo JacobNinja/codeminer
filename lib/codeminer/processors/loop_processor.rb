@@ -21,7 +21,7 @@ module CodeMiner
     end
 
     def on_for(params, receiver, body)
-      params_container = ParamsContainer.wrap(params, :positional)
+      params_container = ExpressionContainer.wrap(params, :positional)
       ForExpression.new(params_container, receiver, body, extract_src_by_token(pop_keyword('for')))
     end
 

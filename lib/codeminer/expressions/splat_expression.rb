@@ -12,11 +12,11 @@ module CodeMiner
     end
 
     def value
-      @token.value
+      @token.value if @token
     end
 
     def each
-      @token.each
+      []
     end
 
   end

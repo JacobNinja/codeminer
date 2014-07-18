@@ -9,17 +9,22 @@ class AssignmentTest < ParseTestCase
 
   test 'multiple assignment' do
     ruby 'foo, bar = 5, baz'
-    assert_valid_child_expression MultipleAssignmentMatcher.new(ruby, DestructuredParamsMatcher.new(Matcher.new(:ident, 'foo'), Matcher.new(:ident, 'bar'), 'foo, bar'), [Matcher.new(:int, '5'), CallMatcher.new('baz', 'baz')])
+    assert_valid_child_expression MultipleAssignmentMatcher.new(ruby, LhsMatcher.new(Matcher.new(:ident, 'foo'), Matcher.new(:ident, 'bar'), 'foo, bar'), [Matcher.new(:int, '5'), CallMatcher.new('baz', 'baz')])
   end
 
   test 'assignment with left splat' do
     ruby 'foo, *bar = baz'
-    assert_valid_child_expression MultipleAssignmentMatcher.new(ruby, DestructuredParamsMatcher.new(Matcher.new(:ident, 'foo'), SplatMatcher.new('bar', '*bar'), 'foo, *bar'), [CallMatcher.new('baz', 'baz')])
+    assert_valid_child_expression MultipleAssignmentMatcher.new(ruby, LhsMatcher.new(Matcher.new(:ident, 'foo'), SplatMatcher.new('bar', '*bar'), 'foo, *bar'), [CallMatcher.new('baz', 'baz')])
+  end
+
+  test 'assignment with left splat 2' do
+    ruby '*foo, bar = baz'
+    assert_valid_child_expression MultipleAssignmentMatcher.new(ruby, LhsMatcher.new(SplatMatcher.new('foo', '*foo'), Matcher.new(:ident, 'bar'), '*foo, bar'), [CallMatcher.new('baz', 'baz')])
   end
 
   test 'assignment with right splat' do
     ruby 'foo, bar = *baz'
-    assert_valid_child_expression MultipleAssignmentMatcher.new(ruby, DestructuredParamsMatcher.new(Matcher.new(:ident, 'foo'), Matcher.new(:ident, 'bar'), 'foo, bar'), [SplatMatcher.new('baz', '*baz')])
+    assert_valid_child_expression MultipleAssignmentMatcher.new(ruby, LhsMatcher.new(Matcher.new(:ident, 'foo'), Matcher.new(:ident, 'bar'), 'foo, bar'), [SplatMatcher.new('baz', '*baz')])
   end
 
   test 'field assign' do

@@ -28,11 +28,11 @@ module CodeMiner
     end
 
     def on_mlhs_new
-      ParamsContainer.new([], :destructured_params)
+      ExpressionContainer.new([], :mlhs)
     end
 
     def on_mrhs_new
-      ParamsContainer.new([], :values)
+      ExpressionContainer.new([], :values)
     end
 
     def on_mlhs_add(params, param)
@@ -49,7 +49,7 @@ module CodeMiner
     end
 
     def on_mrhs_new_from_args(args)
-      ParamsContainer.new(args.each, :values, args.src_extract)
+      ExpressionContainer.new(args.each, :values, args.src_extract)
     end
 
     def on_mrhs_add(params, exp)
@@ -69,7 +69,7 @@ module CodeMiner
         PositionalParamExpression.convert(exp, extract_src_by_token(exp, exp.end_line, exp.end_column))
       end
       src = extract_src_by_token(positional.first, positional.last.end_line, positional.last.end_column) if positional
-      ParamsContainer.new(positional_expressions, :positional, src)
+      ExpressionContainer.new(positional_expressions, :positional, src)
     end
 
     def optional_params(optional)
@@ -77,7 +77,7 @@ module CodeMiner
         OptionalParamExpression.new(token, value, extract_src_by_token(token, value.end_line, value.end_column))
       end
       src = extract_src_by_token(optional.first.first, optional.last.last.end_line, optional.last.last.end_column) if optional
-      ParamsContainer.new(optional_expressions, :optional, src)
+      ExpressionContainer.new(optional_expressions, :optional, src)
     end
 
     def keyword_params(keyword)
@@ -85,7 +85,7 @@ module CodeMiner
         KeywordParamExpression.new(token, value || nil, extract_src_by_tokens(token, value || token))
       end
       src = extract_src_by_tokens(keyword_expressions.first, keyword_expressions.last) unless keyword_expressions.empty?
-      ParamsContainer.new(keyword_expressions, :keyword, src)
+      ExpressionContainer.new(keyword_expressions, :keyword, src)
     end
 
     def splat_param(splat)

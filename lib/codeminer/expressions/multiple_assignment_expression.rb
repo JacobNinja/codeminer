@@ -18,6 +18,8 @@ module CodeMiner
       [params, values]
     end
 
+    alias lhs params
+
   end
 
 end

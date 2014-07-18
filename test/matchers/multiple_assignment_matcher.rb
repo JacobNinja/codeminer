@@ -1,8 +1,8 @@
 class MultipleAssignmentMatcher < Matcher
 
-  def initialize(src, params_matcher, values_matchers)
+  def initialize(src, lhs_matcher, values_matchers)
     @src = src
-    @params_matcher = params_matcher
+    @lhs_matcher = lhs_matcher
     @values_matchers = values_matchers
   end
 
@@ -11,7 +11,7 @@ class MultipleAssignmentMatcher < Matcher
   end
 
   def assert(exp)
-    @params_matcher.assert(exp.params)
+    @lhs_matcher.assert(exp.lhs)
     assert_equal @values_matchers.length, exp.values.each.length
     @values_matchers.zip(exp.values.each).each do |matcher, e|
       matcher.assert(e)
