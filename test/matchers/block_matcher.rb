@@ -11,7 +11,7 @@ class BlockMatcher < Matcher
   end
 
   def assert(exp)
-    assert_equal exp.body.each.count, @body_matchers.count
+    assert_equal @body_matchers.count, exp.body.each.count
     exp.body.each.zip(@body_matchers).each do |(e, matcher)|
       matcher.assert(e)
     end

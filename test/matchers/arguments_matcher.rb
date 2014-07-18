@@ -1,7 +1,8 @@
 class ArgumentsMatcher < Matcher
 
-  def initialize(*argument_matchers, src)
+  def initialize(*argument_matchers, src, block: nil)
     @argument_matchers = argument_matchers
+    @block = block
     @src = src
   end
 
@@ -14,6 +15,7 @@ class ArgumentsMatcher < Matcher
     @argument_matchers.zip(exp.each).each do |matcher, e|
       matcher.assert(e)
     end
+    @block.assert(exp.block) if @block
     assert_equal @src, exp.src
   end
 

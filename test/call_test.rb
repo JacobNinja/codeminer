@@ -52,6 +52,13 @@ end
     RUBY
   end
 
+  test 'arg with block' do
+    ruby <<-RUBY
+foo(&bar{ baz })
+    RUBY
+    assert_valid_child_expression ArgumentsMatcher.new('(&bar{ baz })', block: CallMatcher.new('bar', 'bar{ baz }', block: BlockMatcher.new('{ baz }', CallMatcher.new('baz')))), 3
+  end
+
   test 'bracket invocation' do
     ruby 'foo[bar]'
     assert_valid_child_expression CallMatcher.new('[', ruby, receiver: CallMatcher.new('foo', 'foo'), arguments: ArgumentsMatcher.new(CallMatcher.new('bar', 'bar'), 'bar'))
