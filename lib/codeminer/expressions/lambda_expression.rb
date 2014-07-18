@@ -18,6 +18,8 @@ module CodeMiner
       [@args, @body]
     end
 
+    alias params args
+
   end
 
 end
