@@ -2,9 +2,10 @@ module CodeMiner
 
   class SuperExpression < Expression
 
-    attr_reader :value
+    attr_reader :value, :body
 
-    def initialize(src)
+    def initialize(body, src)
+      @body = body
       @src = src
     end
 
@@ -13,7 +14,11 @@ module CodeMiner
     end
 
     def each
-      []
+      if body
+        body.each
+      else
+        []
+      end
     end
 
   end

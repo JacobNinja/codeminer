@@ -88,12 +88,12 @@ module CodeMiner
 
     def on_zsuper
       token = pop_keyword('super')
-      SuperExpression.new(extract_src_by_token(token))
+      SuperExpression.new(nil, extract_src_by_token(token))
     end
 
     def on_super(body)
-      pop_keyword('super')
-      super
+      token = pop_keyword('super')
+      SuperExpression.new(body, extract_src_by_tokens(*[token, body].compact))
     end
 
     def on_alias(left, right)

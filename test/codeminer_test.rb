@@ -59,6 +59,11 @@ class CodeMinerParseTest < ParseTestCase
     assert_valid_child_expression Matcher.new(:super, nil, ruby)
   end
 
+  test 'super with args' do
+    ruby 'super foo'
+    assert_valid_child_expression SuperMatcher.new(ArgumentsMatcher.new(CallMatcher.new('foo'), 'foo'), ruby)
+  end
+
   test 'begin' do
     ruby <<-RUBY
 begin
