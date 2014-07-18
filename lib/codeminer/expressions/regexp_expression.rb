@@ -2,16 +2,14 @@ module CodeMiner
 
   class RegexpExpression < Expression
 
+    attr_reader :value
+
     def initialize
       @content = []
     end
 
     def type
       :regexp
-    end
-
-    def value
-      src
     end
 
     def each
