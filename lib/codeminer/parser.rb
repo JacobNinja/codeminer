@@ -136,8 +136,12 @@ module CodeMiner
       RescueExpression.new(rescue_match, rescue_body, d, src)
     end
 
-    def on_bodystmt(body, rescue_exp, c, d)
-      BodystmtExpression.new(body, rescue_exp, c, d, src: extract_src_by_tokens(body, body))
+    def on_ensure(body)
+      EnsureExpression.new(body, extract_src_by_tokens(pop_keyword('ensure'), body))
+    end
+
+    def on_bodystmt(body, rescue_exp, c, ensure_exp)
+      BodystmtExpression.new(body, rescue_exp, c, ensure_exp, src: extract_src_by_tokens(body, body))
     end
 
     def on_stmts_new

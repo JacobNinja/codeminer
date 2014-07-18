@@ -87,6 +87,20 @@ rescue
     RESCUE
   end
 
+  test 'begin ensure' do
+    ruby <<-RUBY
+begin
+  foo
+ensure
+  bar
+end
+    RUBY
+    assert_valid_child_expression BeginMatcher.new(ruby, BodyMatcher.new(CallMatcher.new('foo'), 'foo'), ensure_matcher: EnsureMatcher.new(<<-ENSURE, BodyMatcher.new(CallMatcher.new('bar'), 'bar')))
+ensure
+  bar
+    ENSURE
+  end
+
   test 'lambda' do
     ruby '-> (arg) { foo }'
     assert_valid_child_expression LambdaMatcher.new(ParamsMatcher.new('(arg)', PositionalParamsMatcher.new(Matcher.new(:positional_param, 'arg'), 'arg')), BodyMatcher.new(CallMatcher.new('foo', 'foo'), 'foo'), ruby)

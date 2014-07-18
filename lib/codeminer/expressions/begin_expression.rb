@@ -17,6 +17,10 @@ module CodeMiner
       @bodystmt.body
     end
 
+    def ensure
+      @bodystmt.ensure
+    end
+
     def rescue
       @bodystmt.rescue
     end

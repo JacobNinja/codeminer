@@ -36,6 +36,7 @@ require File.expand_path('../codeminer/expressions/destructured_param_expression
 require File.expand_path('../codeminer/expressions/dynamic_symbol_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/else_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/empty_expression', __FILE__)
+require File.expand_path('../codeminer/expressions/ensure_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/false_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/field_expression', __FILE__)
 require File.expand_path('../codeminer/expressions/for_expression', __FILE__)

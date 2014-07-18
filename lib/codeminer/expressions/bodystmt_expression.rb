@@ -2,12 +2,13 @@ module CodeMiner
 
   class BodystmtExpression < Expression
 
-    attr_reader :body, :rescue, :value
+    attr_reader :body, :rescue, :ensure, :value
 
-    def initialize(body, rescue_exp, c, d, src:)
+    def initialize(body, rescue_exp, c, ensure_exp, src:)
       @body = body
       @rescue = rescue_exp
-      @c, @d = c, d
+      @ensure = ensure_exp
+      @c = c
       @src = src
     end
 
