@@ -71,4 +71,18 @@ rescue Exception, RuntimeError => e
     RESCUE
   end
 
+  test 'bodystmt else' do
+    ruby <<-RUBY
+def test
+  foo
+else
+  bar
+end
+    RUBY
+    assert_valid_child_expression ElseMatcher.new(BodyMatcher.new(CallMatcher.new('bar'), 'bar'), <<-ELSE), 4
+else
+  bar
+    ELSE
+  end
+
 end

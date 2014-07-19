@@ -2,13 +2,13 @@ module CodeMiner
 
   class BodystmtExpression < Expression
 
-    attr_reader :body, :rescue, :ensure, :value
+    attr_reader :body, :rescue, :ensure, :value, :else
 
-    def initialize(body, rescue_exp, c, ensure_exp, src:)
+    def initialize(body, rescue_exp, else_exp, ensure_exp, src:)
       @body = body
       @rescue = rescue_exp
       @ensure = ensure_exp
-      @c = c
+      @else = else_exp
       @src = src
     end
 
@@ -17,11 +17,7 @@ module CodeMiner
     end
 
     def each
-      if @rescue
-        [*body.each, @rescue]
-      else
-        @body.each
-      end
+      [*body.each, *[@rescue, @else, @ensure].compact]
     end
 
   end

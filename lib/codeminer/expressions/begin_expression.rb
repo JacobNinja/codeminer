@@ -25,6 +25,10 @@ module CodeMiner
       @bodystmt.rescue
     end
 
+    def else
+      @bodystmt.else
+    end
+
     def each
       body.each
     end

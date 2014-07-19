@@ -1,10 +1,11 @@
 class RescueMatcher < Matcher
 
-  def initialize(src, constant_matchers, variable_matcher, body_matcher)
+  def initialize(src, constant_matchers, variable_matcher, body_matcher, else_matcher=nil)
     @src = src
     @constant_matchers = constant_matchers
     @variable_matcher = variable_matcher
     @body_matcher = body_matcher
+    @else_matcher = else_matcher
   end
 
   def type
