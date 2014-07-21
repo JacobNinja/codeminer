@@ -48,4 +48,11 @@ HEREDOC
     assert_valid_child_expression DynamicStringMatcher.new(StringMatcher.new('foo ', '"foo "'), StringMatcher.new('bar', '"bar"'), ruby.strip)
   end
 
+  test 'xstring' do
+    ruby <<-RUBY
+`foo`
+    RUBY
+    assert_valid_child_expression XStringMatcher.new('foo', ruby)
+  end
+
 end

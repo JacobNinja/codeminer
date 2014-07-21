@@ -19,6 +19,12 @@ module CodeMiner
       dynamic_string.add(str2)
     end
 
+    def on_xstring_literal(token)
+      token.column -= 1
+      token.end_column += 1
+      XStringExpression.new(token, extract_src_by_tokens(token))
+    end
+
     def on_string_embexpr(body)
       body.each.last.delimiter = '}'
       embedded_expression_src = extract_src_by_token(@embexpr.pop)
