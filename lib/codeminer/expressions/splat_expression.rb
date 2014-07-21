@@ -16,7 +16,7 @@ module CodeMiner
     end
 
     def each
-      []
+      [@token]
     end
 
   end
