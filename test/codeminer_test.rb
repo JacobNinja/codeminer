@@ -35,8 +35,8 @@ class CodeMinerParseTest < ParseTestCase
   end
 
   test 'unary' do
-    ruby '-1'
-    assert_valid_child_expression UnaryMatcher.new('-', Matcher.new(:int, '1', '1'), ruby)
+    ruby 'not 1'
+    assert_valid_child_expression UnaryMatcher.new('not', Matcher.new(:int, '1', '1'), ruby)
   end
 
   test 'alias' do

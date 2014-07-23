@@ -118,7 +118,7 @@ module CodeMiner
     end
 
     def on_unary(value, receiver)
-      UnaryExpression.new(value.to_s.chomp('@'), receiver, extract_src(receiver.line, receiver.column - 1))
+      UnaryExpression.new(value.to_s.chomp('@'), receiver, extract_src(receiver.line, receiver.column - value.length - unary_offset(value), receiver.end_line, receiver.end_column))
     end
 
     def on_void_stmt
@@ -203,6 +203,10 @@ module CodeMiner
     def pop_keyword(type)
       i = @keywords.index {|k| k.value == type }
       @keywords.delete_at(i)
+    end
+
+    def unary_offset(value)
+      value == :-@ ? -1 : 1
     end
 
   end
