@@ -21,7 +21,7 @@ module CodeMiner
     end
 
     def each
-      [positional, optional, keyword, splat]
+      [positional, optional, keyword, *splat, *block]
     end
 
     def each_param
