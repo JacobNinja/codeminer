@@ -11,9 +11,14 @@ module CodeMiner
       @exp = exp
     end
 
+    # TODO: kill this and delegate properly
     def method_missing(meth, *args)
       if @exp.respond_to?(meth)
         @exp.send(meth, *args)
+      elsif @expressions.respond_to?(meth)
+        @expressions.send(meth, *args)
+      elsif @exp.exp.respond_to?(meth)
+        @exp.exp.send(meth, *args)
       else
         super
       end
@@ -38,6 +43,8 @@ module CodeMiner
     def inspect
       "s(#{to_a.map(&:inspect).join(', ')})"
     end
+
+    alias to_s inspect
 
     def ==(other)
       @expressions == other
@@ -64,6 +71,10 @@ module CodeMiner
 
     def each
       exp.each
+    end
+
+    def src_extract
+      exp.src_extract
     end
 
     def to_sexp
