@@ -202,6 +202,7 @@ module CodeMiner
 
     def pop_keyword(type)
       i = @keywords.index {|k| k.value == type }
+      assert(i, "Expected to find keyword of type #{type}")
       @keywords.delete_at(i)
     end
 
