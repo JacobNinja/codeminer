@@ -16,7 +16,12 @@ module CodeMiner
     end
 
     def value
-      @token.value
+      value = @token.value.lstrip
+      if value[0] == '.'
+        value[1..-1]
+      else
+        value
+      end
     end
 
     def each

@@ -69,4 +69,12 @@ foo(&bar{ baz })
     assert_valid_child_expression CallMatcher.new('call', ruby, receiver: CallMatcher.new('foo', 'foo'), arguments: ArgumentsMatcher.new(CallMatcher.new('bar', 'bar'), '(bar)'))
   end
 
+  test 'newline' do
+    ruby <<-RUBY
+foo
+  .bar
+    RUBY
+    assert_valid_child_expression CallMatcher.new('bar', ruby, receiver: CallMatcher.new('foo', 'foo'))
+  end
+
 end
