@@ -49,16 +49,19 @@ module CodeMiner
     def cast_variable_to_type(exp)
       if exp.type == :const
         ConstantVariableExpression.new(exp, exp.src_extract)
-      elsif exp.value == 'nil'
-        NilExpression.new(exp, extract_src_by_tokens(exp))
-      elsif exp.value == 'self'
-        SelfExpression.new(exp, extract_src_by_tokens(exp))
-      elsif exp.value == 'false'
-        FalseExpression.new(exp, extract_src_by_tokens(exp))
-      elsif exp.value == 'true'
-        TrueExpression.new(exp, extract_src_by_tokens(exp))
       else
-        LocalVariableExpression.new(exp, exp.src_extract)
+        case exp.value
+          when 'nil'
+            NilExpression.new(exp, extract_src_by_tokens(exp))
+          when 'self'
+            SelfExpression.new(exp, extract_src_by_tokens(exp))
+          when 'false'
+            FalseExpression.new(exp, extract_src_by_tokens(exp))
+          when 'true'
+            TrueExpression.new(exp, extract_src_by_tokens(exp))
+          else
+            LocalVariableExpression.new(exp, exp.src_extract)
+        end
       end
     end
 
