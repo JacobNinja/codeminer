@@ -3,8 +3,8 @@ Gem::Specification.new do |s|
   s.version = '0.1.0'
   s.date = '2014-06-30'
 
-  s.summary = 'summary'
-  s.description = 'description'
+  s.summary = 'Mines Ruby code'
+  s.description = 'Streamlined parsing and processing of Ruby code using Ripper'
 
   s.authors = ['Jacob Richardson']
   s.email = 'jacob.ninja.dev@gmail.com'
