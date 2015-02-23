@@ -6,6 +6,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    rake (10.1.0)
     test-unit (2.5.5)
 
 PLATFORMS
@@ -13,4 +14,5 @@ PLATFORMS
 
 DEPENDENCIES
   codeminer!
+  rake (~> 10.1)
   test-unit (= 2.5.5)

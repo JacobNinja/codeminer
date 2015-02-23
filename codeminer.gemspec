@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.require_paths = %w[lib]
 
   s.add_development_dependency('test-unit', '2.5.5')
+  s.add_development_dependency('rake', '~> 10.1')
 
   s.files = %w[
     codeminer.gemspec
