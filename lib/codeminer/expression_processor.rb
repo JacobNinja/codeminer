@@ -20,6 +20,7 @@ module CodeMiner
       @processors.each do |p|
         meth = :"process_#{event}"
         p.public_send(meth, node) if p.respond_to?(meth)
+        p.process_default(node) if p.respond_to?(:process_default)
       end
     end
 
