@@ -5,7 +5,6 @@ module CodeMiner
     Ripper::PARSER_EVENT_TABLE.each do |event, arity|
       next if event == :parse_error
       next if /_new\z/ =~ event.to_s and arity == 0
-      next if /_add\z/ =~ event.to_s
       next if /_from_[a-z]+\z/ =~ event.to_s
 
       define_method :"on_#{event}" do |*args|
