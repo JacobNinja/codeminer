@@ -23,12 +23,12 @@ module CodeMiner
 
     def on_if_mod(test, consequence)
       consequence_body = BodyExpression.from(consequence)
-      ConditionExpression.new(test, consequence_body, nil, pop_keyword('if'), extract_src(consequence.line, consequence.column))
+      ConditionExpression.new(test, consequence_body, nil, pop_keyword('if'), extract_src_by_tokens(consequence, test))
     end
 
     def on_unless_mod(test, else_expression)
       else_body = BodyExpression.from(else_expression)
-      ConditionExpression.new(test, nil, else_body, pop_keyword('unless'), extract_src_by_token(else_expression))
+      ConditionExpression.new(test, nil, else_body, pop_keyword('unless'), extract_src_by_tokens(else_expression, test))
     end
 
     def on_ifop(test, consequence, else_statement)
