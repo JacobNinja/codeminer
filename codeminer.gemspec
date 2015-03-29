@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'codeminer'
-  s.version = '0.1.1'
+  s.version = '0.2'
   s.date = '2014-06-30'
 
   s.summary = 'Mines Ruby code'
